@@ -8,6 +8,7 @@ import { HeaderComponent } from "./shared/header.component";
 import { HomeComponent } from "./home.component";
 import { TestComponent } from "./test.component";
 
+import { AuthModule } from './auth/auth.module';
 import { DiseaseCaseModule } from './diseaseCase/diseaseCase.module';
 import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
 import { PatientModule } from './patient/patient.module';
@@ -16,24 +17,24 @@ import { routing, appRoutingProviders } from "./app.routing";
 
 import {AngularFireModule} from 'angularfire2';
 import *as firebase from 'firebase';
+import {AuthProviders} from "angularfire2/index";
+import {AuthMethods} from "angularfire2/index";
 
 
 const firebaseConfig = {
-    /*
-    // fbe2
-    apiKey: "AIzaSyDLxXLtFAWXtOrD9mtSmLGb9uWHlOGH9SQ",
-    authDomain: "fbe2-3e917.firebaseapp.com",
-    databaseURL: "https://fbe2-3e917.firebaseio.com",
-    storageBucket: "fbe2-3e917.appspot.com",
-    messagingSenderId: "75684927389"
-    */
     // fbe5
     apiKey: "AIzaSyAMQA61KfzbKBSxVRYJtch1LPzcC-VFblk",
     authDomain: "fbe5-17455.firebaseapp.com",
     databaseURL: "https://fbe5-17455.firebaseio.com",
     storageBucket: "fbe5-17455.appspot.com",
     messagingSenderId: "811840885015"
-}
+};
+
+const firebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
+
+};
 
 @NgModule({
   declarations: [
@@ -43,11 +44,12 @@ const firebaseConfig = {
     AppComponent
   ],
   imports: [
-	AngularFireModule.initializeApp(firebaseConfig),
+	  AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
     CommonModule,
     FormsModule,
 	  routing,
+	  AuthModule,
 	  DiseaseCaseModule,
 	  DiseaseEventModule,
 	  PatientModule
