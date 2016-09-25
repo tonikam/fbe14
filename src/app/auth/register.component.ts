@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import { Router } from "@angular/router";
 
-// import { AuthService } from "../shared/auth.service";
+import { AuthService } from "../shared/auth.service";
 
 @Component({
     templateUrl: './register.component.html'
@@ -11,10 +12,11 @@ export class RegisterComponent implements OnInit {
     error = false;
     errorMessage = '';
 
-    constructor(private fb: FormBuilder) {} // , private authService: AuthService) {}
+    constructor(private fb: FormBuilder, private authService: AuthService,private router: Router) {}
 
-    onSignup() {
-      //this.authService.signupUser(this.myForm.value);
+    onRegister() {
+      this.authService.registerUser(this.myForm.value);
+      this.router.navigate(['/test']);
     }
 
     ngOnInit(): any {

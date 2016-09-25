@@ -13,6 +13,8 @@ import { DiseaseCaseModule } from './diseaseCase/diseaseCase.module';
 import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
 import { PatientModule } from './patient/patient.module';
 
+import { AuthService } from './shared/auth.service';
+
 import { routing, appRoutingProviders } from "./app.routing";
 
 import {AngularFireModule} from 'angularfire2';
@@ -55,7 +57,8 @@ const firebaseAuthConfig = {
 	  PatientModule
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+	  AuthService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

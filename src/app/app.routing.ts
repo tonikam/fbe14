@@ -9,15 +9,14 @@ import { DiseaseCaseComponent } from "./diseaseCase/diseaseCase.component";
 import { DiseaseEventComponent } from "./diseaseEvent/diseaseEvent.component";
 
 const APP_ROUTES: Routes = [
-	  {path: '', component: HomeComponent},
-    {path: 'home', component: HomeComponent},
-	{path: 'login', component: LoginComponent},
-	{path: 'register', component: RegisterComponent},
-    {path: 'test', component: TestComponent},
-    {path: 'patient', component: PatientComponent},
-    //{path: 'case', component: CaseComponent},
-	  {path: 'case', component: DiseaseCaseComponent},
-    {path: 'event', component: DiseaseEventComponent}
+  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'test', component: TestComponent},
+  {path: 'patient', component: PatientComponent},
+  {path: 'case', component: DiseaseCaseComponent},
+  {path: 'event', component: DiseaseEventComponent}
 ];
 
 export const appRoutingProviders : any[] = [
