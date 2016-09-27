@@ -7,9 +7,11 @@
 				        <li><a [routerLink]="['register']">Register</a></li>
                 <li><a [routerLink]="['login']">Login</a></li>
                 <li><a [routerLink]="['test']">Test</a></li>
+				<li *ngIf="af.auth | async"><a [routerLink]="['user']">User</a></li>
                 <li *ngIf="af.auth | async"><a [routerLink]="['patient']">Patient</a></li>
                 <li *ngIf="af.auth | async"><a [routerLink]="['case']">Case</a></li>
                 <li *ngIf="af.auth | async"><a [routerLink]="['event']">Event</a></li>
+				<li *ngIf="af.auth | async"><a [routerLink]="['allUsers']">All Users</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" *ngIf="af.auth | async">
                 <li><a (click)="onLogout()" style="cursor: pointer;">Logout</a></li>

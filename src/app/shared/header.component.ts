@@ -11,7 +11,9 @@ import { AuthService } from "./auth.service";
 })
 export class HeaderComponent {
 
-  constructor(private authService: AuthService, private af: AngularFire,private router: Router) {
+  constructor(private authService: AuthService,
+              private af: AngularFire,
+              private router: Router) {
     this.af.auth.subscribe(auth => console.log(auth));
   }
 

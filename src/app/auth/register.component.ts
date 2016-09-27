@@ -12,7 +12,9 @@ export class RegisterComponent implements OnInit {
     error = false;
     errorMessage = '';
 
-    constructor(private fb: FormBuilder, private authService: AuthService,private router: Router) {}
+    constructor(private fb: FormBuilder,
+                private authService: AuthService,
+                private router: Router) {}
 
     onRegister() {
       this.authService.registerUser(this.myForm.value);

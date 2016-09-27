@@ -11,7 +11,9 @@ export class LoginComponent implements OnInit {
     myForm: FormGroup;
     error = false;
 
-    constructor(private fb: FormBuilder, private authService: AuthService,private router: Router) {}
+    constructor(private fb: FormBuilder,
+                private authService: AuthService,
+                private router: Router) {}
 
     onLogin() {
       this.authService.loginUser(this.myForm.value);

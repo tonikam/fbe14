@@ -9,9 +9,12 @@ import { HomeComponent } from "./home.component";
 import { TestComponent } from "./test.component";
 
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { PatientModule } from './patient/patient.module';
 import { DiseaseCaseModule } from './diseaseCase/diseaseCase.module';
 import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
-import { PatientModule } from './patient/patient.module';
+
+import { AllUsersModule } from './allUsers/allUsers.module';
 
 import { AuthService } from './shared/auth.service';
 
@@ -40,21 +43,23 @@ const firebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-	  HeaderComponent,
+	HeaderComponent,
     HomeComponent,
     TestComponent,
     AppComponent
   ],
   imports: [
-	  AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
+	AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
     CommonModule,
     FormsModule,
-	  routing,
-	  AuthModule,
-	  DiseaseCaseModule,
-	  DiseaseEventModule,
-	  PatientModule
+	routing,
+	AuthModule,
+	UserModule,
+	PatientModule,
+	DiseaseCaseModule,
+	DiseaseEventModule,
+	AllUsersModule
   ],
   providers: [
     appRoutingProviders,

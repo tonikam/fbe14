@@ -9,8 +9,20 @@ export class DiseaseCaseComponent {
 
   cases: FirebaseListObservable<any>;
 
-  constructor(af: AngularFire) {
+  constructor(private af: AngularFire) {
     this.cases = af.database.list('cases');
   }
 
+  addCase(newName: string) {
+    this.cases.push({ name: newName });
+  }
+  updateCase(key: string, newText: string) {
+    this.cases.update(key, { name: newText });
+  }
+  deleteCase(key: string) {
+    this.cases.remove(key);
+  }
+  deleteCaseAll() {
+    this.cases.remove();
+  }
 }

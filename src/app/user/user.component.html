@@ -1,0 +1,20 @@
+<!--
+<ul>
+  <li *ngFor="let user of users |  async">
+    {{ user.name }}
+  </li>
+</ul>
+-->
+
+<ul>
+  <li *ngFor="let user of users | async">
+    <input type="text" #updatetext [value]="user.name" />
+    <button (click)="updateUser(user.$key, updatetext.value)">Update</button>
+    <button (click)="deleteUser(user.$key)">Delete</button>
+    <label>Key: {{user.$key}}</label>
+  </li>
+</ul>
+<input type="text" #newitem />
+<button (click)="addUser(newitem.value)">Add</button>
+<button (click)="deleteUserAll()">Delete All</button>
+

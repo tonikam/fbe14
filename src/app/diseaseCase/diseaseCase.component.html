@@ -1,5 +1,17 @@
+<!--
 <ul>
   <li *ngFor="let case of cases |  async">
     {{ case.name }}
   </li>
 </ul>
+-->
+<ul>
+  <li *ngFor="let case of cases | async">
+    <input type="text" #updatetext [value]="case.name" />
+    <button (click)="updateCase(case.$key, updatetext.value)">Update</button>
+    <button (click)="deleteCase(case.$key)">Delete</button>
+  </li>
+</ul>
+<input type="text" #newitem />
+<button (click)="addCase(newitem.value)">Add</button>
+<button (click)="deleteCaseAll()">Delete All</button>

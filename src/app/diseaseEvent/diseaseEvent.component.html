@@ -1,5 +1,18 @@
+<!--
 <ul>
   <li *ngFor="let event of events |  async">
     {{ event.name }}
   </li>
 </ul>
+-->
+
+<ul>
+  <li *ngFor="let event of events | async">
+    <input type="text" #updatetext [value]="event.name" />
+    <button (click)="updateEvent(event.$key, updatetext.value)">Update</button>
+    <button (click)="deleteEvent(event.$key)">Delete</button>
+  </li>
+</ul>
+<input type="text" #newitem />
+<button (click)="addEvent(newitem.value)">Add</button>
+<button (click)="deleteEventAll()">Delete All</button>
