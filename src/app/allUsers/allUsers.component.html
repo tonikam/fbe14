@@ -1,10 +1,10 @@
 <h2>Users</h2>
 <ul>
 	<li *ngFor="let user of allUsers | async">
-		user: {{ user.name }}
+		User: {{ user.name }} ({{user.$key}})
     <ul>
 			<li *ngFor="let patient of user.patients | async">
-				{{ patient.name }}
+				{{ patient.name }} ({{patient.$key}})
 			</li>
 		</ul>
 	</li>

@@ -5,8 +5,8 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li><a [routerLink]="['test']">Test</a></li>
-            <li *ngIf="af.auth | async" class="dropdown" diseaseDiaryDropdown>
+            <li routerLinkActive="active"><a [routerLink]="['test']">Test</a></li>
+            <li routerLinkActive="active" *ngIf="af.auth | async" class="dropdown" diseaseDiaryDropdown>
               <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a [routerLink]="['user']">User</a></li>
@@ -15,10 +15,11 @@
                 <li><a [routerLink]="['event']">Event</a></li>
               </ul>
             </li>
-		        <li *ngIf="af.auth | async"><a [routerLink]="['allUsers']">All Users</a></li>
+		        <li routerLinkActive="active" *ngIf="af.auth | async"><a [routerLink]="['allUsers']">All Users (Admin)</a></li>
+				<li routerLinkActive="active" *ngIf="af.auth | async"><a [routerLink]="['allPatients']">All Patients</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown" diseaseDiaryDropdown>
+          <li routerLinkActive="active" class="dropdown" diseaseDiaryDropdown>
             <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">My Diary<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a [routerLink]="['register']">Register</a></li>

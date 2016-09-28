@@ -1,0 +1,14 @@
+<h2>Patients of User: {{(actUser | async)?.$key}}</h2>
+<ul>
+	<li *ngFor="let patient of allPatients | async">
+		Patient: {{ patient.name }} ({{patient.$key}})
+    <ul>
+			<li *ngFor="let case of patient.cases | async">
+				{{ case.name }} ({{case.$key}})
+			</li>
+		</ul>
+	</li>
+</ul>
+
+
+

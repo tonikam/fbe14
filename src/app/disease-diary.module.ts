@@ -16,6 +16,7 @@ import { DiseaseCaseModule } from './diseaseCase/diseaseCase.module';
 import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
 
 import { AllUsersModule } from './allUsers/allUsers.module';
+import { AllPatientsModule } from './allPatients/allPatients.module';
 
 import { AuthService } from './shared/auth.service';
 
@@ -60,7 +61,8 @@ const firebaseAuthConfig = {
     PatientModule,
     DiseaseCaseModule,
     DiseaseEventModule,
-	  AllUsersModule
+	  AllUsersModule,
+	  AllPatientsModule
   ],
   providers: [
     appRoutingProviders,
