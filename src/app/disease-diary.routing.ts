@@ -13,7 +13,6 @@ import { AllUsersComponent } from "./allUsers/allUsers.component";
 
 const APP_ROUTES: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'test', component: TestComponent},

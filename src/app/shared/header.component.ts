@@ -6,7 +6,7 @@ import { AngularFire } from 'angularfire2';
 import { AuthService } from "./auth.service";
 
 @Component({
-    selector: 'my-header',
+    selector: 'disease-diary-header',
     templateUrl: './header.component.html',
 })
 export class HeaderComponent {
@@ -15,11 +15,11 @@ export class HeaderComponent {
               private af: AngularFire,
               private router: Router) {
     this.af.auth.subscribe(auth => console.log(auth));
-  }
+   }
 
   onLogout() {
     this.authService.logout();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
 }

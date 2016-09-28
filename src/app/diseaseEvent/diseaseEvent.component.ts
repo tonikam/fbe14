@@ -23,6 +23,6 @@ export class DiseaseEventComponent {
     this.events.remove(key);
   }
   deleteEventAll() {
-    this.events.remove();
+    //this.events.remove();
   }
 }

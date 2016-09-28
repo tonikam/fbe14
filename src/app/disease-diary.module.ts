@@ -3,8 +3,9 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AppComponent } from './app.component';
+import { DiseaseDiaryComponent } from './disease-diary.component';
 import { HeaderComponent } from "./shared/header.component";
+import { DiseaseDiaryDropdownDirective } from './disease-diary-dropdown.directive';
 import { HomeComponent } from "./home.component";
 import { TestComponent } from "./test.component";
 
@@ -18,7 +19,7 @@ import { AllUsersModule } from './allUsers/allUsers.module';
 
 import { AuthService } from './shared/auth.service';
 
-import { routing, appRoutingProviders } from "./app.routing";
+import { routing, appRoutingProviders } from "./disease-diary.routing";
 
 import {AngularFireModule} from 'angularfire2';
 import *as firebase from 'firebase';
@@ -38,37 +39,37 @@ const firebaseConfig = {
 const firebaseAuthConfig = {
   provider: AuthProviders.Password,
   method: AuthMethods.Password
-
 };
 
 @NgModule({
   declarations: [
-	HeaderComponent,
+    DiseaseDiaryComponent,
+	  HeaderComponent,
+    DiseaseDiaryDropdownDirective,
     HomeComponent,
-    TestComponent,
-    AppComponent
+    TestComponent
   ],
   imports: [
-	AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
+	  AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
     CommonModule,
     FormsModule,
-	routing,
-	AuthModule,
-	UserModule,
-	PatientModule,
-	DiseaseCaseModule,
-	DiseaseEventModule,
-	AllUsersModule
+    routing,
+    AuthModule,
+    UserModule,
+    PatientModule,
+    DiseaseCaseModule,
+    DiseaseEventModule,
+	  AllUsersModule
   ],
   providers: [
     appRoutingProviders,
 	  AuthService
   ],
-  entryComponents: [AppComponent],
-  bootstrap: [AppComponent]
+  entryComponents: [DiseaseDiaryComponent],
+  bootstrap: [DiseaseDiaryComponent]
 })
 
-export class AppModule {
+export class DiseaseDiaryModule {
 
 }

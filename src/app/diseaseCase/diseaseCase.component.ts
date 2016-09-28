@@ -23,6 +23,6 @@ export class DiseaseCaseComponent {
     this.cases.remove(key);
   }
   deleteCaseAll() {
-    this.cases.remove();
+    //this.cases.remove();
   }
 }

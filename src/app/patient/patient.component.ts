@@ -23,7 +23,7 @@ export class PatientComponent {
     this.patients.remove(key);
   }
   deletePatientAll() {
-    this.patients.remove();
+    //this.patients.remove();
   }
 
 }

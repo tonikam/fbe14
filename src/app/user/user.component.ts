@@ -24,7 +24,7 @@ export class UserComponent {
     this.users.remove(key);
   }
   deleteUserAll() {
-    this.users.remove();
+    //this.users.remove();
   }
 
 }
