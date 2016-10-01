@@ -14,13 +14,11 @@ export class AllUsersComponent {
 
   constructor(private af: AngularFire) {
     this.allUsers = af.database.list('/_db2/users')
-		.map((allUsers) => {
-			return allUsers.map((user) =>
-			{
-				user.patients = af.database.list(`/_db2/patients/${user.$key}`)
-         return user;
-			});
-		});
+      .map((allUsers) => {
+        return allUsers.map((user) => {
+          user.patients = af.database.list(`/_db2/patients/${user.$key}`)
+          return user;
+        });
+      });
   }
-
 }

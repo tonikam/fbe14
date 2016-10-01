@@ -1,4 +1,5 @@
 <h2>Users</h2>
+<!--
 <ul>
 	<li *ngFor="let user of allUsers | async">
 		User: {{ user.name }} ({{user.$key}})
@@ -9,6 +10,17 @@
 		</ul>
 	</li>
 </ul>
+-->
 
-
+<ul>
+  <li *ngFor="let user of allUsers | async">
+    <p>{{user.name}} ({{user.$key}})</p>
+      <table class="table">
+        <tr *ngFor="let patient of user.patients | async">
+          <td>{{patient.name}}</td>
+          <td>{{patient.$key}}</td>
+        </tr>
+      </table>
+  </li>
+</ul>
 

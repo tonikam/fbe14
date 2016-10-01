@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
     onLogin() {
       this.authService.loginUser(this.myForm.value);
-      this.router.navigate(['/test']);
+      this.router.navigate(['/']);
     }
 
     ngOnInit():any {

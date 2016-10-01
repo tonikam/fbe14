@@ -1,0 +1,8 @@
+
+<tr><td>{{patient.name}}</td></tr>
+
+
+<tr *ngFor="let case of patient.cases | async">
+  <td>{{case.name}}</td>
+</tr>
+

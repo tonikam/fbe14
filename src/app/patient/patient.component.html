@@ -5,6 +5,7 @@
   </li>
 </ul>
 -->
+<!--
 <ul>
   <li *ngFor="let patient of patients | async">
     <input type="text" #updatetext [value]="patient.name" />
@@ -12,6 +13,16 @@
     <button (click)="deletePatient(patient.$key)">Delete</button>
   </li>
 </ul>
+-->
 <input type="text" #newitem />
 <button (click)="addPatient(newitem.value)">Add</button>
 <button (click)="deletePatientAll()">Delete All</button>
+<table class="table">
+  <tr *ngFor="let patient of patients | async">
+    <td><input type="text" #updatetext [value]="patient.name" /></td>
+    <td><button (click)="updatePatient(patient.$key, updatetext.value)">Update</button></td>
+    <td><button (click)="deletePatient(patient.$key)">Delete</button></td>
+    <td><label>Key: {{patient.$key}}</label></td>
+  </tr>
+</table>
+

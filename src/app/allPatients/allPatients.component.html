@@ -1,4 +1,33 @@
-<h2>Patients of User: {{(actUser | async)?.$key}}</h2>
+
+<div>
+  <h2>Patients of User: {{(actUser | async)?.$key}}</h2>
+  <ul>
+    <li *ngFor="let patient of allPatients | async">
+      <p>{{patient.name}} ({{patient.$key}})</p>
+      <table class="table">
+        <tr *ngFor="let case of patient.cases | async">
+          <td>{{case.name}}</td>
+          <td>{{case.$key}}</td>
+        </tr>
+      </table>
+    </li>
+  </ul>
+</div>
+
+
+
+
+<!-- with allPatientsRow.component.. but patient-row was'nt replaced
+
+<table>
+  <patient-row *ngFor = "let patient of allPatients | async" [patient]="patient"></patient-row>
+
+</table>
+-->
+
+
+
+<!--
 <ul>
 	<li *ngFor="let patient of allPatients | async">
 		Patient: {{ patient.name }} ({{patient.$key}})
@@ -9,6 +38,24 @@
 		</ul>
 	</li>
 </ul>
+-->
+
+
+
+<!-- template funktioniert hier nicht
+<table>
+  <template ngFor patient="$implicit" [ngForOf]="allPatients">
+    <tr>
+      <td>
+        <h2>{{patient.name}}</h2>
+      </td>
+    </tr>
+    <tr *ngFor="let case of patient.cases">
+      <td>{{case.name}}</td>
+    </tr>
+  </template>
+</table>
+-->
 
 
 
