@@ -15,10 +15,12 @@ import { PatientModule } from './patient/patient.module';
 import { DiseaseCaseModule } from './diseaseCase/diseaseCase.module';
 import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
 
-import { AllUsersModule } from './allUsers/allUsers.module';
+// now lazy loading - allUsersRouting
+//import { AllUsersModule } from './allUsers/allUsers.module';
 import { AllPatientsModule } from './allPatients/allPatients.module';
 
 import { AuthService } from './shared/auth.service';
+import { HelperService } from './shared/helper.service';
 
 import { routing, appRoutingProviders } from "./disease-diary.routing";
 
@@ -26,6 +28,7 @@ import {AngularFireModule} from 'angularfire2';
 import *as firebase from 'firebase';
 import {AuthProviders} from "angularfire2/index";
 import {AuthMethods} from "angularfire2/index";
+//import { UserItemComponent } from './user-item/user-item.component';
 
 
 const firebaseConfig = {
@@ -48,7 +51,8 @@ const firebaseAuthConfig = {
 	  HeaderComponent,
     DiseaseDiaryDropdownDirective,
     HomeComponent,
-    TestComponent
+    TestComponent //,
+    //UserItemComponent
   ],
   imports: [
 	  AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
@@ -61,12 +65,13 @@ const firebaseAuthConfig = {
     PatientModule,
     DiseaseCaseModule,
     DiseaseEventModule,
-	  AllUsersModule,
+	  //AllUsersModule,
 	  AllPatientsModule
   ],
   providers: [
     appRoutingProviders,
-	  AuthService
+	  AuthService,
+    HelperService
   ],
   entryComponents: [DiseaseDiaryComponent],
   bootstrap: [DiseaseDiaryComponent]

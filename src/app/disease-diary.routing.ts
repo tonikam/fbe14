@@ -9,7 +9,7 @@ import { PatientComponent } from "./patient/patient.component";
 import { DiseaseCaseComponent } from "./diseaseCase/diseaseCase.component";
 import { DiseaseEventComponent } from "./diseaseEvent/diseaseEvent.component";
 
-import { AllUsersComponent } from "./allUsers/allUsers.component";
+//import { AllUsersComponent } from "./allUsers/allUsers.component";
 import { AllPatientsComponent } from "./allPatients/allPatients.component";
 
 const APP_ROUTES: Routes = [
@@ -21,7 +21,8 @@ const APP_ROUTES: Routes = [
   {path: 'patient', component: PatientComponent},
   {path: 'case', component: DiseaseCaseComponent},
   {path: 'event', component: DiseaseEventComponent},
-  {path: 'allUsers', component: AllUsersComponent},
+  //{path: 'allUsers', component: AllUsersComponent, children: ALLUSERS_ROUTES},
+  {path: 'allUsers', loadChildren: 'app/allUsers/allUsers.module#AllUsersModule'},
   {path: 'allPatients', component: AllPatientsComponent}
 ];
 

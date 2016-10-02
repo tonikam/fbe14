@@ -17,11 +17,11 @@ export class AllPatientsComponent {
 
     this.actUser = af.database.object('/_db2/users/uid1');
 
-    this.allPatients = af.database.list('/_db2/patients/uid1')
+    this.allPatients = af.database.list('/_db2/patients/uid1', {query: {orderByKey: true}})
 		.map((allPatients) => {
 			return allPatients.map((patient) =>
 			{
-				patient.cases = af.database.list(`/_db2/cases/${patient.$key}`)
+				patient.cases = af.database.list(`/_db2/cases/${patient.$key}`, {query: {orderByKey: true}})
          return patient;
 			});
 		});
