@@ -19,7 +19,7 @@ export class AuthService {
       .catch((error) => {
         console.log("Register Error: " + error.message);
       });
-  }
+  };
 
   loginUser(user: User) {
     this.af.auth.login({ email: user.email, password: user.password})
@@ -29,10 +29,20 @@ export class AuthService {
       .catch((error) => {
         console.log("Login Error: " + error.message);
       });
-    }
+   };
 
   logout() {
     this.af.auth.logout()
-  }
+  };
+
+  getActUserID() {
+    try {
+      let userID = "";
+      this.af.auth.subscribe(auth => {userID = auth.uid});
+      return userID;
+    } catch(e) {
+      return "no logged in user";
+    }
+  };
 
 }

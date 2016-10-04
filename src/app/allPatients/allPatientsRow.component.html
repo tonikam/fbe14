@@ -1,8 +1,10 @@
 
-<tr><td>{{patient.name}}</td></tr>
+<td>{{patient.name}}<td>{{case.name}}<td>{{case.$key}}<td><button class="btn btn-primary" (click)="onEdit()">Edit</button>
 
+<!--
+  <tr><td>{{patient.name}}</td></tr>
 
 <tr *ngFor="let case of patient.cases | async">
   <td>{{case.name}}</td>
 </tr>
-
+-->

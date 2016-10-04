@@ -20,7 +20,7 @@ import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
 import { AllPatientsModule } from './allPatients/allPatients.module';
 
 import { AuthService } from './shared/auth.service';
-import { HelperService } from './shared/helper.service';
+import { DataService } from './shared/data.service';
 
 import { routing, appRoutingProviders } from "./disease-diary.routing";
 
@@ -71,7 +71,7 @@ const firebaseAuthConfig = {
   providers: [
     appRoutingProviders,
 	  AuthService,
-    HelperService
+    DataService
   ],
   entryComponents: [DiseaseDiaryComponent],
   bootstrap: [DiseaseDiaryComponent]

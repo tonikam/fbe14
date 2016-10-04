@@ -1,32 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { Observable } from 'rxjs';
+
+import {AuthService} from "./shared/auth.service";
+import {DataService} from "./shared/data.service";
 
 @Component({
-  template: `
-    <p>
-      Test Object {{test}}--{{(test | async)?.name}}
-    </p>
-  `,
+  templateUrl: './test.component.html',
   styles: []
 })
 
-export class TestComponent implements OnInit {
+export class TestComponent {
 
-  private test: FirebaseObjectObservable<any>;
-  private userKey: String;
-  private patientKey: String;
+  private test: Observable<any>;
+  private userID: String;
+  private userObj: Observable<any>;
 
-  constructor(private af: AngularFire){
+  constructor(private dataService: DataService,
+              private authService: AuthService){
+    this.getData();
   };
 
-  ngOnInit() {
-    this.userKey = "uid1";
-    this.patientKey = "pid1";
-    this.test = this.af.database.object(`/_db2/patients/` + this.userKey + `/` + this.patientKey);
+  getData(){
+    this.test = this.dataService.getTest();
+    this.userID = this.authService.getActUserID();
+    this.userObj = this.dataService.getActUser();
 
-
-    // only breakpoint for debugging
-    this.userKey = "uid1";
+    let x = 123;
   };
 }

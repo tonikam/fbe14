@@ -1,17 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-user-start',
-  template: `
-    <p>Please select an entry to edit</p>
-  `,
+  templateUrl: './user-start.component.html',
   styles: []
 })
-export class UserStartComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class UserStartComponent {}

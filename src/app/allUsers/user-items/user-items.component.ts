@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+
+import {DataService} from "../../shared/data.service";
 
 @Component({
   selector: 'user-items-list',
@@ -13,17 +12,9 @@ export class UserItemsComponent {
 
   allUsers: Observable<any[]>;
 
-  constructor(private af: AngularFire) {
+  constructor(private dataService: DataService) {
+    this.allUsers = this.dataService.getAllUsersAndPatients();
   }
 
-  ngOnInit() {
-    this.allUsers = this.af.database.list('/_db2/users', {query: {orderByKey: true}})
-      .map((allUsers) => {
-        return allUsers.map((user) => {
-          user.patients = this.af.database.list(`/_db2/patients/${user.$key}`, {query: {orderByKey: true}})
-          return user;
-        });
-      });
-  }
 }
 

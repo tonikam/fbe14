@@ -4,12 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {allUsersRouting} from "./allUsers.routing";
 
+import {DataService} from "../shared/data.service";
+
 import { AllUsersComponent } from "./allUsers.component";
 import { UserItemsComponent } from './user-items/user-items.component';
 import { UserItemComponent } from './user-items/user-item.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserStartComponent } from './user-start.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
     declarations: [
@@ -17,13 +18,15 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
       UserItemsComponent,
       UserItemComponent,
       UserStartComponent,
-      UserEditComponent,
-      UserDetailComponent
+      UserEditComponent
     ],
     imports: [
       FormsModule,
       ReactiveFormsModule,
       CommonModule,
-      allUsersRouting]
+      allUsersRouting],
+    providers: [
+      DataService
+    ]
 })
 export class AllUsersModule {}

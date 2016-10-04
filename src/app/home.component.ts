@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { AngularFire } from 'angularfire2';
+import {AngularFire} from "angularfire2/angularfire2";
 
 import { AuthService } from "./shared/auth.service";
 
@@ -19,6 +19,6 @@ export class HomeComponent {
 
   onLogout() {
     this.authService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 }

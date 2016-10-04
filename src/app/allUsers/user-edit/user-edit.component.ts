@@ -1,50 +1,42 @@
-import { Component, OnInit} from '@angular/core';
+import { Component} from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { Subscription } from "rxjs/Rx";
-
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import {async} from "rxjs/scheduler/async";
+import { Subscription } from "rxjs/Rx";
 
-import {HelperService} from "../../shared/helper.service";
+import {DataService} from "../../shared/data.service";
 
 @Component({
-  selector: 'app-user-edit',
   templateUrl: './user-edit.component.html'
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent {
 
   private subscription: Subscription;
   private patientKey: String;
   private userKey: String;
+  private user: Observable<any>;
   private patient: Observable<any>;
   private patientName: String;
+  private patientAge: String;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private af: AngularFire,
-              private helper: HelperService){
+              private dataService: DataService){
 
     this.subscription = this.route.params.subscribe(
       (params: any) => {
         this.patientKey = params['patientKey'];
-        this.userKey = this.helper.getUserID();
-        this.patient = this.getPatient();
+        this.userKey = this.dataService.getCachedUserID();
+        this.user = this.dataService.getCachedUserData(this.userKey);
+        this.patient = this.dataService.getPatient(this.userKey,this.patientKey);
+        this.patient.subscribe((patient) => {this.patientName = patient.name});
+        this.patient.subscribe((patient) => {this.patientAge = patient.age});
       }
     );
-
-    // only breakpoint for debugging
-    this.userKey = "uid1";
-
   };
 
-  ngOnInit() {
-
+  updatePatient(key_value) {
+    this.dataService.updatePatient(this.userKey,this.patientKey,key_value)
   };
 
-  getPatient () {
-    return this.af.database.object(`/_db2/patients/` + this.userKey + `/` + this.patientKey);
-  }
 }

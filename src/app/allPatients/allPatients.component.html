@@ -1,4 +1,17 @@
+<div class="table-responsive">
+  <!--<h2>Patients of User: {{(actUser | async)?.$key}}</h2>-->
+  <table class="table">
+    <caption>Patients and their cases</caption>
+    <tbody *ngFor="let patient of allPatients | async">
 
+    <tr patient-item *ngFor="let case of patient.cases | async" [patient]="patient" [case]="case">
+
+    </tbody>
+  </table>
+</div>
+
+
+<!--
 <div>
   <h2>Patients of User: {{(actUser | async)?.$key}}</h2>
   <ul>
@@ -13,7 +26,7 @@
     </li>
   </ul>
 </div>
-
+-->
 
 
 
