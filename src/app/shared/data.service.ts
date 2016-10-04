@@ -16,7 +16,8 @@ export class DataService {
 
   };
 
-  getActUser() {
+
+  getActAppUser() {
     let actUserID = this.authService.getActUserID();
     console.log ("aus dataService: " + actUserID);
     return this.af.database.object(`/_db3/users/` + actUserID);
@@ -62,6 +63,10 @@ export class DataService {
   updatePatient(userKey,patientKey,key_value) {
     let patient = this.getPatient(userKey, patientKey);
     patient.update(key_value);
+  };
+
+  createPatient(userKey,key_value) {
+    this.af.database.list(`/_db2/patients/` + userKey).push(key_value);
   };
 
   getTest() {

@@ -13,7 +13,7 @@ export class AllPatientsComponent {
   allPatients: Observable<any[]>;
 
   constructor(private dataService: DataService) {
-    this.actUser = this.dataService.getActUser();
+    this.actUser = this.dataService.getActAppUser();
     this.allPatients = this.dataService.getPatientWithCases("uid1");
   }
 

@@ -5,10 +5,10 @@ import {DataService} from "../../shared/data.service";
 
 @Component({
   //selector: 'user-item',
-  selector: '[user-item]',
-  templateUrl: 'user-item.component.html'
+  selector: '[user-patient]',
+  templateUrl: 'user-patient.component.html'
 })
-export class UserItemComponent {
+export class UserPatientComponent {
   @Input() user: any;
   @Input() patient: any;
 

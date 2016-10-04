@@ -2,8 +2,11 @@
   Test Object {{(test | async)?.name}}
 </p>
 <p>
-  User ID: {{userID}}
+  Loggedin user key: {{loggedInUserID}}
 </p>
 <p>
-  User name: {{(userObj | async)?.name}}
+  Loggedin user id: {{loggedInUserData.uid}}
+</p>
+<p>
+  App user name: {{(actAppUser | async)?.name}}
 </p>

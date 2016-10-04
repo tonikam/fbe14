@@ -7,18 +7,22 @@ import {allUsersRouting} from "./allUsers.routing";
 import {DataService} from "../shared/data.service";
 
 import { AllUsersComponent } from "./allUsers.component";
-import { UserItemsComponent } from './user-items/user-items.component';
-import { UserItemComponent } from './user-items/user-item.component';
+import { UserListComponent } from './user-items/user-list.component';
+import { UserPatientComponent } from './user-items/user-patient.component';
+import { UserRowComponent } from './user-items/user-row.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserStartComponent } from './user-start.component';
+import { UserNewComponent } from "./user-new/user-new.component";
 
 @NgModule({
     declarations: [
       AllUsersComponent,
-      UserItemsComponent,
-      UserItemComponent,
+      UserListComponent,
+      UserPatientComponent,
+      UserRowComponent,
       UserStartComponent,
-      UserEditComponent
+      UserEditComponent,
+      UserNewComponent
     ],
     imports: [
       FormsModule,

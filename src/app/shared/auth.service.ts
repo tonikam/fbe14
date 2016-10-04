@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { AngularFire } from 'angularfire2';
 
 import { User } from "./user.interface";
+import {AngularFireAuth} from "angularfire2/index";
 
 @Injectable()
 export class AuthService {
@@ -40,6 +41,16 @@ export class AuthService {
       let userID = "";
       this.af.auth.subscribe(auth => {userID = auth.uid});
       return userID;
+    } catch(e) {
+      return "no logged in user";
+    }
+  };
+
+  getActUserData() {
+    try {
+      let userData;
+      this.af.auth.subscribe(auth => {userData = auth.auth.providerData[0]});
+      return userData;
     } catch(e) {
       return "no logged in user";
     }

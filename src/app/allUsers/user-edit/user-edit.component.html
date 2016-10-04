@@ -1,20 +1,17 @@
 <div class="pull-left">
   <table class="table">
-    <tr><td>Patient (User: {{(user | async)?.name}})</td></tr>
-    <tr><td><label>Key: {{patientKey}}</label></td></tr>
+    <tr><td>Patient of user: {{(user | async)?.name}}</td></tr>
+    <tr><td class="info"><label>Edit: {{patientKey}}</label></td></tr>
     <tr>
+      <td>name</td>
       <td><input type="text" #updateName [value]="patientName" /></td>
       <td><button (click)="updatePatient({name: updateName.value})">Update name</button></td>
     </tr>
     <tr>
+      <td>age</td>
       <td><input type="text" #updateAge [value]="patientAge" /></td>
-      <td><button (click)="updatePatient({age: updateAge.value,name: updateName.value})">Update age+name</button></td>
+      <td><button (click)="updatePatient({age: updateAge.value})">Update age</button></td>
     </tr>
+    <tr><button (click)="updatePatient({age: updateAge.value,name: updateName.value})">update patient</button></tr>
   </table>
 </div>
-
-<!--
-<div class="pull-left">
-  <p class="list-group-item-text">Patient: {{patientKey}} - {{(patient | async)?.name}} -- User: {{userKey}}</p>
-</div>
--->

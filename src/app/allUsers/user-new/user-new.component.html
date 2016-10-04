@@ -1,0 +1,15 @@
+<div class="pull-left">
+  <table class="table">
+    <tr><td>Patient of user: {{(user | async)?.name}}</td></tr>
+    <tr><td class="success"><label>new patient</label></td></tr>
+    <tr>
+      <td>name</td>
+      <td><input type="text" #newName [value]="" /></td>
+    </tr>
+    <tr>
+      <td>age</td>
+      <td><input type="text" #newAge [value]="" /></td>
+    </tr>
+    <tr><button (click)="createPatient({age: newAge.value,name: newName.value})">create patient</button></tr>
+  </table>
+</div>

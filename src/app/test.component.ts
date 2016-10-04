@@ -13,8 +13,9 @@ import {DataService} from "./shared/data.service";
 export class TestComponent {
 
   private test: Observable<any>;
-  private userID: String;
-  private userObj: Observable<any>;
+  private loggedInUserID: String;
+  private loggedInUserData: any;
+  private actAppUser: Observable<any>;
 
   constructor(private dataService: DataService,
               private authService: AuthService){
@@ -23,8 +24,9 @@ export class TestComponent {
 
   getData(){
     this.test = this.dataService.getTest();
-    this.userID = this.authService.getActUserID();
-    this.userObj = this.dataService.getActUser();
+    this.loggedInUserID = this.authService.getActUserID();
+    this.loggedInUserData = this.authService.getActUserData();
+    this.actAppUser = this.dataService.getActAppUser();
 
     let x = 123;
   };

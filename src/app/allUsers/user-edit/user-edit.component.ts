@@ -33,6 +33,11 @@ export class UserEditComponent {
         this.patient.subscribe((patient) => {this.patientAge = patient.age});
       }
     );
+    this.setParameters();
+  };
+
+  setParameters() {
+
   };
 
   updatePatient(key_value) {

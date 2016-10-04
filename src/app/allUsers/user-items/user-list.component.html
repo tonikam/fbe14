@@ -1,13 +1,15 @@
 <div class="table-responsive">
   <table class="table">
     <caption>Users and their patients</caption>
-    <tbody *ngFor="let user of allUsers | async">
+    <tbody *ngFor="let user of allUsers | async" class="table">
 
     <!-- <tr><td><th scope="rowgroup>">{{user.name}} ({{user.$key}})<td><td> -->
     <!-- <tr class="table-success" ><td>{{user.name}}<td>({{user.$key}})<td>. -->
+    <!--<tr class="success"><td>Patients of</td><td>{{user.name}}</td><td>{{user.$key}}</td><td><button class="btn btn-success" (click)="onNew($user)">New</button></td></tr>-->
+    <tr class="success" user-row [user]="user"></tr>
 
     <!-- Tag wird in Angular2 nicht mehr ersetzt, deshalb Attribut verwenden -->
-    <tr user-item *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient">
+    <tr user-patient *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient"></tr>
       <!-- <user-item *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient"></user-item> -->
 
       <!--/table-->
