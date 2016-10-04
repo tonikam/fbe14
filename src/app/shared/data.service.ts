@@ -4,12 +4,15 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 
 import {AuthService} from "./auth.service";
 
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
 
   private userID: String;
+  private actUser: Observable<any>;
+  private actUserID: String;
 
   constructor(private af: AngularFire,
               private authService: AuthService) {
@@ -20,7 +23,13 @@ export class DataService {
   getActAppUser() {
     let actUserID = this.authService.getActUserID();
     console.log ("aus dataService: " + actUserID);
-    return this.af.database.object(`/_db3/users/` + actUserID);
+    return this.af.database.object(`/_db2/users/` + actUserID);
+  };
+
+  getActAppUserID(user) {
+    let actUserID = this.authService.getActUserID();
+    console.log ("aus dataService: " + actUserID);
+    return this.af.database.object(`/_db2/users/` + actUserID);
   };
 
   setCachedUserID(userID) {
@@ -45,8 +54,10 @@ export class DataService {
       });
   };
 
-  getPatientWithCases(userKey) {
-    return this.af.database.list(`/_db2/patients/` + userKey, {query: {orderByKey: true}})
+  getPatientWithCases(user) {
+    user.subscribe((user) => {this.actUserID = user.$key});
+    console.log('Aktueller User:' + this.actUserID);
+    return this.af.database.list('/_db2/patients/' + this.actUserID, {query: {orderByKey: true}})
       .map((allPatients) => {
         return allPatients.map((patient) =>
         {

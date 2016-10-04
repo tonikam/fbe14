@@ -4,20 +4,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {DataService} from "../shared/data.service";
 
-import { AllPatientsComponent } from "./allPatients.component";
-import { AllPatientsRowComponent } from "./allPatientsRow.component";
+import { PatientListComponent } from "./patient-list.component";
+import { PatientCaseComponent } from "./patient-case.component";
+import { PatientRowComponent } from "./patient-row.component";
 
 @NgModule({
     declarations: [
-      AllPatientsComponent,
-      AllPatientsRowComponent
+      PatientListComponent,
+      PatientRowComponent,
+      PatientCaseComponent
     ],
     imports: [
       FormsModule,
       ReactiveFormsModule,
       CommonModule],
     providers: [
-    DataService
+      DataService
   ]
 })
-export class AllPatientsModule {}
+export class PatientModule {}

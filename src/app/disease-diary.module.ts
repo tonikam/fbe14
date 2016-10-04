@@ -11,13 +11,13 @@ import { TestComponent } from "./test.component";
 
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { PatientModule } from './patient/patient.module';
+import { DiseasePatientModule } from './patient/patient.module';
 import { DiseaseCaseModule } from './diseaseCase/diseaseCase.module';
 import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
 
 // now lazy loading - allUsersRouting
 //import { AllUsersModule } from './allUsers/allUsers.module';
-import { AllPatientsModule } from './allPatients/allPatients.module';
+import { PatientModule } from './allPatients/patient.module';
 
 import { AuthService } from './shared/auth.service';
 import { DataService } from './shared/data.service';
@@ -62,11 +62,11 @@ const firebaseAuthConfig = {
     routing,
     AuthModule,
     UserModule,
-    PatientModule,
+    DiseasePatientModule,
     DiseaseCaseModule,
     DiseaseEventModule,
 	  //AllUsersModule,
-	  AllPatientsModule
+	  PatientModule
   ],
   providers: [
     appRoutingProviders,

@@ -5,7 +5,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 @Component({
   templateUrl: './patient.component.html'
 })
-export class PatientComponent {
+export class DiseasePatientComponent {
 
   patients: FirebaseListObservable<any>;
 

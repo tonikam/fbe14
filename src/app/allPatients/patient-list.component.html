@@ -1,14 +1,19 @@
 <div class="table-responsive">
-  <!--<h2>Patients of User: {{(actUser | async)?.$key}}</h2>-->
+  <p *ngIf="counterPatients < 1">no patients found</p>
   <table class="table">
-    <caption>Patients and their cases</caption>
-    <tbody *ngFor="let patient of allPatients | async">
+    <caption>User: {{userName}} / Patients and their cases</caption>
+    <tbody *ngFor="let patient of allPatients | async" class="table">
 
-    <tr patient-item *ngFor="let case of patient.cases | async" [patient]="patient" [case]="case">
+      <tr class="success" patient-row [patient]="patient"></tr>
 
+      <tr patient-item *ngFor="let case of patient.cases | async" [patient]="patient" [case]="case"></tr>
+
+    <!--/table-->
     </tbody>
   </table>
 </div>
+
+
 
 
 <!--

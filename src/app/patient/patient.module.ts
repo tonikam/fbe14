@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { PatientComponent } from "./patient.component";
+import { DiseasePatientComponent } from "./patient.component";
 
 @NgModule({
     declarations: [
-        PatientComponent
+        DiseasePatientComponent
     ],
     imports: [FormsModule, ReactiveFormsModule, CommonModule]
 })
-export class PatientModule {}
+export class DiseasePatientModule {}
