@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
     onRegister() {
       this.authService.registerUser(this.myForm.value);
-      this.router.navigate(['/test']);
+      this.router.navigate(['']);
     }
 
     ngOnInit(): any {
