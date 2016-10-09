@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ApplicationRef } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -7,6 +7,7 @@ import { DiseaseDiaryComponent } from './disease-diary.component';
 import { HeaderComponent } from "./shared/header.component";
 import { DiseaseDiaryDropdownDirective } from './disease-diary-dropdown.directive';
 import { HomeComponent } from "./home.component";
+
 import { TestComponent } from "./test.component";
 
 import { AuthModule } from './auth/auth.module';
@@ -22,14 +23,13 @@ import { PatientModule } from './allPatients/patient.module';
 import { AuthService } from './shared/auth.service';
 import { DataService } from './shared/data.service';
 
-import { routing, appRoutingProviders } from "./disease-diary.routing";
+import { DiseaseRoutingModule, routedDiseaseComponents } from "./disease-diary.routing";
 
 import {AngularFireModule} from 'angularfire2';
 import *as firebase from 'firebase';
 import {AuthProviders} from "angularfire2/index";
 import {AuthMethods} from "angularfire2/index";
-//import { UserItemComponent } from './user-item/user-item.component';
-
+import {Register} from "ts-node/dist/index";
 
 const firebaseConfig = {
     // fbe5
@@ -46,30 +46,28 @@ const firebaseAuthConfig = {
 };
 
 @NgModule({
-  declarations: [
-    DiseaseDiaryComponent,
-	  HeaderComponent,
-    DiseaseDiaryDropdownDirective,
-    HomeComponent,
-    TestComponent //,
-    //UserItemComponent
-  ],
   imports: [
 	  AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
     CommonModule,
     FormsModule,
-    routing,
-    AuthModule,
-    UserModule,
+    DiseaseRoutingModule,
     DiseasePatientModule,
     DiseaseCaseModule,
     DiseaseEventModule,
-	  //AllUsersModule,
+    AuthModule,
+    UserModule,
 	  PatientModule
   ],
+  declarations: [
+    DiseaseDiaryComponent,
+    routedDiseaseComponents,
+    HeaderComponent,
+    DiseaseDiaryDropdownDirective,
+    HomeComponent,
+    TestComponent
+  ],
   providers: [
-    appRoutingProviders,
 	  AuthService,
     DataService
   ],

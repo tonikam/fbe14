@@ -16,8 +16,13 @@ export class LoginComponent implements OnInit {
                 private router: Router) {}
 
     onLogin() {
-      this.authService.loginUser(this.myForm.value);
-      this.router.navigate(['']);
+      let resultLogin = this.authService.loginUser(this.myForm.value);
+      console.log("Login result: " + resultLogin);
+      //if (resultLogin == "auth/ok") {
+        this.router.navigate(['home']);
+      //} else {
+      //  this.router.navigate(['error']);
+      //}
     }
 
     ngOnInit():any {

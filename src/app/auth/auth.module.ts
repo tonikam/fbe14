@@ -15,6 +15,17 @@ import { RegisterComponent } from "./register.component";
       FormsModule,
       ReactiveFormsModule,
       CommonModule
+    ],
+    exports: [
+      LoginComponent,
+      RegisterComponent
     ]
 })
 export class AuthModule {}
+
+/*
+export const authComponents = [
+  LoginComponent,
+  RegisterComponent,
+];
+*/

@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 
 import {AllUsersComponent} from "./allUsers.component";
@@ -5,7 +6,7 @@ import {UserStartComponent} from "./user-start.component";
 import {UserEditComponent} from "./user-edit/user-edit.component";
 import {UserNewComponent} from "./user-new/user-new.component";
 
-const ALLUSERS_ROUTES: Routes = [
+export const allUsers_routes: Routes = [
   { path: '', component: AllUsersComponent, children: [
     { path: '', component: UserStartComponent },
     { path: ':userKey/new', component: UserNewComponent },
@@ -13,4 +14,17 @@ const ALLUSERS_ROUTES: Routes = [
   ]}
 ];
 
-export const allUsersRouting = RouterModule.forChild(ALLUSERS_ROUTES);
+@NgModule ({
+  imports: [RouterModule.forChild(allUsers_routes)],
+  exports: [RouterModule]
+})
+
+export class AllUsersRoutingModule{}
+
+export const routedAllUsersComponents = [
+  AllUsersComponent,
+  UserStartComponent,
+  UserEditComponent,
+  UserNewComponent
+];
+

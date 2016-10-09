@@ -1,33 +1,56 @@
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
+
+import { AuthModule } from './auth/auth.module';
 
 import { LoginComponent } from "./auth/login.component";
 import { RegisterComponent } from "./auth/register.component";
+
 import { HomeComponent } from "./home.component";
 import { TestComponent } from "./test.component";
+import { ErrorComponent } from "./error.component";
+
 import { UserComponent } from "./user/user.component";
 import { DiseasePatientComponent } from "./patient/patient.component";
 import { DiseaseCaseComponent } from "./diseaseCase/diseaseCase.component";
 import { DiseaseEventComponent } from "./diseaseEvent/diseaseEvent.component";
 
-//import { AllUsersComponent } from "./allUsers/allUsers.component";
 import { PatientListComponent } from "./allPatients/patient-list.component";
 
-const APP_ROUTES: Routes = [
+export const app_routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
+
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+
+  {path: 'error', component: ErrorComponent},
+
   {path: 'test', component: TestComponent},
+
   {path: 'user', component: UserComponent},
   {path: 'patient', component: DiseasePatientComponent},
   {path: 'case', component: DiseaseCaseComponent},
   {path: 'event', component: DiseaseEventComponent},
-  //{path: 'allUsers', component: AllUsersComponent, children: ALLUSERS_ROUTES},
+
   {path: 'allUsers', loadChildren: 'app/allUsers/allUsers.module#AllUsersModule'},
+
   {path: 'allPatients', component: PatientListComponent}
 ];
 
-export const appRoutingProviders : any[] = [
+@NgModule ({
+  imports: [RouterModule.forRoot(app_routes)],
+  exports: [RouterModule]
+})
 
+export class DiseaseRoutingModule{}
+
+export const routedDiseaseComponents = [
+  HomeComponent,
+  TestComponent,
+  ErrorComponent,
+  UserComponent,
+  DiseasePatientComponent,
+  DiseaseCaseComponent,
+  DiseaseEventComponent
 ];
-
-export const routing = RouterModule.forRoot(APP_ROUTES);
