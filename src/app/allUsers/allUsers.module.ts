@@ -11,17 +11,17 @@ import { UserPatientComponent } from './user-items/user-patient.component';
 import { UserRowComponent } from './user-items/user-row.component';
 
 @NgModule({
-    declarations: [
-      UserListComponent,
-      UserPatientComponent,
-      UserRowComponent,
-      routedAllUsersComponents
-    ],
     imports: [
       FormsModule,
       ReactiveFormsModule,
       CommonModule,
       AllUsersRoutingModule
+    ],
+    declarations: [
+      UserListComponent,
+      UserPatientComponent,
+      UserRowComponent,
+      routedAllUsersComponents
     ],
     providers: [
       DataService

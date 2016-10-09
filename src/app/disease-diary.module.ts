@@ -20,6 +20,7 @@ import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
 //import { AllUsersModule } from './allUsers/allUsers.module';
 import { PatientModule } from './allPatients/patient.module';
 
+import { ConfigService } from "./shared/config.service";
 import { AuthService } from './shared/auth.service';
 import { DataService } from './shared/data.service';
 
@@ -31,23 +32,9 @@ import {AuthProviders} from "angularfire2/index";
 import {AuthMethods} from "angularfire2/index";
 import {Register} from "ts-node/dist/index";
 
-const firebaseConfig = {
-    // fbe5
-    apiKey: "AIzaSyAMQA61KfzbKBSxVRYJtch1LPzcC-VFblk",
-    authDomain: "fbe5-17455.firebaseapp.com",
-    databaseURL: "https://fbe5-17455.firebaseio.com",
-    storageBucket: "fbe5-17455.appspot.com",
-    messagingSenderId: "811840885015"
-};
-
-const firebaseAuthConfig = {
-  provider: AuthProviders.Password,
-  method: AuthMethods.Password
-};
-
 @NgModule({
   imports: [
-	  AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
+    AngularFireModule.initializeApp(ConfigService.firebaseConfig, ConfigService.firebaseAuthConfig),
     BrowserModule,
     CommonModule,
     FormsModule,
@@ -68,6 +55,7 @@ const firebaseAuthConfig = {
     TestComponent
   ],
   providers: [
+    ConfigService,
 	  AuthService,
     DataService
   ],
