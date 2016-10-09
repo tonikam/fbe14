@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from "@angular/router";
 import {DataService} from "../../shared/data.service";
 
 @Component({
-  //selector: 'user-item',
   selector: '[user-patient]',
   templateUrl: 'user-patient.component.html'
 })

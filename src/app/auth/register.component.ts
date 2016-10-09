@@ -18,12 +18,7 @@ export class RegisterComponent implements OnInit {
 
     onRegister() {
       let resultRegister = this.authService.registerUser(this.myForm.value);
-      console.log("Register result: " + resultRegister);
-      //if (resultRegister == "auth/ok") {
-        this.router.navigate(['home']);
-      //} else {
-      //  this.router.navigate(['error']);
-      //}
+      this.router.navigate(['home']);
     }
 
     ngOnInit(): any {

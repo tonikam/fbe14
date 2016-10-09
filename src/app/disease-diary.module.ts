@@ -23,6 +23,8 @@ import { PatientModule } from './allPatients/patient.module';
 import { ConfigService } from "./shared/config.service";
 import { AuthService } from './shared/auth.service';
 import { DataService } from './shared/data.service';
+import { ErrorHandlerService } from "./shared/error-handler.service";
+import { ErrorLoggerService } from "./shared/error-logger.service";
 
 import { DiseaseRoutingModule, routedDiseaseComponents } from "./disease-diary.routing";
 
@@ -44,7 +46,7 @@ import {Register} from "ts-node/dist/index";
     DiseaseEventModule,
     AuthModule,
     UserModule,
-	  PatientModule
+    PatientModule
   ],
   declarations: [
     DiseaseDiaryComponent,
@@ -56,8 +58,10 @@ import {Register} from "ts-node/dist/index";
   ],
   providers: [
     ConfigService,
-	  AuthService,
-    DataService
+    AuthService,
+    DataService,
+    ErrorHandlerService,
+    ErrorLoggerService
   ],
   entryComponents: [DiseaseDiaryComponent],
   bootstrap: [DiseaseDiaryComponent]
