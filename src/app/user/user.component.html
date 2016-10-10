@@ -15,13 +15,15 @@
   </li>
 </ul>
 -->
-<input type="text" #newitem />
-<button (click)="addUser(newitem.value)">Add</button>
+<input type="text" #newName />
+<input type="text" #newRole />
+<button (click)="addUser(newName.value, newRole.value)">Add</button>
 <button (click)="deleteUserAll()">Delete All</button>
 <table class="table">
   <tr *ngFor="let user of users | async">
-    <td><input type="text" #updatetext [value]="user.name" /></td>
-    <td><button (click)="updateUser(user.$key, updatetext.value)">Update</button></td>
+    <td><input type="text" #updateName [value]="user.name" /></td>
+        <td><input type="text" #updateRole [value]="user.role" /></td>
+    <td><button (click)="updateUser(user.$key, updateName.value, updateRole.value)">Update</button></td>
     <td><button (click)="deleteUser(user.$key)">Delete</button></td>
     <td><label>Key: {{user.$key}}</label></td>
   </tr>

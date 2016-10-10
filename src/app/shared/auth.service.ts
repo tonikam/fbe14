@@ -19,7 +19,7 @@ export class AuthService {
     this.af.auth.createUser({email: user.email, password: user.password})
       .then((value) => {
         // create entry in users - table with correct uid
-        this.af.database.object('/_db2/users/' + value.uid).set({name: user.email, age: 0});
+        this.af.database.object('/_db2/users/' + value.uid).set({name: user.email, age: 0, role: 10});
         console.log("Registered uid: " + value.uid);
       })
       .catch((error) => {
