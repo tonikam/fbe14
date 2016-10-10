@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import {DataService} from "../../shared/data.service";
 @Component({
   templateUrl: './user-new.component.html'
 })
-export class UserNewComponent {
+export class UserNewComponent implements OnDestroy {
 
   private subscription: Subscription;
 
@@ -31,4 +31,7 @@ export class UserNewComponent {
     this.dataService.createPatient(this.userKey,key_value)
   };
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

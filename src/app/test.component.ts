@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import {async} from "rxjs/scheduler/async";
 
 import {AuthService} from "./shared/auth.service";
 import {DataService} from "./shared/data.service";
+
 
 @Component({
   templateUrl: './test.component.html',
@@ -16,6 +18,7 @@ export class TestComponent {
   private loggedInUserID: String;
   private loggedInUserData: any;
   private actAppUser: Observable<any>;
+  //private loggedInUserInfo: Observable<any>;
 
   constructor(private dataService: DataService,
               private authService: AuthService){
@@ -26,6 +29,7 @@ export class TestComponent {
     this.test = this.dataService.getTest();
     this.loggedInUserID = this.authService.getActUserID();
     this.loggedInUserData = this.authService.getActUserData();
+    //this.loggedInUserInfo = this.dataService.getCachedUserData();
     this.actAppUser = this.dataService.getActAppUser();
 
     let x = 123;

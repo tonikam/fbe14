@@ -28,7 +28,7 @@ export const app_routes: Routes = [
 
   {path: 'test', component: TestComponent},
 
-  {path: 'user', component: UserComponent},
+  {path: 'user', component: UserComponent, canActivate: []},
   {path: 'patient', component: DiseasePatientComponent},
   {path: 'case', component: DiseaseCaseComponent},
   {path: 'event', component: DiseaseEventComponent},
