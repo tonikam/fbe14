@@ -8,6 +8,7 @@ import { RegisterComponent } from "./auth/register.component";
 
 import { HomeComponent } from "./home.component";
 import { TestComponent } from "./test.component";
+import { WrongLinkComponent } from "./wrong-link.component";
 import { ErrorComponent } from "./error.component";
 
 import { UserComponent } from "./user/user.component";
@@ -33,9 +34,11 @@ export const app_routes: Routes = [
   {path: 'case', component: DiseaseCaseComponent},
   {path: 'event', component: DiseaseEventComponent},
 
-  {path: 'allUsers', loadChildren: 'app/allUsers/allUsers.module#AllUsersModule'},
+  {path: 'allUsers', loadChildren: 'app/+allUsers/allUsers.module#AllUsersModule'},
 
-  {path: 'allPatients', component: PatientListComponent}
+  {path: 'allPatients', component: PatientListComponent},
+
+  {path: '**', component: WrongLinkComponent}
 ];
 
 @NgModule ({

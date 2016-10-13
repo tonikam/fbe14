@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
-import {AuthService} from "./auth.service";
+import { AuthService } from "./auth.service";
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';

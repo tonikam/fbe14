@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import {async} from "rxjs/scheduler/async";
@@ -22,6 +22,7 @@ export class TestComponent {
 
   constructor(private dataService: DataService,
               private authService: AuthService){
+
     this.getData();
   };
 
@@ -31,7 +32,6 @@ export class TestComponent {
     this.loggedInUserData = this.authService.getActUserData();
     //this.loggedInUserInfo = this.dataService.getCachedUserData();
     this.actAppUser = this.dataService.getActAppUser();
-
-    let x = 123;
+    console.log("[getData] TestComponent");
   };
 }

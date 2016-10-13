@@ -9,6 +9,7 @@ import { DiseaseDiaryDropdownDirective } from './disease-diary-dropdown.directiv
 import { HomeComponent } from "./home.component";
 
 import { TestComponent } from "./test.component";
+import { WrongLinkComponent } from "./wrong-link.component";
 
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
@@ -54,7 +55,8 @@ import {Register} from "ts-node/dist/index";
     HeaderComponent,
     DiseaseDiaryDropdownDirective,
     HomeComponent,
-    TestComponent
+    TestComponent,
+    WrongLinkComponent
   ],
   providers: [
     ConfigService,
