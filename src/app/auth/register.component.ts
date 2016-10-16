@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 import { Router } from "@angular/router";
 
 import { AuthService } from "../shared/auth.service";
+import { ConfigService } from "../shared/config.service";
 
 @Component({
     templateUrl: './register.component.html'
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
     }
 
     isEmail(control: FormControl): {[s: string]: boolean} {
-        if (!control.value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+        if (!control.value.match(ConfigService.getEmailRegex())) {
             return {noEmail: true};
         }
     }

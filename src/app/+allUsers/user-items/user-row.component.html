@@ -1,1 +1,14 @@
+
+<div class="card-deck">
+  <div class="card card-danger  header-card-width">
+    <div class="card-header">Patients of {{user.name}}</div>
+    <div class="card-block">
+      <p class="card-text">{{user.$key}}</p>
+      <button class="btn btn-success" (click)="onNew()">Add new Patient</button>
+    </div>
+  </div>
+</div>
+
+<!--
 <td>Patients of</td><td>{{user.name}}</td><td>{{user.$key}}</td><td><button class="btn btn-success" (click)="onNew()">New</button></td>
+-->

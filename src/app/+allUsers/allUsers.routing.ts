@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 
 import {AllUsersComponent} from "./allUsers.component";
+import {UserListComponent} from "./user-items/user-list.component";
 import {UserStartComponent} from "./user-start.component";
 import {UserEditComponent} from "./user-edit/user-edit.component";
 import {UserNewComponent} from "./user-new/user-new.component";
 
 export const allUsers_routes: Routes = [
   { path: '', component: AllUsersComponent, children: [
-    { path: '', component: UserStartComponent },
+    { path: '', component: UserListComponent },
     { path: ':userKey/new', component: UserNewComponent },
     { path: ':patientKey/edit', component: UserEditComponent }
   ]}

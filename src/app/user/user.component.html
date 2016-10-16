@@ -19,7 +19,7 @@
 <input type="text" #newRole />
 <button (click)="addUser(newName.value, newRole.value)">Add</button>
 <button (click)="deleteUserAll()">Delete All</button>
-<table class="table">
+<table class="table table-bordered table-active">
   <tr *ngFor="let user of users | async">
     <td><input type="text" #updateName [value]="user.name" /></td>
         <td><input type="text" #updateRole [value]="user.role" /></td>

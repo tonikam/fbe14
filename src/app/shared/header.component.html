@@ -1,34 +1,74 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" [routerLink]="['/']">Disease Diary</a>
-      </div>
-      <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li routerLinkActive="active"><a [routerLink]="['test']">Test</a></li>
-            <li routerLinkActive="active" *ngIf="af.auth | async" class="dropdown" diseaseDiaryDropdown>
-              <a class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a [routerLink]="['user']">User</a></li>
-                <li><a [routerLink]="['patient']">Patient -test</a></li>
-                <li><a [routerLink]="['case']">Case -test</a></li>
-                <li><a [routerLink]="['event']">Event -test</a></li>
-              </ul>
-            </li>
-		        <li routerLinkActive="active" *ngIf="af.auth | async"><a [routerLink]="['allUsers']">All Users (Admin)</a></li>
-				<li routerLinkActive="active" *ngIf="af.auth | async"><a [routerLink]="['allPatients']">All Patients</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li routerLinkActive="active" class="dropdown" diseaseDiaryDropdown>
-            <a class="dropdown-toggle" data-toggle="dropdown">My Diary<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a [routerLink]="['register']">Register</a></li>
-              <li><a [routerLink]="['login']">Login</a></li>
-              <li *ngIf="af.auth | async" role="separator" class="divider"></li>
-              <li *ngIf="af.auth | async"><a (click)="onLogout()" style="cursor: pointer;">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div><!-- /.container-fluid -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <br />
+
+      <nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggler="collapse" data-target="#CollapseNavbar">
+          &#9776;
+        </button>
+
+          <div class="collapse navbar-toggleable-xs" id="CollapseNavbar">
+
+            <!-- Brand -->
+            <a class="navbar-brand" [routerLink]="['/']">Disease Diary</a>
+
+            <!-- Links -->
+            <div class="nav navbar-nav">
+              <a class="nav-item nav-link" routerLinkActive="active" [routerLink]="['test']">Test</a>
+
+              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['allUsers']">All Users (Admin)</a>
+              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['allPatients']">All Patients</a>
+            </div>
+
+
+            <!-- Admin -->
+            <div class="nav navbar-nav pull-right" diseaseDiaryDropdown>
+              <div class="nav-item dropdown">
+                <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  My Diary
+                </a>
+                <div class="dropdown-menu" data-placement="left" aria-labelledby="Auth">
+                  <a class="dropdown-item" [routerLink]="['register']">Register</a>
+                  <a class="dropdown-item" [routerLink]="['login']">Login</a>
+                  <!--li *ngIf="af.auth | async" role="separator" class="divider"-->
+                  <div *ngIf="af.auth | async" class="dropdown-divider"></div>
+                  <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Authentication -->
+            <div class="nav navbar-nav pull-right" *ngIf="af.auth | async" routerLinkActive="active"  diseaseDiaryDropdown  id="navpadding">
+              <div class="nav-item dropdown">
+                <!--li class="nav-item dropdown" routerLinkActive="active" *ngIf="af.auth | async" diseaseDiaryDropdown-->
+                <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  Admin
+                </a>
+                <div class="dropdown-menu" data-placement="left" aria-labelledby="Admin">
+                  <a class="dropdown-item" [routerLink]="['user']">User</a>
+                  <a class="dropdown-item" [routerLink]="['patient']">Patient -test</a>
+                  <a class="dropdown-item" [routerLink]="['case']">Case -test</a>
+                  <a class="dropdown-item" [routerLink]="['event']">Event -test</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+      </nav>
+
+    </div>
+  </div>
+</div>
+
+<!--
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="#!">Home</a>
+  <a class="breadcrumb-item" href="#!">User</a>
+  <a class="breadcrumb-item active" href="#!">Patient</a>
 </nav>
+-->
+

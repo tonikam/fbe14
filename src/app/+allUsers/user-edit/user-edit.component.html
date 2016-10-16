@@ -5,13 +5,15 @@
     <tr>
       <td>name</td>
       <td><input type="text" #updateName [value]="patientName" /></td>
-      <td><button (click)="updatePatient({name: updateName.value})">Update name</button></td>
+      <!--td><button (click)="updatePatient({name: updateName.value})">Update name</button></td-->
     </tr>
     <tr>
       <td>age</td>
       <td><input type="text" #updateAge [value]="patientAge" /></td>
-      <td><button (click)="updatePatient({age: updateAge.value})">Update age</button></td>
+      <!--td><button (click)="updatePatient({age: updateAge.value})">Update age</button></td-->
     </tr>
-    <tr><button (click)="updatePatient({age: updateAge.value,name: updateName.value})">update patient</button></tr>
+    <tr><button class="btn btn-success" (click)="updatePatient({age: updateAge.value,name: updateName.value})">update patient</button></tr>
+    <tr>&nbsp;</tr>
+    <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
   </table>
 </div>

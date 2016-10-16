@@ -1,10 +1,12 @@
 <div class="table-responsive">
   <p *ngIf="counterPatients < 1">no patients found</p>
-  <table class="table">
-    <caption>User: {{userName}} / Patients and their cases</caption>
+  <p>User: {{userName}} / Patients and their cases</p>
+
+  <table class="table table-bordered">
+    <!--caption>User: {{userName}} / Patients and their cases</caption-->
     <tbody *ngFor="let patient of allPatients | async" class="table">
 
-      <tr class="success" patient-row [patient]="patient"></tr>
+      <tr class="table-success" patient-row [patient]="patient"></tr>
 
       <tr patient-item *ngFor="let case of patient.cases | async" [patient]="patient" [case]="case"></tr>
 
