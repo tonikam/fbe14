@@ -1,7 +1,9 @@
-<p>
-  Welcome to Disease Diary
-</p>
-<ul>
-  <li *ngIf="af.auth | async"><a [routerLink]="['patient']">Go to your patients..</a></li>
-  <li *ngIf="af.auth | async"><a (click)="onLogout()" style="cursor: pointer;">or Logout</a></li>
-</ul>
+<div>
+  <p>
+    Welcome to Disease Diary
+  </p>
+  <ul>
+    <li *ngIf="af.auth | async"><a [routerLink]="['/patient']">Go to your patients..</a></li>
+    <li *ngIf="af.auth | async"><a (click)="onLogout()" style="cursor: pointer;">or Logout</a></li>
+  </ul>
+</div>

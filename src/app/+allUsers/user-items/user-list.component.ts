@@ -19,9 +19,17 @@ export class UserListComponent {
     this.allUsers = this.dataService.getAllUsersAndPatients();
   }
 
+  /*
   onNew(user) {
     console.log("new: " + user);
     this.router.navigate(['/allUsers','new'])
   }
+  */
+
+  /*
+  createPatient(user_key,key_value) {
+    this.dataService.createPatient(user_key,key_value)
+  };
+  */
 }
 

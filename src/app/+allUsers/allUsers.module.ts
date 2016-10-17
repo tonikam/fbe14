@@ -9,6 +9,7 @@ import {DataService} from "../shared/data.service";
 import { UserListComponent } from './user-items/user-list.component';
 import { UserPatientComponent } from './user-items/user-patient.component';
 import { UserRowComponent } from './user-items/user-row.component';
+import { UserNewModalComponent } from './user-items/user-new-modal.component';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { UserRowComponent } from './user-items/user-row.component';
       UserListComponent,
       UserPatientComponent,
       UserRowComponent,
+      UserNewModalComponent,
       routedAllUsersComponents
     ],
     providers: [

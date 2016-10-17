@@ -17,10 +17,10 @@
 
             <!-- Links -->
             <div class="nav navbar-nav">
-              <a class="nav-item nav-link" routerLinkActive="active" [routerLink]="['test']">Test</a>
+              <a class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/test']">Test</a>
 
-              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['allUsers']">All Users (Admin)</a>
-              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['allPatients']">All Patients</a>
+              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allUsers']">All Users (Admin)</a>
+              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allPatients']">All Patients</a>
             </div>
 
 
@@ -31,8 +31,8 @@
                   My Diary
                 </a>
                 <div class="dropdown-menu" data-placement="left" aria-labelledby="Auth">
-                  <a class="dropdown-item" [routerLink]="['register']">Register</a>
-                  <a class="dropdown-item" [routerLink]="['login']">Login</a>
+                  <a class="dropdown-item" [routerLink]="['/register']">Register</a>
+                  <a class="dropdown-item" [routerLink]="['/login']">Login</a>
                   <!--li *ngIf="af.auth | async" role="separator" class="divider"-->
                   <div *ngIf="af.auth | async" class="dropdown-divider"></div>
                   <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout</a>
@@ -48,10 +48,10 @@
                   Admin
                 </a>
                 <div class="dropdown-menu" data-placement="left" aria-labelledby="Admin">
-                  <a class="dropdown-item" [routerLink]="['user']">User</a>
-                  <a class="dropdown-item" [routerLink]="['patient']">Patient -test</a>
-                  <a class="dropdown-item" [routerLink]="['case']">Case -test</a>
-                  <a class="dropdown-item" [routerLink]="['event']">Event -test</a>
+                  <a class="dropdown-item" [routerLink]="['/user']">User</a>
+                  <a class="dropdown-item" [routerLink]="['/patient']">Patient -test</a>
+                  <a class="dropdown-item" [routerLink]="['/case']">Case -test</a>
+                  <a class="dropdown-item" [routerLink]="['/event']">Event -test</a>
                 </div>
               </div>
             </div>

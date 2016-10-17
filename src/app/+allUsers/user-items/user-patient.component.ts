@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
 import {DataService} from "../../shared/data.service";
@@ -7,18 +7,45 @@ import {DataService} from "../../shared/data.service";
   selector: '[user-patient]',
   templateUrl: 'user-patient.component.html'
 })
-export class UserPatientComponent {
+export class UserPatientComponent implements OnInit {
   @Input() user: any;
   @Input() patient: any;
 
+  isSuccessVisible: boolean;
+  isWarningVisible: boolean;
+
+  patientKey: String;
+
   constructor(private router: Router,
               private dataService: DataService){
+
+    // card einfärben: patient with active cases, or closed cases
+    // function for checking cases -> or feature stripping :)
+    this.isSuccessVisible = true;
+
+    this.isWarningVisible = this.checkCaseStatus();
+
   };
 
+  ngOnInit(){
+    this.patientKey = this.patient.$key;
+  }
+
+  /*
   onEdit() {
     this.dataService.setCachedUserID(this.user.$key);
     this.router.navigate(['/allUsers',this.patient.$key,'edit'])
   };
+  */
+
+  updatePatient(key_value) {
+    this.dataService.updatePatient(this.user.$key, this.patient.$key, key_value)
+  };
+
+  checkCaseStatus() {
+    // checking case status of patient
+    return false;
+  }
 
 }
 

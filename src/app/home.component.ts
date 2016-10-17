@@ -9,12 +9,18 @@ import { AuthService } from "./shared/auth.service";
   templateUrl: './home.component.html',
   styles: []
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+
+  backgroundURL: String;
 
   constructor(private authService: AuthService,
               private af: AngularFire,
               private router: Router) {
     this.af.auth.subscribe(auth => console.log(auth));
+  }
+
+  ngOnInit() {
+
   }
 
   onLogout() {

@@ -5,14 +5,18 @@
 
 <div *ngFor="let user of allUsers | async" class="card-deck-wrapper">
   <div class="container-fluid">
-      <div class="row">
+      <div class="row flex-items-xs-center">
         <div user-row [user]="user"></div>
       </div>
-      <div class="row">
+      <div class="row flex-items-xs-center">
         <div user-patient *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient" class="card-group"></div>
       </div>
   </div>
 </div>
+
+
+
+
 
 <!--/div-->
 
