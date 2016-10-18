@@ -6,26 +6,34 @@
 
       <nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
 
-        <button class="navbar-toggler hidden-sm-up" type="button" data-toggler="collapse" data-target="#CollapseNavbar">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavBar2" aria-expanded="false" aria-label="Toggle navigation">
           &#9776;
         </button>
 
-          <div class="collapse navbar-toggleable-xs" id="CollapseNavbar">
+          <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
 
             <!-- Brand -->
-            <a class="navbar-brand" [routerLink]="['/']">Disease Diary</a>
+            <div class="nav navbar-nav">
+              <a class="navbar-brand" [routerLink]="['/']">Disease Diary</a>
+            </div>
 
             <!-- Links -->
-            <div class="nav navbar-nav">
-              <a class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/test']">Test</a>
 
-              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allUsers']">All Users (Admin)</a>
+            <div class="nav navbar-nav">
+
+              <a class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/test']">Display user data</a>
+
+              <!--a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allUsers']">All Users (Admin)</a-->
               <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allPatients']">All Patients</a>
             </div>
 
 
-            <!-- Admin -->
-            <div class="nav navbar-nav pull-right" diseaseDiaryDropdown>
+            <!-- ensure correct sequenze of nav objects on the right -->
+
+            <!-- Authentication -->
+
+            <!--div class="nav navbar-nav pull-right" diseaseDiaryDropdown-->
+            <div class="nav navbar-nav pull-right">
               <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   My Diary
@@ -33,22 +41,24 @@
                 <div class="dropdown-menu" data-placement="left" aria-labelledby="Auth">
                   <a class="dropdown-item" [routerLink]="['/register']">Register</a>
                   <a class="dropdown-item" [routerLink]="['/login']">Login</a>
-                  <!--li *ngIf="af.auth | async" role="separator" class="divider"-->
+
                   <div *ngIf="af.auth | async" class="dropdown-divider"></div>
-                  <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout</a>
+                  <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout <span id="loggedInName">{{userName}}</span></a>
                 </div>
               </div>
             </div>
 
-            <!-- Authentication -->
-            <div class="nav navbar-nav pull-right" *ngIf="af.auth | async" routerLinkActive="active"  diseaseDiaryDropdown  id="navpadding">
+            <!-- Admin -->
+
+            <div class="nav navbar-nav pull-right" *ngIf="af.auth | async" routerLinkActive="active" id="navpadding">
+            <!--div class="nav navbar-nav pull-right" *ngIf="af.auth | async" routerLinkActive="active"  diseaseDiaryDropdown  id="navpadding"-->
               <div class="nav-item dropdown">
-                <!--li class="nav-item dropdown" routerLinkActive="active" *ngIf="af.auth | async" diseaseDiaryDropdown-->
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Admin
                 </a>
                 <div class="dropdown-menu" data-placement="left" aria-labelledby="Admin">
-                  <a class="dropdown-item" [routerLink]="['/user']">User</a>
+                  <a class="dropdown-item" [routerLink]="['/user']">Edit user data</a>
+                  <a class="dropdown-item" [routerLink]="['/allUsers']">All users + patients</a>
                   <a class="dropdown-item" [routerLink]="['/patient']">Patient -test</a>
                   <a class="dropdown-item" [routerLink]="['/case']">Case -test</a>
                   <a class="dropdown-item" [routerLink]="['/event']">Event -test</a>
@@ -63,6 +73,7 @@
     </div>
   </div>
 </div>
+
 
 <!--
 <nav class="breadcrumb">

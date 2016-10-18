@@ -13,6 +13,7 @@ export class DataService {
   private userID: String;
   private actUser: Observable<any>;
   private actUserID: String;
+  private actPatientID: String;
 
   constructor(private af: AngularFire,
               private authService: AuthService) {
@@ -63,6 +64,19 @@ export class DataService {
         {
           patient.cases = this.af.database.list(`/_db2/cases/${patient.$key}`, {query: {orderByKey: true}})
           return patient;
+        });
+      });
+  };
+
+  getCaseWithEvents(patient) {
+    patient.subscribe((patient) => {this.actPatientID = patient.$key});
+    console.log('Aktueller Patient:' + this.actPatientID);
+    return this.af.database.list('/_db2/cases/' + this.actPatientID, {query: {orderByKey: true}})
+      .map((allCases) => {
+        return allCases.map((diseaseCase) =>
+        {
+          diseaseCase.diseaseEvents = this.af.database.list(`/_db2/events/${diseaseCase.$key}`, {query: {orderByKey: true}})
+          return diseaseCase;
         });
       });
   };

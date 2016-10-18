@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
+
+import {Subscription} from "rxjs/Subscription";
 
 import {AngularFire} from "angularfire2/angularfire2";
 
@@ -10,14 +12,15 @@ import { AuthService } from "./shared/auth.service";
   styles: []
 })
 
-export class WrongLinkComponent implements OnInit{
+export class WrongLinkComponent implements OnInit, OnDestroy{
 
+  subscription: Subscription;
   showLinkLogin: boolean;
 
   constructor(private authService: AuthService,
               private af: AngularFire,
               private router: Router) {
-    this.af.auth.subscribe(auth => console.log(auth));
+    this.subscription = this.af.auth.subscribe(auth => console.log(auth));
   };
 
   ngOnInit() {
@@ -28,6 +31,10 @@ export class WrongLinkComponent implements OnInit{
         this.showLinkLogin = true;
       }
     });
+  };
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   };
 
   onLogout() {

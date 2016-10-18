@@ -13,11 +13,13 @@ export class LoginComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
                 private authService: AuthService,
-                private router: Router) {}
+                private router: Router) {
+
+    }
 
     onLogin() {
       this.authService.loginUser(this.myForm.value);
-      this.router.navigate(['home']);
+      this.router.navigate(['']);
     }
 
     ngOnInit():any {

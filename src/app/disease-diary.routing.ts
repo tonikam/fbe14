@@ -20,6 +20,8 @@ import { PatientListComponent } from "./allPatients/patient-list.component";
 
 export const app_routes: Routes = [
   {path: '', component: HomeComponent},
+  //{path: '', pathMatch: 'full', redirectTo: '/home'},
+
   {path: 'home', component: HomeComponent},
 
   {path: 'login', component: LoginComponent},
