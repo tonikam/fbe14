@@ -10,6 +10,7 @@ import { HomeComponent } from "./home.component";
 import { LoggedInDataComponent } from "./logged-in-data.component";
 import { WrongLinkComponent } from "./wrong-link.component";
 import { ErrorComponent } from "./error.component";
+import { GitLinkComponent } from "./git-link.component";
 
 import { UserComponent } from "./user/user.component";
 
@@ -29,6 +30,7 @@ export const app_routes: Routes = [
   {path: 'error', component: ErrorComponent},
 
   {path: 'loggedInData', component: LoggedInDataComponent},
+  {path: 'git', component: GitLinkComponent},
 
   {path: 'user', component: UserComponent, canActivate: []},
 

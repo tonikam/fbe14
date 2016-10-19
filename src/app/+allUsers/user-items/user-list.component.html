@@ -2,7 +2,9 @@
 <!--div class="card-deck-wrapper"-->
   <!--div *ngFor="let user of allUsers | async" class="card-deck"-->
 
-
+<div class="container-fluid cust-container-header">
+  <p>{{allUsersCount}} Users</p>
+</div>
 <div *ngFor="let user of allUsers | async" class="card-deck-wrapper">
   <div class="container-fluid">
       <div class="row flex-items-xs-center">

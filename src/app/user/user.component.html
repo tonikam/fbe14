@@ -4,8 +4,8 @@
     <tr>
       <th>user id</th>
       <th>user role</th>
-      <th>update user</th>
-      <th>delete user</th>
+      <th>update</th>
+      <th>delete</th>
     </tr>
   </thead>
   <tbody>
@@ -14,11 +14,35 @@
       <td>{{user.name}}</td>
       <td><input type="text" #updateRole [value]="user.role" /></td>
       <!--td><button (click)="updateUser(user.$key, updateName.value, updateRole.value)">Update</button></td-->
-      <td><button (click)="updateUser(user.$key, updateRole.value)">Update</button></td>
-      <td><button (click)="deleteUser(user.$key)">Delete</button></td>
+      <td><button class="cust-table-btn-update" (click)="updateUser(user.$key, updateRole.value)">Update</button></td>
+      <td><button class="cust-table-btn-delete" data-toggle="modal" [attr.data-target]="'#' + user.$key">Delete</button></td>
       <!--
       <td><label>Key: {{user.$key}}</label></td>
       -->
+
+      <!-- modal dialog for editing patient -->
+
+      <div class="modal fade" [attr.id]="'' + user.$key" tabindex="-1" role="dialog" aria-labelledby="editDiseaseCaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header cust-table-modal-header-danger">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="editDiseaseCaseModalLabel">Delete: {{user.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure to delete this user?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn cust-table-btn-delete" (click)="deleteUser(user.$key)" data-dismiss="modal">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </tr>
   </tbody>
 </table>

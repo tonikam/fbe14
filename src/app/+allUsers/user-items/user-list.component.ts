@@ -12,10 +12,13 @@ import {DataService} from "../../shared/data.service";
 export class UserListComponent {
 
   allUsers: Observable<any[]>;
+  allUsersCount: Number;
 
   //constructor(private router: Router,
   constructor(private dataService: DataService) {
     this.allUsers = this.dataService.getAllUsersAndPatients();
+
+    this.allUsers.subscribe((queriedItems) => {this.allUsersCount = queriedItems.length});
   }
 
   /*

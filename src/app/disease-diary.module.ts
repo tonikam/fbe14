@@ -10,6 +10,7 @@ import { HomeComponent } from "./home.component";
 
 import { LoggedInDataComponent } from "./logged-in-data.component";
 import { WrongLinkComponent } from "./wrong-link.component";
+import { GitLinkComponent } from "./git-link.component";
 
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
@@ -36,6 +37,7 @@ import {AuthProviders} from "angularfire2/index";
 import {AuthMethods} from "angularfire2/index";
 import {Register} from "ts-node/dist/index";
 
+
 @NgModule({
   imports: [
     AngularFireModule.initializeApp(ConfigService.firebaseConfig, ConfigService.firebaseAuthConfig),
@@ -56,7 +58,8 @@ import {Register} from "ts-node/dist/index";
     DiseaseDiaryDropdownDirective,
     HomeComponent,
     LoggedInDataComponent,
-    WrongLinkComponent
+    WrongLinkComponent,
+    GitLinkComponent
   ],
   providers: [
     ConfigService,

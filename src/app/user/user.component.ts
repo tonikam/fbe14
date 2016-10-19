@@ -29,7 +29,8 @@ export class UserComponent {
   }
 
   deleteUser(key: string) {
-    this.users.remove(key);
+    alert("Delete temporarily deactivated!");
+    //this.users.remove(key);
   };
 
   deleteUserAll() {

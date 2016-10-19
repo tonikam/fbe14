@@ -1,13 +1,17 @@
 
-<p>Patients of: {{actUserName}}</p>
+<div class="container-fluid cust-container-header">
+  <p>{{patientsCount}} Patients of: {{actUserName}}</p>
+</div>
 <div *ngFor="let patient of allPatients | async" class="card-deck-wrapper">
   <div class="container-fluid">
     <div class="row flex-items-xs-center">
       <div patient-row [patient]="patient"></div>
     </div>
+    <hr>
     <div class="row flex-items-xs-center">
       <div patient-diseaseCase *ngFor="let diseaseCase of patient.cases | async" [patient]="patient" [diseaseCase]="diseaseCase" class="card-group"></div>
     </div>
+    <hr>
   </div>
 </div>
 

@@ -14,6 +14,7 @@ export class DiseaseCaseListComponent {
   actPatientName: Observable<any>;
   lastPatientKey: String;
   allDiseaseCases: Observable<any[]>;
+  diseaseCasesCount: Number;
 
   constructor(private dataService: DataService,
               private authService: AuthService
@@ -22,6 +23,8 @@ export class DiseaseCaseListComponent {
     this.lastPatientKey= this.dataService.getLastPatientKey();
     console.log("[case-list] lastPatientKey: " + this.lastPatientKey);
     this.allDiseaseCases = this.dataService.getDiseaseCasesWithEvents();
+
+    this.allDiseaseCases.subscribe((queriedItems) => {this.diseaseCasesCount = queriedItems.length});
 
   }
 }

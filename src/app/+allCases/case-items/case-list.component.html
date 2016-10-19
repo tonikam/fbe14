@@ -1,5 +1,7 @@
 
-<p>Cases of Patient: {{actPatientName}} {{lastPatientKey}}</p>
+<div class="container-fluid cust-container-header">
+  <p>{{diseaseCasesCount}} Cases of Patient: {{actPatientName}} {{lastPatientKey}}</p>
+</div>
 <div *ngFor="let diseaseCase of allDiseaseCases | async" class="card-deck-wrapper">
   <div class="container-fluid">
     <div class="row flex-items-xs-center">

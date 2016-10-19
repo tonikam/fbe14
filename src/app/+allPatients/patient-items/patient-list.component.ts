@@ -13,6 +13,7 @@ export class PatientListComponent {
 
   actUserName: String;
   allPatients: Observable<any[]>;
+  patientsCount: Number;
 
   //actAppUser: Observable<any>;
   //userName: String;
@@ -25,6 +26,10 @@ export class PatientListComponent {
 
     this.actUserName = this.authService.loggedInUserName;
     this.allPatients = this.dataService.getPatientsWithCases();
+
+    this.allPatients.subscribe((queriedItems) => {this.patientsCount = queriedItems.length});
+
+    //this.allPatients().getLength();
 
     //this.userName = this.dataService.getCachedUserName();
     //this.allPatients.subscribe((queriedItems) => {this.countPatients = queriedItems.length});

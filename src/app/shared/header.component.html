@@ -58,7 +58,8 @@
                 <div class="dropdown-menu" data-placement="left" aria-labelledby="Admin">
                   <a class="dropdown-item" [routerLink]="['/user']">Edit user data</a>
                   <a class="dropdown-item" [routerLink]="['/allUsers']">All users + patients</a>
-
+                  <div *ngIf="af.auth | async" class="dropdown-divider"></div>
+                  <a class="dropdown-item" [routerLink]="['/git']">Project links</a>
                   <!--
                   <a class="dropdown-item" [routerLink]="['/patient']">Patient -test</a>
                   <a class="dropdown-item" [routerLink]="['/case']">Case -test</a>
