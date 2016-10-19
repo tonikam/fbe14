@@ -38,7 +38,7 @@ export class UserNewModalComponent {
   */
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
   };
 }
 

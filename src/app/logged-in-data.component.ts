@@ -8,17 +8,14 @@ import {DataService} from "./shared/data.service";
 
 
 @Component({
-  templateUrl: './test.component.html',
-  styles: []
+  templateUrl: './logged-in-data.component.html'
 })
 
-export class TestComponent {
+export class LoggedInDataComponent {
 
-  private test: Observable<any>;
   private loggedInUserID: String;
   private loggedInUserData: any;
-  private actAppUser: Observable<any>;
-  //private loggedInUserInfo: Observable<any>;
+  private lastManagedUser: Observable<any>;
 
   constructor(private dataService: DataService,
               private authService: AuthService){
@@ -27,11 +24,9 @@ export class TestComponent {
   };
 
   getData(){
-    this.test = this.dataService.getTest();
     this.loggedInUserID = this.authService.getActUserID();
     this.loggedInUserData = this.authService.getActUserData();
-    //this.loggedInUserInfo = this.dataService.getCachedUserData();
-    this.actAppUser = this.dataService.getActAppUser();
-    console.log("[getData] TestComponent");
+    this.lastManagedUser = this.dataService.getLastManagedUser();
+    console.log("[getData] UserDataComponent");
   };
 }

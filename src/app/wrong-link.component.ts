@@ -34,7 +34,7 @@ export class WrongLinkComponent implements OnInit, OnDestroy{
   };
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
   };
 
   onLogout() {

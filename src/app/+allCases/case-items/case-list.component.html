@@ -1,20 +1,34 @@
+
+<p>Cases of Patient: {{actPatientName}} {{lastPatientKey}}</p>
+<div *ngFor="let diseaseCase of allDiseaseCases | async" class="card-deck-wrapper">
+  <div class="container-fluid">
+    <div class="row flex-items-xs-center">
+      <div diseaseCase-row [diseaseCase]="diseaseCase"></div>
+    </div>
+    <div class="row flex-items-xs-center">
+      <div diseaseCase-diseaseEvent *ngFor="let diseaseEvent of diseaseCase.diseaseEvents | async" [diseaseCase]="diseaseCase" [diseaseEvent]="diseaseEvent" class="card-group"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--
 <div class="table-responsive">
   <p *ngIf="counterPatients < 1">no patients found</p>
   <p>User: {{userName}} / Patients and their cases</p>
 
   <table class="table table-bordered">
-    <!--caption>User: {{userName}} / Patients and their cases</caption-->
     <tbody *ngFor="let patient of allPatients | async" class="table">
 
       <tr class="table-success" patient-row [patient]="patient"></tr>
 
       <tr patient-item *ngFor="let case of patient.cases | async" [patient]="patient" [case]="case"></tr>
 
-    <!--/table-->
     </tbody>
   </table>
 </div>
-
+-->
 
 
 

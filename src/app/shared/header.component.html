@@ -18,15 +18,12 @@
             </div>
 
             <!-- Links -->
-
             <div class="nav navbar-nav">
-
-              <a class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/test']">Display user data</a>
-
+              <!--a class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/userData']">Display user data</a-->
               <!--a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allUsers']">All Users (Admin)</a-->
-              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allPatients']">All Patients</a>
+              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allPatients']">Patients</a>
+              <!--a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/allDiseaseCases']">Cases</a-->
             </div>
-
 
             <!-- ensure correct sequenze of nav objects on the right -->
 
@@ -44,6 +41,8 @@
 
                   <div *ngIf="af.auth | async" class="dropdown-divider"></div>
                   <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout <span id="loggedInName">{{userName}}</span></a>
+                  <div *ngIf="af.auth | async" class="dropdown-divider"></div>
+                  <a class="dropdown-item" *ngIf="af.auth | async" [routerLink]="['/loggedInData']">Display login data</a>
                 </div>
               </div>
             </div>
@@ -59,9 +58,13 @@
                 <div class="dropdown-menu" data-placement="left" aria-labelledby="Admin">
                   <a class="dropdown-item" [routerLink]="['/user']">Edit user data</a>
                   <a class="dropdown-item" [routerLink]="['/allUsers']">All users + patients</a>
+
+                  <!--
                   <a class="dropdown-item" [routerLink]="['/patient']">Patient -test</a>
                   <a class="dropdown-item" [routerLink]="['/case']">Case -test</a>
                   <a class="dropdown-item" [routerLink]="['/event']">Event -test</a>
+                  -->
+
                 </div>
               </div>
             </div>

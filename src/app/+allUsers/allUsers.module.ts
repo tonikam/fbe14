@@ -4,12 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {AllUsersRoutingModule, routedAllUsersComponents} from "./allUsers.routing";
 
-import {DataService} from "../shared/data.service";
-
 import { UserListComponent } from './user-items/user-list.component';
 import { UserPatientComponent } from './user-items/user-patient.component';
 import { UserRowComponent } from './user-items/user-row.component';
-import { UserNewModalComponent } from './user-items/user-new-modal.component';
+//import { UserNewModalComponent } from './user-items/user-new-modal.component';
 
 @NgModule({
     imports: [
@@ -22,11 +20,10 @@ import { UserNewModalComponent } from './user-items/user-new-modal.component';
       UserListComponent,
       UserPatientComponent,
       UserRowComponent,
-      UserNewModalComponent,
+      //UserNewModalComponent,
       routedAllUsersComponents
     ],
     providers: [
-      DataService
     ]
 })
 export class AllUsersModule {}

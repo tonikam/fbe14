@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
-import {DataService} from "../../shared/data.service";
+import { DataService } from "../../shared/data.service";
 
 @Component({
   selector: '[user-patient]',
@@ -23,7 +23,7 @@ export class UserPatientComponent implements OnInit {
     // function for checking cases -> or feature stripping :)
     this.isSuccessVisible = true;
 
-    this.isWarningVisible = this.checkCaseStatus();
+    this.isWarningVisible = this.checkPatientStatus();
 
   };
 
@@ -42,7 +42,7 @@ export class UserPatientComponent implements OnInit {
     this.dataService.updatePatient(this.user.$key, this.patient.$key, key_value)
   };
 
-  checkCaseStatus() {
+  checkPatientStatus() {
     // checking case status of patient
     return false;
   }

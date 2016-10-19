@@ -7,16 +7,15 @@ import { LoginComponent } from "./auth/login.component";
 import { RegisterComponent } from "./auth/register.component";
 
 import { HomeComponent } from "./home.component";
-import { TestComponent } from "./test.component";
+import { LoggedInDataComponent } from "./logged-in-data.component";
 import { WrongLinkComponent } from "./wrong-link.component";
 import { ErrorComponent } from "./error.component";
 
 import { UserComponent } from "./user/user.component";
-import { DiseasePatientComponent } from "./patient/patient.component";
-import { DiseaseCaseComponent } from "./diseaseCase/diseaseCase.component";
-import { DiseaseEventComponent } from "./diseaseEvent/diseaseEvent.component";
 
-import { PatientListComponent } from "./allPatients/patient-list.component";
+//import { DiseasePatientComponent } from "./patient/patient.component";
+//import { DiseaseCaseComponent } from "./diseaseCase/diseaseCase.component";
+//import { DiseaseEventComponent } from "./diseaseEvent/diseaseEvent.component";
 
 export const app_routes: Routes = [
   {path: '', component: HomeComponent},
@@ -29,16 +28,19 @@ export const app_routes: Routes = [
 
   {path: 'error', component: ErrorComponent},
 
-  {path: 'test', component: TestComponent},
+  {path: 'loggedInData', component: LoggedInDataComponent},
 
   {path: 'user', component: UserComponent, canActivate: []},
+
+  /*
   {path: 'patient', component: DiseasePatientComponent},
   {path: 'case', component: DiseaseCaseComponent},
   {path: 'event', component: DiseaseEventComponent},
+  */
 
   {path: 'allUsers', loadChildren: 'app/+allUsers/allUsers.module#AllUsersModule'},
-
-  {path: 'allPatients', component: PatientListComponent},
+  {path: 'allPatients', loadChildren: 'app/+allPatients/allPatients.module#AllPatientsModule'},
+  {path: 'allDiseaseCases', loadChildren: 'app/+allCases/allCases.module#AllDiseaseCasesModule'},
 
   {path: '**', component: WrongLinkComponent}
 ];
@@ -52,10 +54,10 @@ export class DiseaseRoutingModule{}
 
 export const routedDiseaseComponents = [
   HomeComponent,
-  TestComponent,
+  LoggedInDataComponent,
   ErrorComponent,
-  UserComponent,
-  DiseasePatientComponent,
-  DiseaseCaseComponent,
-  DiseaseEventComponent
+  UserComponent  //,
+  //DiseasePatientComponent,
+  //DiseaseCaseComponent,
+  //DiseaseEventComponent
 ];

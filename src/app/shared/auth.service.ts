@@ -12,6 +12,9 @@ import {ErrorHandlerService} from "./error-handler.service";
 @Injectable()
 export class AuthService {
 
+  loggedInUserID: String;
+  loggedInUserName: String;
+
   constructor(public af:AngularFire, private router:Router, private errorHandler:ErrorHandlerService) {
   }
 
@@ -37,9 +40,13 @@ export class AuthService {
         console.log("Login Error: " + error.message);
         this.errorHandler.handleError(error);
       });
+    this.getActUserID();
+    this.getActUserData();
   };
 
   logout() {
+    this.loggedInUserID = "";
+    this.loggedInUserName = "";
     this.af.auth.logout()
   };
 
@@ -49,6 +56,7 @@ export class AuthService {
       this.af.auth.subscribe(auth => {
         userID = auth.uid
       });
+      this.loggedInUserID = userID;
       return userID;
     } catch (e) {
       return "no logged in user";
@@ -61,6 +69,7 @@ export class AuthService {
       this.af.auth.subscribe(auth => {
         userData = auth.auth.providerData[0]
       });
+      this.loggedInUserName = userData.uid;
       return userData;
     } catch (e) {
       return "no logged in user";

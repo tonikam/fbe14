@@ -4,18 +4,17 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
 
 import {DataService} from "../../shared/data.service";
-import {async} from "rxjs/scheduler/async";
 
 @Component({
-  selector: 'user-items-list',
+  // selector: 'user-items-list',
   templateUrl: './user-list.component.html',
 })
 export class UserListComponent {
 
   allUsers: Observable<any[]>;
 
-  constructor(private router: Router,
-              private dataService: DataService) {
+  //constructor(private router: Router,
+  constructor(private dataService: DataService) {
     this.allUsers = this.dataService.getAllUsersAndPatients();
   }
 

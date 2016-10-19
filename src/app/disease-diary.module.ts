@@ -8,18 +8,19 @@ import { HeaderComponent } from "./shared/header.component";
 import { DiseaseDiaryDropdownDirective } from './disease-diary-dropdown.directive';
 import { HomeComponent } from "./home.component";
 
-import { TestComponent } from "./test.component";
+import { LoggedInDataComponent } from "./logged-in-data.component";
 import { WrongLinkComponent } from "./wrong-link.component";
 
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { DiseasePatientModule } from './patient/patient.module';
-import { DiseaseCaseModule } from './diseaseCase/diseaseCase.module';
-import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
+
+//import { DiseasePatientModule } from './patient/patient.module';
+//import { DiseaseCaseModule } from './diseaseCase/diseaseCase.module';
+//import { DiseaseEventModule } from './diseaseEvent/diseaseEvent.module';
 
 // now lazy loading - allUsersRouting
 //import { AllUsersModule } from './allUsers/allUsers.module';
-import { PatientModule } from './allPatients/patient.module';
+//import { PatientModule } from './allPatients/patient.module';
 
 import { ConfigService } from "./shared/config.service";
 import { AuthService } from './shared/auth.service';
@@ -42,12 +43,11 @@ import {Register} from "ts-node/dist/index";
     CommonModule,
     FormsModule,
     DiseaseRoutingModule,
-    DiseasePatientModule,
-    DiseaseCaseModule,
-    DiseaseEventModule,
+    //DiseasePatientModule,
+    //DiseaseCaseModule,
+    //DiseaseEventModule,
     AuthModule,
-    UserModule,
-    PatientModule
+    UserModule
   ],
   declarations: [
     DiseaseDiaryComponent,
@@ -55,7 +55,7 @@ import {Register} from "ts-node/dist/index";
     HeaderComponent,
     DiseaseDiaryDropdownDirective,
     HomeComponent,
-    TestComponent,
+    LoggedInDataComponent,
     WrongLinkComponent
   ],
   providers: [

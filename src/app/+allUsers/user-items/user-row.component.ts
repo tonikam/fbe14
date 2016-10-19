@@ -30,10 +30,12 @@ export class UserRowComponent implements OnInit { // implements AfterViewInit {
   };
   */
 
+  /*
   onNew() {
     this.router.navigate(['/allUsers',this.user.$key,'new'])
     //this.newPatientModal.showNewModalDialog(this.user);
   };
+  */
 
   createPatient(key_value) {
     this.dataService.createPatient(this.user.$key,key_value)
