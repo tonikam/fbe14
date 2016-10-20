@@ -28,7 +28,7 @@
 <div class="modal fade" [attr.id]="'' + diseaseCaseKey" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header cust-table-modal-header-info">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -48,13 +48,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary cust-btn-cancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary cust-btn-create" (click)="createDiseaseEvent({value: newValue.value,name: newName.value})" data-dismiss="modal">Create event</button>
+        <button type="button" class="btn cust-btn-create" (click)="createDiseaseEvent({value: newValue.value,name: newName.value})" data-dismiss="modal">Create event</button>
       </div>
     </div>
   </div>
 </div>
 
-
-<!--
-<td>Cases of</td><td>{{patient.name}}</td><td>{{patient.$key}}</td><td><button class="btn btn-success" (click)="onNew()">New</button></td>
--->

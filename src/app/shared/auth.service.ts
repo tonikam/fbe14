@@ -1,24 +1,28 @@
 import { Injectable } from "@angular/core";
 
-import { Router } from "@angular/router";
+import { Observable } from 'rxjs';
 
 import { AngularFire } from 'angularfire2';
-import { AngularFireAuth } from "angularfire2/index";
 
-import { User } from "./user.interface";
+import { UserLogin } from "./user-login.interface";
 
-import {ErrorHandlerService} from "./error-handler.service";
+import { DataService } from "./data.service";
+
+import { LoggedInUser } from "./logged-in-user.service";
+
+import { ErrorHandlerService } from "./error-handler.service";
 
 @Injectable()
 export class AuthService {
 
-  loggedInUserID: String;
-  loggedInUserName: String;
+  constructor(public af:AngularFire,
+              private errorHandler:ErrorHandlerService,
+              public _loggedInUser: LoggedInUser,
+              private dataService: DataService) {
 
-  constructor(public af:AngularFire, private router:Router, private errorHandler:ErrorHandlerService) {
   }
 
-  registerUser(user:User) {
+  registerUser(user:UserLogin) {
     this.af.auth.createUser({email: user.email, password: user.password})
       .then((value) => {
         // create entry in users - table with correct uid
@@ -31,49 +35,35 @@ export class AuthService {
       });
   };
 
-  loginUser(user:User) {
+  loginUser(user:UserLogin) {
     this.af.auth.login({email: user.email, password: user.password})
       .then((value) => {
-        console.log("Login uid: " + value.uid);
+        console.log("[authService] - loginUser - uid: " + value.uid);
+        console.log("[authService] - loginUser - providerData[].uid: " + value.auth.providerData[0].uid);
+
+        this.dataService.setLoggedInUser({
+          id: value.uid,
+          name: value.auth.providerData[0].uid
+        });
+
+        // set Subject Observable
+        this._loggedInUser.userName.next(value.auth.providerData[0].uid);
+
       })
       .catch((error) => {
-        console.log("Login Error: " + error.message);
+        console.log("[authService] - login error: " + error.message);
         this.errorHandler.handleError(error);
       });
-    this.getActUserID();
-    this.getActUserData();
-  };
+   };
 
   logout() {
-    this.loggedInUserID = "";
-    this.loggedInUserName = "";
+
+    // clear logged in user data and logout
+    this.dataService.setLoggedInUser({
+      id: "",
+      name: ""
+    });
     this.af.auth.logout()
-  };
-
-  getActUserID() {
-    try {
-      let userID = "";
-      this.af.auth.subscribe(auth => {
-        userID = auth.uid
-      });
-      this.loggedInUserID = userID;
-      return userID;
-    } catch (e) {
-      return "no logged in user";
-    }
-  };
-
-  getActUserData() {
-    try {
-      let userData;
-      this.af.auth.subscribe(auth => {
-        userData = auth.auth.providerData[0]
-      });
-      this.loggedInUserName = userData.uid;
-      return userData;
-    } catch (e) {
-      return "no logged in user";
-    }
   };
 
 }

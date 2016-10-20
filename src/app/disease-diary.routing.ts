@@ -14,10 +14,6 @@ import { GitLinkComponent } from "./git-link.component";
 
 import { UserComponent } from "./user/user.component";
 
-//import { DiseasePatientComponent } from "./patient/patient.component";
-//import { DiseaseCaseComponent } from "./diseaseCase/diseaseCase.component";
-//import { DiseaseEventComponent } from "./diseaseEvent/diseaseEvent.component";
-
 export const app_routes: Routes = [
   {path: '', component: HomeComponent},
   //{path: '', pathMatch: 'full', redirectTo: '/home'},
@@ -33,12 +29,6 @@ export const app_routes: Routes = [
   {path: 'git', component: GitLinkComponent},
 
   {path: 'user', component: UserComponent, canActivate: []},
-
-  /*
-  {path: 'patient', component: DiseasePatientComponent},
-  {path: 'case', component: DiseaseCaseComponent},
-  {path: 'event', component: DiseaseEventComponent},
-  */
 
   {path: 'allUsers', loadChildren: 'app/+allUsers/allUsers.module#AllUsersModule'},
   {path: 'allPatients', loadChildren: 'app/+allPatients/allPatients.module#AllPatientsModule'},
@@ -58,8 +48,5 @@ export const routedDiseaseComponents = [
   HomeComponent,
   LoggedInDataComponent,
   ErrorComponent,
-  UserComponent  //,
-  //DiseasePatientComponent,
-  //DiseaseCaseComponent,
-  //DiseaseEventComponent
+  UserComponent
 ];

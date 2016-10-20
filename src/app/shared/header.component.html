@@ -29,7 +29,6 @@
 
             <!-- Authentication -->
 
-            <!--div class="nav navbar-nav pull-right" diseaseDiaryDropdown-->
             <div class="nav navbar-nav pull-right">
               <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -40,7 +39,7 @@
                   <a class="dropdown-item" [routerLink]="['/login']">Login</a>
 
                   <div *ngIf="af.auth | async" class="dropdown-divider"></div>
-                  <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout <span id="loggedInName">{{userName}}</span></a>
+                  <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout <span id="loggedInName">{{loggedInUserName}}</span></a>
                   <div *ngIf="af.auth | async" class="dropdown-divider"></div>
                   <a class="dropdown-item" *ngIf="af.auth | async" [routerLink]="['/loggedInData']">Display login data</a>
                 </div>

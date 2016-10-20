@@ -1,44 +1,28 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { Subscription } from "rxjs/Rx";
-
 import { AngularFire } from 'angularfire2';
-
 import { AuthService } from "./auth.service";
+
+import { LoggedInUser } from "./logged-in-user.service";
 
 @Component({
     selector: 'disease-diary-header',
     templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent {
 
-  subscription: Subscription;
-
-  userName: String;
+  loggedInUserName: String;
 
   constructor(private authService: AuthService,
               private af: AngularFire,
-              private router: Router) {
+              private router: Router,
+              private loggedInUser: LoggedInUser) {
 
-    this.subscription = this.af.auth.subscribe(auth => console.log(auth));
-    this.subscription = this.af.auth.subscribe(auth => {
-      if (auth) {
-        this.userName = ": " + this.authService.getActUserData().uid;
-      } else {
-        this.userName = "";
-      }
-      console.log(auth);
+    this.loggedInUser.userName.subscribe(nameSub => {
+      console.log("[header-component] loggedInUserName: " + nameSub);
+      this.loggedInUserName = "" + nameSub;
     });
-
-  };
-
-  ngOnInit(){
-    this.subscription = this.af.auth.subscribe(auth => console.log(auth));
-  };
-
-  ngOnDestroy() {
-    //this.subscription.unsubscribe();
   };
 
   onLogout() {

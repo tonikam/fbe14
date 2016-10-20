@@ -2,72 +2,35 @@ import { Injectable } from "@angular/core";
 
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
-import { AuthService } from "./auth.service";
-
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
+
+import { UserLoggedIn } from "./user-logged-in.interface";
 
 @Injectable()
 export class DataService {
 
-  private userID: String;
-  private actUser: Observable<any>;
-  private actUserID: String;
-  private actUserName: String;
-  private actPatientID: String;
-
-
+  private loggedInUser: UserLoggedIn;
   private lastUserKey: String;
   private lastPatientKey: String;
   private lastDiseaseCaseKey: String;
 
 
-  constructor(private af: AngularFire,
-              private authService: AuthService) {
-
-  };
+  constructor(private af: AngularFire) {};
 
   // Users + + + + + + + + + + + + + + +
 
-
-  //   --> check this function ..
-  getLastManagedUser() {
-    let actUserID = this.authService.getActUserID();
-    console.log ("aus dataService: " + actUserID);
-    this.actUser = this.af.database.object(`/_db2/users/` + actUserID);
-    return this.actUser;
+  setLoggedInUser(loggedInUser) {
+    this.loggedInUser = loggedInUser;
   };
-
-  /*
-  getActAppUserID(user) {
-    let actUserID = this.authService.getActUserID();
-    console.log ("aus dataService: " + actUserID);
-    return this.af.database.object(`/_db2/users/` + actUserID);
+  getLoggedInUser() {
+    return this.loggedInUser;
   };
-  */
-
-  setCachedUserID(userID) {
-    this.userID = userID;
-  };
-  getCachedUserID(){
-    return this.userID;
-  };
-
-  getCachedUserData(userKey) {
-    return this.af.database.object(`/_db2/users/` + userKey);
-  };
-  getCachedUserName() {
-    return this.actUserName;
-  };
-
-  // .. ... ..
-
-
 
   setLastUserKey(userKey) {
     this.lastUserKey = userKey;
   };
-    getLastUserKey() {
+  getLastUserKey() {
     return this.lastUserKey;
   };
 
@@ -80,6 +43,7 @@ export class DataService {
         });
       });
   };
+
 
   // Patients + + + + + + + + + + + + + + +
 
@@ -105,25 +69,23 @@ export class DataService {
     return this.lastPatientKey;
   };
 
-  //getPatientsWithCases(user) {
   getPatientsWithCases() {
-    //user.subscribe((user) => {this.actUserID = user.$key});
-    this.getLastManagedUser();
-    this.actUser.subscribe((user) => {
-      this.actUserID = user.$key;
-      this.actUserName = user.uid;
-    });
 
-    console.log('[getPatientsWithCases] Aktueller User ID:' + this.actUserID);
-    console.log('[getPatientsWithCases] Aktueller User Name:' + this.actUserName);
-    return this.af.database.list('/_db2/patients/' + this.actUserID, {query: {orderByKey: true}})
-      .map((allPatients) => {
-        return allPatients.map((patient) =>
-        {
-          patient.cases = this.af.database.list(`/_db2/cases/${patient.$key}`, {query: {orderByKey: true}})
-          return patient;
+    if (this.loggedInUser != undefined) {
+      let currentUserID = this.loggedInUser.id;
+      let currentUserName = this.loggedInUser.name;
+
+      console.log('[getPatientsWithCases] Aktueller User ID:' + currentUserID);
+      console.log('[getPatientsWithCases] Aktueller User Name:' + currentUserName);
+      return this.af.database.list('/_db2/patients/' + currentUserID, {query: {orderByKey: true}})
+        .map((allPatients) => {
+          return allPatients.map((patient) =>
+          {
+            patient.cases = this.af.database.list(`/_db2/cases/${patient.$key}`, {query: {orderByKey: true}})
+            return patient;
+          });
         });
-      });
+    }
   };
 
   // Disease Cases + + + + + + + + + + + + + + +
@@ -150,11 +112,7 @@ export class DataService {
     return this.lastDiseaseCaseKey;
   };
 
-  //getDiseaseCasesWithEvents(patient) {
   getDiseaseCasesWithEvents() {
-
-    //patient.subscribe((patient) => {this.actPatientID = patient.$key});
-    //console.log('Aktueller Patient:' + this.actPatientID);
 
     //let patientKey = "-KTEN0tA1mGh2Ig3DqP3";
     let patientKey = this.getLastPatientKey();
@@ -201,13 +159,4 @@ export class DataService {
     this.af.database.list(`/_db2/events/` + diseaseCaseKey).push(key_value);
   };
 
-
-  // Only Test + + + + + + + + + + + + + + +
-
-
-  getTest() {
-    let userKey = "uid1";
-    let patientKey = "pid1";
-    return this.af.database.object(`/_db2/patients/` + userKey + `/` + patientKey);
-  };
 }

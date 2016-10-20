@@ -1,9 +1,6 @@
-<div>
-  <p>
-    Welcome to Disease Diary
-  </p>
-  <ul>
-    <li *ngIf="af.auth | async"><a [routerLink]="['/patient']">Go to your patients..</a></li>
-    <li *ngIf="af.auth | async"><a (click)="onLogout()" style="cursor: pointer;">or Logout</a></li>
-  </ul>
+
+<div class="container-fluid">
+  <p class="cust-welcome-p">Welcome to Disease Diary</p>
+  <p class="cust-welcome-p" *ngIf="af.auth | async">..you're logged in: {{loggedInUserName}}</p>
+  <div class="cust-welcome-div"><img src="../assets/diary.png" class="cust-welcome-img" /></div>
 </div>

@@ -1,48 +1,29 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
 import { DataService } from "../../shared/data.service";
-import { AuthService } from "../../shared/auth.service";
 
 @Component({
   templateUrl: './patient-list.component.html'
 })
 export class PatientListComponent {
 
-  actUserName: String;
+  currentUserName: String;
   allPatients: Observable<any[]>;
   patientsCount: Number;
 
-  //actAppUser: Observable<any>;
-  //userName: String;
-  //countPatients: Number;
-  //subscription: Subscription;
-
-  constructor(private dataService: DataService,
-              private authService: AuthService
+  constructor(private dataService: DataService
   ){
 
-    this.actUserName = this.authService.loggedInUserName;
+    if (this.dataService.getLoggedInUser() != undefined) {
+      this.currentUserName = this.dataService.getLoggedInUser().name;
+    }
+
     this.allPatients = this.dataService.getPatientsWithCases();
 
     this.allPatients.subscribe((queriedItems) => {this.patientsCount = queriedItems.length});
 
-    //this.allPatients().getLength();
-
-    //this.userName = this.dataService.getCachedUserName();
-    //this.allPatients.subscribe((queriedItems) => {this.countPatients = queriedItems.length});
-
-
-    /*
-    this.actAppUser = this.dataService.getLastManagedUser();
-    this.actAppUser.subscribe((user) => {this.userName = user.name});
-    this.allPatients = this.dataService.getPatientWithCases(this.actAppUser);
-    this.allPatients.subscribe((queriedItems) => {this.countPatients = queriedItems.length});
-
-    console.log("Patients: " + this.allPatients + " Anzahl Patienten: " + this.countPatients + " User: " + this.userName);
-    */
   }
 
 }

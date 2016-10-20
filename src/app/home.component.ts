@@ -1,42 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from "@angular/router";
 
-//import {Subscription} from "rxjs/Subscription";
+import { AngularFire } from 'angularfire2';
 
-import {AngularFire} from "angularfire2/angularfire2";
-
-import { AuthService } from "./shared/auth.service";
+import { LoggedInUser } from "./shared/logged-in-user.service";
 
 @Component({
-  templateUrl: './home.component.html',
-  styles: []
+  templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent {
 
-  //subscription: Subscription;
-  backgroundURL: String;
+  loggedInUserName: String;
 
-  constructor(private authService: AuthService,
-              private af: AngularFire,
-              private router: Router) {
+  constructor(private af: AngularFire,
+              private loggedInUser: LoggedInUser) {
 
-    //this.subscription = this.af.auth.subscribe(auth => {
-    this.af.auth.subscribe(auth => {
-      console.log("[home-component] auth: " + auth)
+    this.loggedInUser.userName.subscribe(name => {
+      console.log("[home-component] loggedInUserName: " + name);
+      this.loggedInUserName = "" + name;
     });
 
-  }
-
-  ngOnInit() {
-    //this.subscription = this.af.auth.subscribe(auth => console.log(auth));
-  };
-
-  ngOnDestroy() {
-      //this.subscription.unsubscribe();
-  };
-
-  onLogout() {
-    this.authService.logout();
-    this.router.navigate(['']);
   }
 }

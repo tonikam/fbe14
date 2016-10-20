@@ -6,7 +6,6 @@ import {AllPatientsRoutingModule, routedAllPatientsComponents} from "./allPatien
 
 import { PatientListComponent } from "./patient-items/patient-list.component";
 import { PatientCaseComponent } from "./patient-items/patient-case.component";
-//import { PatientCaseComponent } from "./patient-items/patient-case.component";
 import { PatientRowComponent } from "./patient-items/patient-row.component";
 
 @NgModule({
@@ -20,7 +19,6 @@ import { PatientRowComponent } from "./patient-items/patient-row.component";
       PatientListComponent,
       PatientRowComponent,
       PatientCaseComponent,
-     // PatientCaseComponent,
       routedAllPatientsComponents
     ],
     providers: [
