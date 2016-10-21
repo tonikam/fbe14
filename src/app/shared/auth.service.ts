@@ -17,7 +17,7 @@ export class AuthService {
 
   constructor(public af:AngularFire,
               private errorHandler:ErrorHandlerService,
-              public _loggedInUser: LoggedInUser,
+              public loggedInUser: LoggedInUser,
               private dataService: DataService) {
 
   }
@@ -47,7 +47,7 @@ export class AuthService {
         });
 
         // set Subject Observable
-        this._loggedInUser.userName.next(value.auth.providerData[0].uid);
+        this.loggedInUser.setUserName(value.auth.providerData[0].uid);
 
       })
       .catch((error) => {
@@ -63,7 +63,8 @@ export class AuthService {
       id: "",
       name: ""
     });
-    this.af.auth.logout()
+    this.af.auth.logout();
+    this.loggedInUser.userName.next("- logged out -");
   };
 
 }

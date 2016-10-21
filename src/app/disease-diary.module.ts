@@ -19,17 +19,17 @@ import { AuthService } from './shared/auth.service';
 import { DataService } from './shared/data.service';
 import { ErrorHandlerService } from "./shared/error-handler.service";
 import { ErrorLoggerService } from "./shared/error-logger.service";
+
 import { LoggedInUser } from "./shared/logged-in-user.service";
+import { CurrentPatient } from "./shared/current-patient.service";
 
 import { DiseaseRoutingModule, routedDiseaseComponents } from "./disease-diary.routing";
 
-import {AngularFireModule} from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
 import *as firebase from 'firebase';
 
-import {AuthProviders} from "angularfire2/index";
-import {AuthMethods} from "angularfire2/index";
-
-import {Register} from "ts-node/dist/index";
+import { AuthProviders } from "angularfire2/index";
+import { AuthMethods } from "angularfire2/index";
 
 @NgModule({
   imports: [
@@ -56,7 +56,8 @@ import {Register} from "ts-node/dist/index";
     DataService,
     ErrorHandlerService,
     ErrorLoggerService,
-    LoggedInUser
+    LoggedInUser,
+    CurrentPatient
   ],
   entryComponents: [DiseaseDiaryComponent],
   bootstrap: [DiseaseDiaryComponent]

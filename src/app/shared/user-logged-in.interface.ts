@@ -1,4 +1,5 @@
 export interface UserLoggedIn {
-    id: string;
-    name: string;
+    id: String;
+    name: String;
+    role: String;
 }

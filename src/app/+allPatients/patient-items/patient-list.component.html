@@ -1,6 +1,6 @@
 
 <div class="container-fluid cust-container-header">
-  <p>{{patientsCount}} Patients of: {{currentUserName}}</p>
+  <p>{{patientsCount}} Patients of: {{loggedInUserName}}</p>
 </div>
 <div *ngFor="let patient of allPatients | async" class="card-deck-wrapper">
   <div class="container-fluid">

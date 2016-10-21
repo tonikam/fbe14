@@ -5,13 +5,15 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
+
 import { UserLoggedIn } from "./user-logged-in.interface";
+
 
 @Injectable()
 export class DataService {
 
   private loggedInUser: UserLoggedIn;
-  private lastUserKey: String;
+
   private lastPatientKey: String;
   private lastDiseaseCaseKey: String;
 
@@ -21,20 +23,29 @@ export class DataService {
   // Users + + + + + + + + + + + + + + +
 
   setLoggedInUser(loggedInUser) {
+    console.log("setLoggedInUser");
     this.loggedInUser = loggedInUser;
+    this.getUserRole(this.loggedInUser.id);
   };
   getLoggedInUser() {
-    return this.loggedInUser;
+    if (this.loggedInUser != undefined) {
+      return this.loggedInUser;
+    } else {
+      return undefined;
+    }
   };
 
-  setLastUserKey(userKey) {
-    this.lastUserKey = userKey;
-  };
-  getLastUserKey() {
-    return this.lastUserKey;
+  getUserRole (userKey) {
+    this.af.database.object(`/_db2/users/` + userKey).subscribe(user => {
+      this.loggedInUser.role = user.role;
+    });
   };
 
-  getAllUsersAndPatients () {
+  getUser (userKey) {
+    return this.af.database.object(`/_db2/users/` + userKey);
+  };
+
+  getAllUsersAndPatients() {
     return this.af.database.list('/_db2/users', {query: {orderByKey: true}})
       .map((allUsers) => {
         return allUsers.map((user) => {

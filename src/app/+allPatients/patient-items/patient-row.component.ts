@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import {DataService} from "../../shared/data.service";
 
+import { CurrentPatient } from "../../shared/current-patient.service";
+
 @Component({
   selector: '[patient-row]',
   templateUrl: 'patient-row.component.html'
@@ -13,7 +15,8 @@ export class PatientRowComponent implements OnInit {
   patientKey: String;
 
   constructor(private router: Router,
-              private dataService: DataService){
+              private dataService: DataService,
+              private currentPatient: CurrentPatient){
   };
 
   ngOnInit() {
@@ -26,11 +29,17 @@ export class PatientRowComponent implements OnInit {
 
   openDiseaseCases(patientKey) {
     console.log("[patient-row] patientKey: " + patientKey);
+
     this.dataService.setLastPatientKey(patientKey);
+
     this.dataService.setLastDiseaseCaseKey("");
 
-    let test = this.dataService.getLastPatientKey();
-    console.log("[patient-row] get patientKey: " + test);
+    // set Subject Observable
+    this.currentPatient.setPatientName(this.patient.name);
+    console.log("[patient-row] set observable patientName: " + this.patient.name);
+
+    this.currentPatient.setPatientKey(this.patient.$key);
+    console.log("[patient-row] set observable patientName: " + this.patient.$key);
 
     this.router.navigate(['/allDiseaseCases'])
   }

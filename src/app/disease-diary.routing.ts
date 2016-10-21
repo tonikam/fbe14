@@ -28,7 +28,7 @@ export const app_routes: Routes = [
   {path: 'loggedInData', component: LoggedInDataComponent},
   {path: 'git', component: GitLinkComponent},
 
-  {path: 'user', component: UserComponent, canActivate: []},
+  {path: 'user', component: UserComponent},
 
   {path: 'allUsers', loadChildren: 'app/+allUsers/allUsers.module#AllUsersModule'},
   {path: 'allPatients', loadChildren: 'app/+allPatients/allPatients.module#AllPatientsModule'},
