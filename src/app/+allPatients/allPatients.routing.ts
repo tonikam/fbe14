@@ -7,7 +7,10 @@ import {PatientStartComponent} from "./patient-start.component";
 
 export const allPatients_routes: Routes = [
   { path: '', component: AllPatientsComponent, children: [
-    { path: '', component: PatientListComponent } //,
+    { path: '', component: PatientListComponent }
+
+
+    //,
     //{ path: ':userKey/new', component: UserNewComponent },
     ////{ path: ':userKey/new', component: UserNewModalComponent },
     //{ path: ':patientKey/edit', component: UserEditComponent }

@@ -41,6 +41,7 @@ export class PatientListComponent {
     if (this.allPatients) {
       this.allPatients.subscribe((queriedItems) => {
         this.patientsCount = queriedItems.length;
+
       });
     };
 

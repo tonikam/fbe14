@@ -48,7 +48,8 @@
 
             <!-- Admin -->
 
-            <div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((currentUser | async)?.role == '99')" routerLinkActive="active" id="navpadding">
+            <!--div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((currentUser | async)?.role == '99')" routerLinkActive="active" id="navpadding"-->
+            <div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((currentUser == '99'))" routerLinkActive="active" id="navpadding">
             <!--div class="nav navbar-nav pull-right" *ngIf="af.auth | async" routerLinkActive="active"  diseaseDiaryDropdown  id="navpadding"-->
               <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

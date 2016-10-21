@@ -133,6 +133,7 @@ export class DataService {
     let queryDefinition = {};
     if (diseaseCaseKey != "") {
       queryDefinition = {query: {orderByKey: true, equalTo: diseaseCaseKey}};
+      //queryDefinition = {query: {orderByChild: "name", equalTo: "Armbruch"}};
     } else {
       queryDefinition = {query: {orderByKey: true}};
     }

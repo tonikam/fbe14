@@ -17,7 +17,8 @@ import { LoggedInUser } from "./logged-in-user.service";
 export class HeaderComponent implements OnInit{
 
   loggedInUserName: String;
-  currentUser: Observable<any>;
+  //currentUser: Observable<any>;
+  currentUser: String;
 
   constructor(private authService: AuthService,
               private af: AngularFire,
@@ -37,13 +38,17 @@ export class HeaderComponent implements OnInit{
         this.loggedInUserName = "" + loggedIn;
         console.log("[header - OnInitx] loggedInUserName: " + loggedIn);
 
+        /*
         let loggedInUserData = this.dataService.getLoggedInUser();
         if (loggedInUserData != undefined) {
           this.currentUser = this.dataService.getUser(loggedInUserData.id);
           console.log("header - oninit - currentUser: " + this.currentUser);
         };
+        */
 
       });
+
+      this.currentUser = "99";
 
     } catch(e) {
       console.log("[header - OnInit] error: " + e);
