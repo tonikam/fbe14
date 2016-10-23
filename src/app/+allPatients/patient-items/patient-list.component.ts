@@ -32,11 +32,20 @@ export class PatientListComponent {
     this.loggedInUser.userName.subscribe(loggedIn => {
       this.loggedInUserName = "" + loggedIn;
       console.log("[patient - list] loggedInUserName: " + loggedIn);
+      this.allPatients = this.dataService.getPatientsWithCases();
+      if (this.allPatients) {
+        this.allPatients.subscribe((queriedItems) => {
+          this.patientsCount = queriedItems.length;
+
+        });
+      };
+
+
     });
     console.log("[patient - list] loggedInUserName: " + this.loggedInUserName);
 
 
-
+/*
     this.allPatients = this.dataService.getPatientsWithCases();
     if (this.allPatients) {
       this.allPatients.subscribe((queriedItems) => {
@@ -44,6 +53,7 @@ export class PatientListComponent {
 
       });
     };
+    */
 
   }
 

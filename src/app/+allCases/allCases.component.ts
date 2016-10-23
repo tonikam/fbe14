@@ -20,8 +20,10 @@ export class AllDiseaseCasesComponent {
     );
     console.log("[case-list] currentPatientKey: " + this.currentPatientKey);
 
+    /*
     if (this.currentPatientKey == "no patient key") {
       this.router.navigate(['/allPatients']);
     }
+    */
   };
 }
