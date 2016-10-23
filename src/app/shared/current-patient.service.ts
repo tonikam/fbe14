@@ -18,15 +18,3 @@ export class CurrentPatient {
   }
 
 }
-
-
-/*
-import { Injectable } from '@angular/core';
-
-import { Subject } from "rxjs/Rx";
-
-@Injectable()
-export class CurrentPatient {
-  public patientName = new Subject();
-}
-*/

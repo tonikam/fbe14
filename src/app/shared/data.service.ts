@@ -16,7 +16,7 @@ export class DataService {
 
   private lastPatientKey: String;
   private lastDiseaseCaseKey: String;
-
+  private lastDiseaseEventKey: String;
 
   constructor(private af: AngularFire) {};
 
@@ -90,11 +90,14 @@ export class DataService {
       console.log('[getPatientsWithCases] Aktueller User Name:' + currentUserName);
       return this.af.database.list('/_db2/patients/' + currentUserID, {query: {orderByKey: true}})
         .map((allPatients) => {
-          return allPatients.map((patient) =>
+          return allPatients;
+
+          /*  .map((patient) =>
           {
             patient.cases = this.af.database.list(`/_db2/cases/${patient.$key}`, {query: {orderByKey: true}})
             return patient;
           });
+          */
         });
     }
   };
@@ -125,7 +128,6 @@ export class DataService {
 
   getDiseaseCasesWithEvents() {
 
-    //let patientKey = "-KTEN0tA1mGh2Ig3DqP3";
     let patientKey = this.getLastPatientKey();
 
     let diseaseCaseKey = this.getLastDiseaseCaseKey();
@@ -139,20 +141,25 @@ export class DataService {
     }
     return this.af.database.list('/_db2/cases/' + patientKey, queryDefinition)
       .map((allCases) => {
-        return allCases.map((diseaseCase) =>
+        return allCases;
+
+        /*  .map((diseaseCase) =>
         {
           diseaseCase.diseaseEvents = this.af.database.list(`/_db2/events/${diseaseCase.$key}`, {query: {orderByKey: true}})
           return diseaseCase;
         });
+        */
       });
   };
 
+  /*
   getDiseaseCaseEvents(diseaseCaseKey) {
     return this.af.database.list('/_db2/events/' + diseaseCaseKey, {query: {orderByKey: true}})
       .map((allEvents) => {
         return allEvents
       });
   };
+  */
 
 
   // Disease Events + + + + + + + + + + + + + + +
@@ -169,6 +176,29 @@ export class DataService {
 
   createDiseaseEvent(diseaseCaseKey,key_value) {
     this.af.database.list(`/_db2/events/` + diseaseCaseKey).push(key_value);
+  };
+
+  setLastDiseaseEventKey(diseaseEventKey) {
+    this.lastDiseaseEventKey = diseaseEventKey;
+  };
+
+  getLastDiseaseEventKey() {
+    return this.lastDiseaseEventKey;
+  };
+
+  getDiseaseEvents() {
+
+    let diseaseCaseKey = this.getLastDiseaseCaseKey();
+
+    console.log("dataService getDiseaseEvents from Case: " + diseaseCaseKey);
+
+    let queryDefinition = {};
+    queryDefinition = {query: {orderByKey: true}};
+
+    return this.af.database.list('/_db2/events/' + diseaseCaseKey, queryDefinition)
+      .map((allEvents) => {
+        return allEvents;
+      });
   };
 
 }

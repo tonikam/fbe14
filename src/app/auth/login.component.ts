@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
      //this.currentUser = pName;
      console.log("[login ] currentUser: " + pName);
      */
-    this.router.navigate(['/allPatients']);
+    this.router.navigate(['/patients']);
     /*
      });
      */
