@@ -6,8 +6,6 @@ import { AngularFire } from 'angularfire2';
 
 import { UserLogin } from "./user-login.interface";
 
-import { DataService } from "./data.service";
-
 import { LoggedInUser } from "./logged-in-user.service";
 
 import { ErrorHandlerService } from "./error-handler.service";
@@ -17,17 +15,17 @@ export class AuthService {
 
   constructor(public af:AngularFire,
               private errorHandler:ErrorHandlerService,
-              public loggedInUser: LoggedInUser,
-              private dataService: DataService) {
+              public loggedInUser: LoggedInUser) {
 
   }
 
   registerUser(user:UserLogin) {
     this.af.auth.createUser({email: user.email, password: user.password})
-      .then((value) => {
-        // create entry in users - table with correct uid
-        this.af.database.object('/_db2/users/' + value.uid).set({name: user.email, age: 0, role: 10});
-        console.log("Registered uid: " + value.uid);
+      .then((auth) => {
+
+        // create entry in users - table with auth uid
+        this.af.database.object('/_db2/users/' + auth.uid).set({name: user.email, age: 0, role: 10});
+        console.log("Registered uid: " + auth.uid);
       })
       .catch((error) => {
         console.log("Register Error: " + error.message);
@@ -37,17 +35,12 @@ export class AuthService {
 
   loginUser(user:UserLogin) {
     this.af.auth.login({email: user.email, password: user.password})
-      .then((value) => {
-        console.log("[authService] - loginUser - uid: " + value.uid);
-        console.log("[authService] - loginUser - providerData[].uid: " + value.auth.providerData[0].uid);
-
-        this.dataService.setLoggedInUser({
-          id: value.uid,
-          name: value.auth.providerData[0].uid
-        });
+      .then((auth) => {
+        console.log("[authService] - loginUser - uid: " + auth.uid);
+        console.log("[authService] - loginUser - providerData[].uid: " + auth.auth.providerData[0].uid);
 
         // set Subject Observable
-        this.loggedInUser.setUserName(value.auth.providerData[0].uid);
+        this.loggedInUser.setUserData({name: auth.auth.providerData[0].uid, key: auth.uid});
 
       })
       .catch((error) => {
@@ -57,14 +50,8 @@ export class AuthService {
    };
 
   logout() {
-
-    // clear logged in user data and logout
-    this.dataService.setLoggedInUser({
-      id: "",
-      name: ""
-    });
     this.af.auth.logout();
-    this.loggedInUser.userName.next("- logged out -");
+    this.loggedInUser.setUserData({name: "", key: ""});
   };
 
 }
