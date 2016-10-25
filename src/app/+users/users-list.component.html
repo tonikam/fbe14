@@ -1,29 +1,25 @@
-
 <!--div class="card-deck-wrapper"-->
-  <!--div *ngFor="let user of allUsers | async" class="card-deck"-->
+<!--div *ngFor="let user of allUsers | async" class="card-deck"-->
 
 <div class="container-fluid cust-container-header">
-  <p>{{allUsersCount}} Users</p>
+    <p>{{allUsersCount}} Users</p>
 </div>
 <div *ngFor="let user of allUsers | async" class="card-deck-wrapper">
-  <div class="container-fluid">
-      <div class="row flex-items-xs-center">
-        <div users-item [user]="user"></div>
-      </div>
+    <div class="container-fluid">
+        <div class="row flex-items-xs-center">
+            <div users-item [user]="user"></div>
+        </div>
 
-      <div class="row flex-items-xs-center">
-        <div users-patient *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient" class="card-group"></div>
-      </div>
+        <div class="row flex-items-xs-center">
+            <div users-patient *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient"
+                 class="card-group"></div>
+        </div>
 
-  </div>
+    </div>
 </div>
-
-
-
 
 
 <!--/div-->
-
 
 
 <!--
@@ -32,20 +28,20 @@
     <caption>Users and their patients</caption>
     <tbody *ngFor="let user of allUsers | async" class="table">
 -->
-    <!-- <tr><td><th scope="rowgroup>">{{user.name}} ({{user.$key}})<td><td> -->
-    <!-- <tr class="table-success" ><td>{{user.name}}<td>({{user.$key}})<td>. -->
-    <!--<tr class="success"><td>Patients of</td><td>{{user.name}}</td><td>{{user.$key}}</td><td><button class="btn btn-success" (click)="onNew($user)">New</button></td></tr>-->
+<!-- <tr><td><th scope="rowgroup>">{{user.name}} ({{user.$key}})<td><td> -->
+<!-- <tr class="table-success" ><td>{{user.name}}<td>({{user.$key}})<td>. -->
+<!--<tr class="success"><td>Patients of</td><td>{{user.name}}</td><td>{{user.$key}}</td><td><button class="btn btn-success" (click)="onNew($user)">New</button></td></tr>-->
 <!--
 <tr class="success" user-row [user]="user"></tr>
 -->
 
-    <!-- Tag wird in Angular2 nicht mehr ersetzt, deshalb Attribut verwenden -->
+<!-- Tag wird in Angular2 nicht mehr ersetzt, deshalb Attribut verwenden -->
 <!--
     <tr user-patient *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient"></tr>
 -->
-      <!-- <user-item *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient"></user-item> -->
+<!-- <user-item *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient"></user-item> -->
 
-      <!--/table-->
+<!--/table-->
 <!--
     </tbody>
   </table>
@@ -62,11 +58,11 @@
     <li *ngFor="let user of allUsers | async">
       <p>{{user.name}} ({{user.$key}})</p>
       <!-- Table in user-item - Template verlegen -->
-      <!--table class="table" border="1px"-->
+<!--table class="table" border="1px"-->
 <!--
         <user-item *ngFor="let patient of user.patients | async" [user]="user" [patient]="patient"></user-item>
 -->
-      <!--/table-->
+<!--/table-->
 <!--
     </li>
   </ul>
@@ -74,15 +70,14 @@
 -->
 
 
-
-  <!-- ngFor Iteration funktioniert nur mit "echten" Arrays ?!?
-  <template ngFor let-user [ngForOf]="allUsers" let-userIndex="index">
-    <template ngFor let-patient [ngForOf]="user.patients" let-patientIndex="index">
-      <tr>
-        <td>{{patient.name}}</td>
-      </tr>
-    </template>
+<!-- ngFor Iteration funktioniert nur mit "echten" Arrays ?!?
+<template ngFor let-user [ngForOf]="allUsers" let-userIndex="index">
+  <template ngFor let-patient [ngForOf]="user.patients" let-patientIndex="index">
+    <tr>
+      <td>{{patient.name}}</td>
+    </tr>
   </template>
-  -->
+</template>
+-->
 
 

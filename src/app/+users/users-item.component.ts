@@ -1,35 +1,35 @@
 import { Component, Input, OnInit } from '@angular/core'; //, AfterViewInit, ViewChild
 import { Router, ActivatedRoute } from "@angular/router";
 
-import {DataService} from "../shared/data.service";
+import { DataService } from "../shared/data.service";
 
 @Component({
-  selector: '[users-item]',
-  templateUrl: 'users-item.component.html'
+    selector: '[users-item]',
+    templateUrl: 'users-item.component.html'
 })
 export class UsersItemComponent implements OnInit { // implements AfterViewInit {
-  @Input() user: any;
+    @Input() user: any;
 
-  userKey: String;
+    userKey: String;
 
-  constructor(private router: Router,
-              private dataService: DataService){
-  };
+    constructor(private router: Router,
+                private dataService: DataService) {
+    };
 
-  ngOnInit() {
-    this.userKey = this.user.$key;
-  }
+    ngOnInit() {
+        this.userKey = this.user.$key;
+    }
 
-  /*
-  onNew() {
-    this.router.navigate(['/allUsers',this.user.$key,'new'])
-    //this.newPatientModal.showNewModalDialog(this.user);
-  };
-  */
+    /*
+     onNew() {
+     this.router.navigate(['/allUsers',this.user.$key,'new'])
+     //this.newPatientModal.showNewModalDialog(this.user);
+     };
+     */
 
-  createPatient(key_value) {
-    this.dataService.createPatient(this.user.$key,key_value)
-  };
+    createPatient(key_value) {
+        this.dataService.createPatient(this.user.$key, key_value)
+    };
 
 }
 

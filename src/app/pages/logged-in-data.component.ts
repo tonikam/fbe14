@@ -7,41 +7,41 @@ import { LoggedInUser } from "../shared/logged-in-user.service";
 
 
 @Component({
-  templateUrl: './logged-in-data.component.html'
+    templateUrl: './logged-in-data.component.html'
 })
 
 export class LoggedInDataComponent {
 
-  loggedInUserID: String;
-  loggedInUserName: String;
-  loggedInUserRole: String;
-  loggedInUserData: any;
+    loggedInUserID: String;
+    loggedInUserName: String;
+    loggedInUserRole: String;
+    loggedInUserData: any;
 
-  currentPatientName: String;
-  currentPatientKey: String;
-  currentPatientData: any;
+    currentPatientName: String;
+    currentPatientKey: String;
+    currentPatientData: any;
 
-  constructor(private loggedInUser: LoggedInUser,
-              private currentPatient: CurrentPatient){
+    constructor(private loggedInUser: LoggedInUser,
+                private currentPatient: CurrentPatient) {
 
-    this.getData();
-  };
+        this.getData();
+    };
 
-  getData(){
-     this.loggedInUser.userData.subscribe(loggedInData => {
-      this.loggedInUserData = loggedInData;
+    getData() {
+        this.loggedInUser.userData.subscribe(loggedInData => {
+            this.loggedInUserData = loggedInData;
 
-      console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
-      console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
+            console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
+            console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
 
-      this.currentPatient.patientData.subscribe(patientData => {
-        this.currentPatientData = patientData;
-        this.currentPatientName = this.currentPatientData.name || "-";
-        this.currentPatientKey = this.currentPatientData.key || "-";
+            this.currentPatient.patientData.subscribe(patientData => {
+                this.currentPatientData = patientData;
+                this.currentPatientName = this.currentPatientData.name || "-";
+                this.currentPatientKey = this.currentPatientData.key || "-";
 
-        console.log("[diseaseCases - list] currentPatientData - key: " + this.currentPatientData.key);
-        console.log("[diseaseCases - list] currentPatientData - name: " + this.currentPatientData.name);
-      });
-    });
-  };
+                console.log("[diseaseCases - list] currentPatientData - key: " + this.currentPatientData.key);
+                console.log("[diseaseCases - list] currentPatientData - name: " + this.currentPatientData.name);
+            });
+        });
+    };
 }
