@@ -14,26 +14,9 @@ export class DataService {
 
   private loggedInUser: UserLoggedIn;
 
-  private lastPatientKey: String;
-  private lastDiseaseCaseKey: String;
-  private lastDiseaseEventKey: String;
-
   constructor(private af: AngularFire) {};
 
   // Users + + + + + + + + + + + + + + +
-
-  setLoggedInUser(loggedInUser) {
-    console.log("setLoggedInUser");
-    this.loggedInUser = loggedInUser;
-    this.getUserRole(this.loggedInUser.id);
-  };
-  getLoggedInUser() {
-    if (this.loggedInUser != undefined) {
-      return this.loggedInUser;
-    } else {
-      return undefined;
-    }
-  };
 
   getUserRole (userKey) {
     this.af.database.object(`/_db2/users/` + userKey).subscribe(user => {
@@ -46,7 +29,10 @@ export class DataService {
   };
 
   getAllUsersAndPatients() {
-    return this.af.database.list('/_db2/users', {query: {orderByKey: true}})
+    let queryDefinition = {};
+    queryDefinition = {query: {orderByKey: true}};
+
+    return this.af.database.list('/_db2/users', queryDefinition)
       .map((allUsers) => {
         return allUsers.map((user) => {
           user.patients = this.af.database.list(`/_db2/patients/${user.$key}`, {query: {orderByKey: true}})
@@ -72,35 +58,15 @@ export class DataService {
     this.af.database.list(`/_db2/patients/` + userKey).push(key_value);
   };
 
-  setLastPatientKey(patientKey) {
-    this.lastPatientKey = patientKey;
-  };
+  getPatients(userKey) {
+    let queryDefinition = {};
+    queryDefinition = {query: {orderByKey: true}};
 
-  getLastPatientKey() {
-    return this.lastPatientKey;
-  };
-
-  getPatientsWithCases() {
-
-    if (this.loggedInUser != undefined) {
-      let currentUserID = this.loggedInUser.id;
-      let currentUserName = this.loggedInUser.name;
-
-      console.log('[getPatientsWithCases] Aktueller User ID:' + currentUserID);
-      console.log('[getPatientsWithCases] Aktueller User Name:' + currentUserName);
-      return this.af.database.list('/_db2/patients/' + currentUserID, {query: {orderByKey: true}})
+    return this.af.database.list('/_db2/patients/' + userKey, queryDefinition)
         .map((allPatients) => {
           return allPatients;
-
-          /*  .map((patient) =>
-          {
-            patient.cases = this.af.database.list(`/_db2/cases/${patient.$key}`, {query: {orderByKey: true}})
-            return patient;
-          });
-          */
         });
-    }
-  };
+   };
 
   // Disease Cases + + + + + + + + + + + + + + +
 
@@ -118,52 +84,17 @@ export class DataService {
     this.af.database.list(`/_db2/cases/` + patientKey).push(key_value);
   };
 
-  setLastDiseaseCaseKey(diseaseCaseKey) {
-    this.lastDiseaseCaseKey = diseaseCaseKey;
-  };
-
-  getLastDiseaseCaseKey() {
-    return this.lastDiseaseCaseKey;
-  };
-
-  getDiseaseCasesWithEvents() {
-
-    let patientKey = this.getLastPatientKey();
-
-    let diseaseCaseKey = this.getLastDiseaseCaseKey();
-
+  getDiseaseCases(patientKey) {
     let queryDefinition = {};
-    if (diseaseCaseKey != "") {
-      queryDefinition = {query: {orderByKey: true, equalTo: diseaseCaseKey}};
-      //queryDefinition = {query: {orderByChild: "name", equalTo: "Armbruch"}};
-    } else {
-      queryDefinition = {query: {orderByKey: true}};
-    }
+    queryDefinition = {query: {orderByKey: true}};
+
     return this.af.database.list('/_db2/cases/' + patientKey, queryDefinition)
       .map((allCases) => {
         return allCases;
-
-        /*  .map((diseaseCase) =>
-        {
-          diseaseCase.diseaseEvents = this.af.database.list(`/_db2/events/${diseaseCase.$key}`, {query: {orderByKey: true}})
-          return diseaseCase;
-        });
-        */
       });
   };
-
-  /*
-  getDiseaseCaseEvents(diseaseCaseKey) {
-    return this.af.database.list('/_db2/events/' + diseaseCaseKey, {query: {orderByKey: true}})
-      .map((allEvents) => {
-        return allEvents
-      });
-  };
-  */
-
 
   // Disease Events + + + + + + + + + + + + + + +
-
 
   getDiseaseEvent (diseaseCaseKey, diseaseEventKey) {
     return this.af.database.object(`/_db2/cases/` + diseaseCaseKey + `/` + diseaseEventKey);
@@ -178,20 +109,7 @@ export class DataService {
     this.af.database.list(`/_db2/events/` + diseaseCaseKey).push(key_value);
   };
 
-  setLastDiseaseEventKey(diseaseEventKey) {
-    this.lastDiseaseEventKey = diseaseEventKey;
-  };
-
-  getLastDiseaseEventKey() {
-    return this.lastDiseaseEventKey;
-  };
-
-  getDiseaseEvents() {
-
-    let diseaseCaseKey = this.getLastDiseaseCaseKey();
-
-    console.log("dataService getDiseaseEvents from Case: " + diseaseCaseKey);
-
+  getDiseaseEvents(diseaseCaseKey) {
     let queryDefinition = {};
     queryDefinition = {query: {orderByKey: true}};
 
@@ -200,5 +118,4 @@ export class DataService {
         return allEvents;
       });
   };
-
 }

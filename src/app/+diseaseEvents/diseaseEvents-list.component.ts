@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
@@ -15,10 +15,12 @@ export class DiseaseEventsListComponent implements OnInit{
   currentDiseaseCaseName: String;
   currentDiseaseCaseKey: String;
 
+  currentDiseaseCaseData: any;
+
   allDiseaseEvents: Observable<any[]>;
   diseaseEventsCount: Number;
 
-  constructor(private router: Router,
+  constructor(private route: ActivatedRoute,
               private dataService: DataService,
               private currentDiseaseCase: CurrentDiseaseCase
   ){
@@ -29,6 +31,7 @@ export class DiseaseEventsListComponent implements OnInit{
     text2 = "constructor";
     console.log(text1 + " " + text2);
 
+    /*
     this.currentDiseaseCase.diseaseCaseName.subscribe(subName => {
       console.log("[event - list - constructor] currentDiseaseCaseName: " + subName);
       this.currentDiseaseCaseName = "" + subName;}
@@ -38,21 +41,33 @@ export class DiseaseEventsListComponent implements OnInit{
       console.log("[event - list - constructor] currentDiseaseCaseKey: " + subKey);
       this.currentDiseaseCaseKey = "" + subKey;}
     );
+    */
+    this.route.params.subscribe(
+      (params:any) => {
+        this.currentDiseaseCaseKey = params['diseaseCaseKey'];
 
-    this.allDiseaseEvents = this.dataService.getDiseaseEvents();
-    this.allDiseaseEvents.subscribe((queriedItems) => {
-      this.diseaseEventsCount = queriedItems.length;
-      console.log("[event - list - constructor] diseaseEventsCount : " + this.diseaseEventsCount);
-    });
+        this.currentDiseaseCase.diseaseCaseData.subscribe(diseaseCaseData => {
+          this.currentDiseaseCaseData = diseaseCaseData;
+          console.log("[diseaseEvents - list] currentDiseaseCaseData - key: " + this.currentDiseaseCaseData.key);
+          console.log("[diseaseEvents - list] currentDiseaseCaseData - name: " + this.currentDiseaseCaseData.name);
 
+          // get name from observable subject for page title
+          this.currentDiseaseCaseName = this.currentDiseaseCaseData.name;
+
+          // get key from routing parameters
+          this.allDiseaseEvents = this.dataService.getDiseaseEvents(this.currentDiseaseCaseKey);
+          if (this.allDiseaseEvents) {
+            this.allDiseaseEvents.subscribe((queriedItems) => {
+              this.diseaseEventsCount = queriedItems.length;
+            });
+          }
+        });
+
+      });
   };
 
   ngOnInit() {
-    let text1 = "";
-    let text2 = "";
-    text1 = "[case-list]";
-    text2 = "OnInit";
-    console.log(text1 + " " + text2);
+
   };
 
 }

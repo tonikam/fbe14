@@ -35,12 +35,8 @@ export class AppComponent implements OnInit{
       if (auth) {
         console.log(text1 + text2 + " subscribe auth: still logged in -> " + auth);
 
-        this.dataService.setLoggedInUser({
-          id: auth.uid,
-          name: auth.auth.providerData[0].uid
-        });
-        // set Subject Observable
-        this.loggedInUser.userName.next(auth.auth.providerData[0].uid);
+        // set Subject Observable after page refresh/reload
+        this.loggedInUser.setUserData({name: auth.auth.providerData[0].uid, key: auth.uid});
 
       } else {
         console.log(text1 + text2 + " subscribe auth: logged out -> " + auth);

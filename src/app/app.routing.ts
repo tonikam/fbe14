@@ -31,9 +31,9 @@ export const app_routes: Routes = [
   {path: 'userAdmin', component: UserAdminComponent},
 
   {path: 'users', loadChildren: 'app/+users/users.module#UsersModule'},
-  {path: 'patients', loadChildren: 'app/+patients/patients.module#PatientsModule'},
-  {path: 'diseaseCases', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
-  {path: 'diseaseEvents', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
+  {path: 'patients/:userKey', loadChildren: 'app/+patients/patients.module#PatientsModule'},
+  {path: 'diseaseCases/:patientKey', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
+  {path: 'diseaseEvents/:diseaseCaseKey', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
 
   {path: '**', component: NotFoundComponent}
 ];

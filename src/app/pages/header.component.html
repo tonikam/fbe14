@@ -19,7 +19,7 @@
 
             <!-- Links -->
             <div class="nav navbar-nav">
-              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/patients']">Patients</a>
+              <a class="nav-item nav-link" routerLinkActive="active" *ngIf="af.auth | async" [routerLink]="['/patients/' + loggedInUserData.key]">Patients</a>
             </div>
 
             <!-- ensure correct sequenze of nav objects on the right -->
@@ -36,7 +36,7 @@
                   <a class="dropdown-item" [routerLink]="['/login']">Login</a>
 
                   <div *ngIf="af.auth | async" class="dropdown-divider"></div>
-                  <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout <span id="loggedInName">{{loggedInUserName}}</span></a>
+                  <a class="dropdown-item" *ngIf="af.auth | async" (click)="onLogout()" style="cursor: pointer;">Logout <span id="loggedInName">{{loggedInUserData.name}}</span></a>
                   <div *ngIf="af.auth | async" class="dropdown-divider"></div>
                   <a class="dropdown-item" *ngIf="af.auth | async" [routerLink]="['/loggedInData']">Display login data</a>
                 </div>
@@ -46,7 +46,7 @@
             <!-- Admin -->
 
             <!--div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((currentUser | async)?.role == '99')" routerLinkActive="active" id="navpadding"-->
-            <div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((currentUser == '99'))" routerLinkActive="active" id="navpadding">
+            <div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((currentUserRole == '99'))" routerLinkActive="active" id="navpadding">
               <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Admin

@@ -23,25 +23,23 @@ export class PatientsItemComponent implements OnInit {
     this.patientKey = this.patient.$key;
   }
 
+  /* not here anymore
   createDiseaseCase(key_value) {
     this.dataService.createDiseaseCase(this.patient.$key,key_value)
   };
+  */
+
+  editPatient(patientKey) {
+    this.router.navigate(['patients/' + patientKey + '/edit']);
+  }
+
 
   openDiseaseCases(patientKey) {
     console.log("[patient-row] patientKey: " + patientKey);
 
-    this.dataService.setLastPatientKey(patientKey);
+    this.currentPatient.setPatientData({name: this.patient.name, key: patientKey});
 
-    this.dataService.setLastDiseaseCaseKey("");
-
-    // set Subject Observable
-    this.currentPatient.setPatientName(this.patient.name);
-    console.log("[patient-row] set observable patientName: " + this.patient.name);
-
-    this.currentPatient.setPatientKey(this.patient.$key);
-    console.log("[patient-row] set observable patientName: " + this.patient.$key);
-
-    this.router.navigate(['/diseaseCases'])
+    this.router.navigate(['/diseaseCases/' + patientKey])
   }
 }
 

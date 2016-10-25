@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 
 import { Observable } from "rxjs";
 
-import { DataService } from "../shared/data.service";
-
 import { CurrentPatient } from "../shared/current-patient.service";
 import { LoggedInUser } from "../shared/logged-in-user.service";
 
@@ -14,45 +12,36 @@ import { LoggedInUser } from "../shared/logged-in-user.service";
 
 export class LoggedInDataComponent {
 
-  private loggedInUserID: String;
-  private loggedInUserName: String;
-  private loggedInUserRole: String;
+  loggedInUserID: String;
+  loggedInUserName: String;
+  loggedInUserRole: String;
+  loggedInUserData: any;
 
   currentPatientName: String;
   currentPatientKey: String;
+  currentPatientData: any;
 
-  constructor(private dataService: DataService,
-              private loggedInUser: LoggedInUser,
+  constructor(private loggedInUser: LoggedInUser,
               private currentPatient: CurrentPatient){
 
     this.getData();
   };
 
   getData(){
-    console.log("getData");
-    let loggedInUserData = this.dataService.getLoggedInUser();
+     this.loggedInUser.userData.subscribe(loggedInData => {
+      this.loggedInUserData = loggedInData;
 
-    if (loggedInUserData != undefined) {
-      this.loggedInUserID = loggedInUserData.id;
-      this.loggedInUserName = loggedInUserData.name;
-      this.loggedInUserRole = loggedInUserData.role;
-    } else {
-      this.loggedInUserID = "N/A";
-      this.loggedInUserName = "N/A";
-      this.loggedInUserRole = "N/A";
-    }
+      console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
+      console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
 
+      this.currentPatient.patientData.subscribe(patientData => {
+        this.currentPatientData = patientData;
+        this.currentPatientName = this.currentPatientData.name || "-";
+        this.currentPatientKey = this.currentPatientData.key || "-";
 
-    this.currentPatient.patientName.subscribe(pName => {
-      this.currentPatientName = pName;
-      console.log("[header - OnInit] patientName: " + pName);
+        console.log("[diseaseCases - list] currentPatientData - key: " + this.currentPatientData.key);
+        console.log("[diseaseCases - list] currentPatientData - name: " + this.currentPatientData.name);
+      });
     });
-    this.currentPatient.patientKey.subscribe(pKey => {
-      this.currentPatientKey = pKey;
-      console.log("[header - OnInit] patientName: " + pKey);
-    });
-
-
-
   };
 }

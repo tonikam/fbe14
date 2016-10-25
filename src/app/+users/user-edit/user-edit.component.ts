@@ -1,5 +1,5 @@
 
-/*
+
 import { Component, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
@@ -30,8 +30,6 @@ export class UserEditComponent implements OnDestroy {
     this.subscription = this.route.params.subscribe(
       (params:any) => {
         this.patientKey = params['patientKey'];
-        this.userKey = this.dataService.getCachedUserID();
-        this.user = this.dataService.getCachedUserData(this.userKey);
         this.patient = this.dataService.getPatient(this.userKey, this.patientKey);
         this.patient.subscribe((patient) => {
           this.patientName = patient.name
@@ -41,10 +39,6 @@ export class UserEditComponent implements OnDestroy {
         });
       }
     );
-    this.setParameters();
-  };
-
-  setParameters() {
 
   };
 
@@ -57,9 +51,8 @@ export class UserEditComponent implements OnDestroy {
   };
 
   ngOnDestroy() {
-    //this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
 
 
-  */

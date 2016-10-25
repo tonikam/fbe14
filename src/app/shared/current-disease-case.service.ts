@@ -7,14 +7,11 @@ import { BehaviorSubject } from "rxjs/Rx";
 @Injectable()
 export class CurrentDiseaseCase {
 
-  public diseaseCaseName: Subject<string> = new BehaviorSubject<string>("no disease case");
-  public diseaseCaseKey: Subject<string> = new BehaviorSubject<string>("no disease case key");
+  public diseaseCaseData: Subject<any> = new BehaviorSubject<any>("no disease case data");
 
-  setDiseaseCaseName(text:string) {
-    this.diseaseCaseName.next(text);
-  }
-  setDiseaseCaseKey(text:string) {
-    this.diseaseCaseKey.next(text);
-  }
+  setDiseaseCaseData(data: any) {
+    console.log("current-disease-case-service: data = " + data.key + " - " + data.name);
+    this.diseaseCaseData.next(data);
+  };
 
 }

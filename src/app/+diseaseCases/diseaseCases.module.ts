@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DiseaseCasesRoutingModule, routedDiseaseCasesComponents} from "./diseaseCases.routing";
 
 import { DiseaseCasesListComponent } from "./diseaseCases-list.component";
-//import { DiseaseCaseDiseaseEventComponent } from "./case-items/case-event.component";
 import { DiseaseCasesItemComponent } from "./diseaseCases-item.component";
 
 @NgModule({
@@ -18,7 +17,6 @@ import { DiseaseCasesItemComponent } from "./diseaseCases-item.component";
     declarations: [
       DiseaseCasesListComponent,
       DiseaseCasesItemComponent,
-      //DiseaseCaseDiseaseEventComponent,
       routedDiseaseCasesComponents
     ],
     providers: [

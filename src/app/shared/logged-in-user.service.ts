@@ -6,10 +6,10 @@ import { BehaviorSubject } from "rxjs/Rx";
 @Injectable()
 export class LoggedInUser {
 
-  public userName: Subject<string> = new BehaviorSubject<string>("no user");
+  public userData: Subject<any> = new BehaviorSubject<any>({name: "no name", key: "no key"});
 
-  setUserName(text:string) {
-    this.userName.next(text);
-  }
-
+  setUserData(data: any) {
+    console.log("logged-in-user-service: data = " + data.key + " - " + data.name);
+    this.userData.next(data);
+  };
 }

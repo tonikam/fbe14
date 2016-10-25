@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
@@ -12,58 +12,44 @@ import { CurrentPatient } from "../shared/current-patient.service";
 })
 export class DiseaseCasesListComponent implements OnInit{
 
-  //currentPatientIDds: String;
-  //currentPatientID: String;
-
   currentPatientName: String;
   currentPatientKey: String;
+
+  currentPatientData: any;
 
   allDiseaseCases: Observable<any[]>;
   diseaseCasesCount: Number;
 
-  constructor(private router: Router,
+  constructor(private route: ActivatedRoute,
               private dataService: DataService,
               private currentPatient: CurrentPatient
   ){
 
-    let text1 = "";
-    let text2 = "";
-    text1 = "[case-list]";
-    text2 = "constructor";
-    console.log(text1 + " " + text2);
+    this.route.params.subscribe(
+      (params:any) => {
+        this.currentPatientKey = params['patientKey'];
 
-    /*
-    this.currentPatientIDds= this.dataService.getLastPatientKey();
-    console.log("[case-list] currentPatientIDds: " + this.currentPatientIDds);
-    */
+        this.currentPatient.patientData.subscribe(patientData => {
+          this.currentPatientData = patientData;
+          console.log("[diseaseCases - list] currentPatientData - key: " + this.currentPatientData.key);
+          console.log("[diseaseCases - list] currentPatientData - name: " + this.currentPatientData.name);
 
-    text1 = "";
-    text2 = "";
-    text1 = "[case-list]";
-    text2 = "constructor";
-    console.log(text1 + " " + text2);
+          // get name from observable subject for page title
+          this.currentPatientName = this.currentPatientData.name;
 
-    this.currentPatient.patientName.subscribe(subName => {
-      console.log("[case - list - constructor] currentPatientName: " + subName);
-      this.currentPatientName = "" + subName;}
-    );
-
-    this.currentPatient.patientKey.subscribe(subKey => {
-      console.log("[case - list - constructor] currentPatientKey: " + subKey);
-      this.currentPatientKey = "" + subKey;}
-    );
-
-    this.allDiseaseCases = this.dataService.getDiseaseCasesWithEvents();
-    this.allDiseaseCases.subscribe((queriedItems) => {this.diseaseCasesCount = queriedItems.length});
-
+          // get key from routing parameters
+          this.allDiseaseCases = this.dataService.getDiseaseCases(this.currentPatientData.key);
+          if (this.allDiseaseCases) {
+            this.allDiseaseCases.subscribe((queriedItems) => {
+              this.diseaseCasesCount = queriedItems.length;
+            });
+          }
+        });
+      });
   };
 
   ngOnInit() {
-    let text1 = "";
-    let text2 = "";
-    text1 = "[case-list]";
-    text2 = "OnInit";
-    console.log(text1 + " " + text2);
+
   };
 
 }

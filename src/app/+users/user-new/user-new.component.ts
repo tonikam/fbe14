@@ -1,4 +1,4 @@
-/*
+
 import { Component, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
@@ -26,7 +26,7 @@ export class UserNewComponent implements OnDestroy {
     this.subscription = this.route.params.subscribe(
       (params: any) => {
         this.userKey = params['userKey'];
-        this.user = this.dataService.getCachedUserData(this.userKey);
+        //this.user = this.dataService.getCachedUserData(this.userKey);
       });
   };
 
@@ -39,7 +39,7 @@ export class UserNewComponent implements OnDestroy {
   };
 
   ngOnDestroy() {
-    //this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   };
 }
-*/
+

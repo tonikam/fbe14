@@ -6,8 +6,6 @@ import { Observable } from "rxjs";
 import { AngularFire } from 'angularfire2';
 import { AuthService } from "../shared/auth.service";
 
-import { DataService } from "../shared/data.service";
-
 import { LoggedInUser } from "../shared/logged-in-user.service";
 
 @Component({
@@ -16,44 +14,29 @@ import { LoggedInUser } from "../shared/logged-in-user.service";
 })
 export class HeaderComponent implements OnInit{
 
-  loggedInUserName: String;
-  //currentUser: Observable<any>;
-  currentUser: String;
+  loggedInUserData: any;
+
+  currentUserRole: String;
 
   constructor(private authService: AuthService,
               private af: AngularFire,
               private router: Router,
-              private dataService: DataService,
               private loggedInUser: LoggedInUser) {
-
-    let text1 = "[header]";
-    let text2 = "constructor";
-    console.log(text1 + "" + text2);
-
   };
 
   ngOnInit() {
     try {
-      this.loggedInUser.userName.subscribe(loggedIn => {
-        this.loggedInUserName = "" + loggedIn;
-        console.log("[header - OnInitx] loggedInUserName: " + loggedIn);
-
-        /*
-        let loggedInUserData = this.dataService.getLoggedInUser();
-        if (loggedInUserData != undefined) {
-          this.currentUser = this.dataService.getUser(loggedInUserData.id);
-          console.log("header - oninit - currentUser: " + this.currentUser);
-        };
-        */
-
+        this.loggedInUser.userData.subscribe(loggedInData => {
+          this.loggedInUserData = loggedInData;
+          console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
+          console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
       });
 
-      this.currentUser = "99";
+      this.currentUserRole = "99";
 
     } catch(e) {
       console.log("[header - OnInit] error: " + e);
     }
-
   };
 
   onLogout() {

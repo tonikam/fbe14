@@ -3,7 +3,6 @@ import { RouterModule, Routes } from "@angular/router";
 
 import {DiseaseCasesComponent} from "./diseaseCases.component";
 import {DiseaseCasesListComponent} from "./diseaseCases-list.component";
-import {DiseaseCasesStartComponent} from "./diseaseCases-start.component";
 
 export const diseaseCases_routes: Routes = [
   { path: '', component: DiseaseCasesComponent, children: [
@@ -19,7 +18,6 @@ export const diseaseCases_routes: Routes = [
 export class DiseaseCasesRoutingModule{}
 
 export const routedDiseaseCasesComponents = [
-  DiseaseCasesComponent,
-  DiseaseCasesStartComponent
+  DiseaseCasesComponent
 ];
 

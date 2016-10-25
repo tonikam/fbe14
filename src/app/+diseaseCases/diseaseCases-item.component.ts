@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router} from "@angular/router";
 
 import {DataService} from "../shared/data.service";
 
@@ -30,18 +30,13 @@ export class DiseaseCasesItemComponent implements OnInit {
   openDiseaseEvents(diseaseCaseKey) {
     console.log("[diseaseCase-item] diseaseCaseKey: " + diseaseCaseKey);
 
-    this.dataService.setLastDiseaseCaseKey(diseaseCaseKey);
-
-    this.dataService.setLastDiseaseEventKey("");
+    //this.dataService.setLastDiseaseCaseKey(diseaseCaseKey);
+    //this.dataService.setLastDiseaseEventKey("");
 
     // set Subject Observable
-    this.currentDiseaseCase.setDiseaseCaseName(this.diseaseCase.name);
-    console.log("[diseaseCase-item] set observable patientName: " + this.diseaseCase.name);
+    this.currentDiseaseCase.setDiseaseCaseData({name: this.diseaseCase.name, key: diseaseCaseKey});
 
-    this.currentDiseaseCase.setDiseaseCaseKey(this.diseaseCase.$key);
-    console.log("[diseaseCase-item] set observable patientName: " + this.diseaseCase.$key);
-
-    this.router.navigate(['/diseaseEvents'])
+    this.router.navigate(['/diseaseEvents/' + diseaseCaseKey])
   }
 }
 

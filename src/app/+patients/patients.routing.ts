@@ -3,17 +3,14 @@ import { RouterModule, Routes } from "@angular/router";
 
 import {PatientsComponent} from "./patients.component";
 import {PatientsListComponent} from "./patients-list.component";
-import {PatientsStartComponent} from "./patients-start.component";
+import {PatientsEditComponent} from "./patients-edit.component";
+import {PatientsNewComponent} from "./patients-new.component";
 
 export const patients_routes: Routes = [
   { path: '', component: PatientsComponent, children: [
-    { path: '', component: PatientsListComponent }
-
-
-    //,
-    //{ path: ':userKey/new', component: UserNewComponent },
-    ////{ path: ':userKey/new', component: UserNewModalComponent },
-    //{ path: ':patientKey/edit', component: UserEditComponent }
+    { path: '', component: PatientsListComponent },
+    { path: ':patientKey/edit', component: PatientsEditComponent },
+    { path: ':userKey/new', component: PatientsNewComponent }
   ]}
 ];
 
@@ -26,8 +23,7 @@ export class PatientsRoutingModule{}
 
 export const routedPatientsComponents = [
   PatientsComponent,
-  PatientsStartComponent //,
-  //UserEditComponent,
-  //UserNewComponent
+  PatientsEditComponent,
+  PatientsNewComponent
 ];
 

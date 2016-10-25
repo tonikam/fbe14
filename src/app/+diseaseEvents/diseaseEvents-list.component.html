@@ -1,9 +1,34 @@
 
 <div class="row cust-container-header">
-  <p>{{diseaseEventsCount}} Events of Case: | {{currentDiseaseCaseName}} | {{currentDiseaseCaseKey}}</p>
+  <p>{{diseaseEventsCount}} Events of Case: {{currentDiseaseCaseName}}</p>
 </div>
+
 <div class="row col-sm-6 col-md-4 col-lg-3">
-  <div *ngFor="let diseaseEvent of allDiseaseEvents | async" class="card-deck-wrapper">
-        <div diseaseEvents-item [diseaseEvent]="diseaseEvent"></div>
+  <div class="card-deck">
+
+    <!-- Card to add new item -->
+
+    <div class="cust-wrap-cards">
+      <div class="card cust-head-card-buttons cust-card-events">
+
+        <div class="card-header cust-head-card-header">events of {{currentDiseaseCaseName}}</div>
+
+        <div class="card-block text-center">
+          <!-- Inhalt -->
+        </div>
+
+        <div class="card-block cust-flex-btn cust-block-card-padding">
+          <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child">New</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- List all existing items as card -->
+
+    <div *ngFor="let diseaseEvent of allDiseaseEvents | async" class="card-deck-wrapper">
+          <div diseaseEvents-item [diseaseEvent]="diseaseEvent"></div>
+    </div>
+
   </div>
 </div>

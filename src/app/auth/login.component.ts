@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   myForm:FormGroup;
   error = false;
 
-  //currentUser: String;
+  loggedInUserData: any;
 
   constructor(private fb:FormBuilder,
               private authService:AuthService,
@@ -24,19 +24,15 @@ export class LoginComponent implements OnInit {
   onLogin() {
     this.authService.loginUser(this.myForm.value);
 
-    /*
-     this.subscription = this.loggedInUser.userName.subscribe(pName => {
-     //this.currentUser = pName;
-     console.log("[login ] currentUser: " + pName);
-     */
-    this.router.navigate(['/patients']);
-    /*
+    this.loggedInUser.userData.subscribe(loggedInData => {
+      this.loggedInUserData = loggedInData;
+      console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
+      console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
+
+      this.router.navigate(['/patients/' + this.loggedInUserData.key]);
+
      });
-     */
-    // subscribe subject
-    //
-    //
-  }
+  };
 
   ngOnInit():any {
     this.myForm = this.fb.group({
