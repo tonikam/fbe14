@@ -41,6 +41,9 @@ export class DiseaseEventsListComponent implements OnInit {
         this.loggedInUser.userData.subscribe(loggedInData => {
           this.loggedInUserData = loggedInData;
 
+          // set data of diseaseCase in data service
+          this.dataService.setCurrentDiseaseCase(this.patientKey, this.currentDiseaseCaseKey);
+
           this.currentPatient.patientData.subscribe(patientData => {
             this.currentPatientData = patientData;
 

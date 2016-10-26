@@ -6,23 +6,32 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 
-import { UserLoggedIn } from "./user-logged-in.interface";
+// import { UserLoggedIn } from "./user-logged-in.interface";
 
+import { LoggedInUser } from "./logged-in-user.service";
+import { CurrentPatient } from "./current-patient.service";
+import { CurrentDiseaseCase} from "../shared/current-disease-case.service";
 
 @Injectable()
 export class DataService {
 
-  private loggedInUser: UserLoggedIn;
+  // private userLoggedIn: UserLoggedIn;
 
-  constructor(private af: AngularFire) {};
+  constructor(private af: AngularFire,
+              private loggedInUser: LoggedInUser,
+              private currentPatient: CurrentPatient,
+              private currentDiseaseCase: CurrentDiseaseCase
+  ) {};
 
   // Users + + + + + + + + + + + + + + +
 
+  /*
   getUserRole (userKey) {
     this.af.database.object(`/_db2/users/` + userKey).subscribe(user => {
-      this.loggedInUser.role = user.role;
+      this.userLoggedIn.role = user.role;
     });
   };
+  */
 
   getUser (userKey) {
     return this.af.database.object(`/_db2/users/` + userKey);
@@ -45,8 +54,14 @@ export class DataService {
   // Patients + + + + + + + + + + + + + + +
 
 
-  getPatient (userKey, patientKey) {
+  getPatient(userKey, patientKey) {
     return this.af.database.object(`/_db2/patients/` + userKey + `/` + patientKey);
+  };
+
+  setCurrentPatient(userKey, patientKey) {
+    this.getPatient(userKey, patientKey).subscribe((patient) => {
+      this.currentPatient.setPatientData({name: patient.name, age: patient.age});
+    });
   };
 
   updatePatient(userKey,patientKey,key_value) {
@@ -73,6 +88,12 @@ export class DataService {
 
   getDiseaseCase (patientKey, diseaseCaseKey) {
     return this.af.database.object(`/_db2/cases/` + patientKey + `/` + diseaseCaseKey);
+  };
+
+  setCurrentDiseaseCase(patientKey, diseaseCaseKey) {
+    this.getDiseaseCase(patientKey, diseaseCaseKey).subscribe((diseaseCase) => {
+      this.currentDiseaseCase.setDiseaseCaseData({name: diseaseCase.name, type: diseaseCase.type});
+    });
   };
 
   updateDiseaseCase(patientKey,diseaseCaseKey,key_value) {
