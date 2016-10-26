@@ -6,7 +6,7 @@ import { Location } from "@angular/common";
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
-import {DataService} from "../shared/data.service";
+import { DataService } from "../shared/data.service";
 
 @Component({
   templateUrl: './patients-new.component.html'
@@ -26,11 +26,9 @@ export class PatientsNewComponent {
     this.subscription = this.route.params.subscribe(
       (params:any) => {
         this.userKey = params['userKey'];
-        console.log("patients-new -> userKey: " + this.userKey);
 
         this.dataService.getUser(this.userKey).subscribe((user) => {
           this.userName = user.name;
-          console.log("user: " + user.name);
         });
       });
   };

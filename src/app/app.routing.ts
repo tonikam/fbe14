@@ -33,7 +33,7 @@ export const app_routes: Routes = [
   {path: 'users', loadChildren: 'app/+users/users.module#UsersModule'},
   {path: 'patients/:userKey', loadChildren: 'app/+patients/patients.module#PatientsModule'},
   {path: 'diseaseCases/:patientKey', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
-  {path: 'diseaseEvents/:diseaseCaseKey', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
+  {path: 'diseaseEvents/:patientKey/:diseaseCaseKey', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
 
   {path: '**', component: NotFoundComponent}
 ];

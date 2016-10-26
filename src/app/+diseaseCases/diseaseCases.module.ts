@@ -6,6 +6,8 @@ import {DiseaseCasesRoutingModule, routedDiseaseCasesComponents} from "./disease
 
 import { DiseaseCasesListComponent } from "./diseaseCases-list.component";
 import { DiseaseCasesItemComponent } from "./diseaseCases-item.component";
+import { DiseaseCasesEditComponent } from "./diseaseCases-edit.component";
+import { DiseaseCasesNewComponent } from "./diseaseCases-new.component";
 
 @NgModule({
     imports: [
@@ -17,6 +19,8 @@ import { DiseaseCasesItemComponent } from "./diseaseCases-item.component";
     declarations: [
       DiseaseCasesListComponent,
       DiseaseCasesItemComponent,
+      DiseaseCasesEditComponent,
+      DiseaseCasesNewComponent,
       routedDiseaseCasesComponents
     ],
     providers: [

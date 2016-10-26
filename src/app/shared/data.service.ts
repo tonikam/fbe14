@@ -97,11 +97,11 @@ export class DataService {
   // Disease Events + + + + + + + + + + + + + + +
 
   getDiseaseEvent (diseaseCaseKey, diseaseEventKey) {
-    return this.af.database.object(`/_db2/cases/` + diseaseCaseKey + `/` + diseaseEventKey);
+    return this.af.database.object(`/_db2/events/` + diseaseCaseKey + `/` + diseaseEventKey);
   };
 
   updateDiseaseEvent(diseaseCaseKey,diseaseEventKey,key_value) {
-    let diseaseEvent = this.getDiseaseCase(diseaseCaseKey, diseaseEventKey);
+    let diseaseEvent = this.getDiseaseEvent(diseaseCaseKey, diseaseEventKey);
     diseaseEvent.update(key_value);
   };
 

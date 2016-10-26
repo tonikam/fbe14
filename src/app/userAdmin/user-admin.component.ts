@@ -14,7 +14,12 @@ export class UserAdminComponent {
     this.users = af.database.list('_db2/users');
   };
 
-  updateUser(key: string, newRole: string) {
+  updateUser(key: string, role: boolean) {
+    let newRole = "10";
+    if (role ==  true){
+      newRole = "99";
+    }
+    console.log("[updateUser] key: " + key + " role: " + newRole);
     this.users.update(key, { role: newRole });
   }
 

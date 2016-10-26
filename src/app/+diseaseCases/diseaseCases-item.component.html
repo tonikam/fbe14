@@ -2,14 +2,14 @@
 <div class="cust-wrap-cards">
     <div class="card cust-list-card cust-card-event">
 
-      <div class="card-header cust-head-card-header">Events of {{diseaseCase.name}}</div>
+      <div class="card-header cust-head-card-header">Case {{diseaseCase.name}}</div>
       <div class="card-block text-center">
         <!-- Inhalt -->
       </div>
 
       <div class="card-block cust-flex-btn cust-block-card-padding">
-        <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child" data-toggle="modal" [attr.data-target]="'#' + diseaseCaseKey">Edit</button>
-        <button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" (click)="openDiseaseEvents(diseaseCaseKey)">Open all</button>
+        <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child" data-toggle="modal" [routerLink]="[diseaseCaseKey + '/edit']">Edit</button>
+        <button type="button" class="btn btn-secondary cust-btn-all-open cust-flex-btn-child" [routerLink]="['/diseaseEvents/' + patientKey + '/' + diseaseCaseKey]">Open all</button>
       </div>
 
     </div>

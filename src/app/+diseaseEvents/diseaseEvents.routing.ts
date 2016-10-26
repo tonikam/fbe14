@@ -3,10 +3,14 @@ import { RouterModule, Routes } from "@angular/router";
 
 import {DiseaseEventsComponent} from "./diseaseEvents.component";
 import {DiseaseEventsListComponent} from "./diseaseEvents-list.component";
+import { DiseaseEventsEditComponent } from "./diseaseEvents-edit.component";
+import { DiseaseEventsNewComponent } from "./diseaseEvents-new.component";
 
 export const diseaseEvents_routes: Routes = [
   { path: '', component: DiseaseEventsComponent, children: [
-    { path: '', component: DiseaseEventsListComponent }
+    { path: '', component: DiseaseEventsListComponent },
+    { path: ':diseaseEventKey/edit', component: DiseaseEventsEditComponent },
+    { path: 'new', component: DiseaseEventsNewComponent }
   ]}
 ];
 

@@ -31,14 +31,11 @@ export class PatientsEditComponent {
     this.subscription = this.route.params.subscribe(
       (params:any) => {
         this.patientKey = params['patientKey'];
-        console.log("patients-edit -> patientKey: " + this.patientKey);
 
         this.userKey = this.route.parent.snapshot.params['userKey'];
-        console.log("patients-edit -> userKey: " + this.userKey);
 
         this.dataService.getUser(this.userKey).subscribe((user) => {
           this.userName = user.name;
-          console.log("user: " + user.name);
 
           this.dataService.getPatient(this.userKey, this.patientKey).subscribe((patient) => {
             this.patientName = patient.name;

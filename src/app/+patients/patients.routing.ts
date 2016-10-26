@@ -10,7 +10,7 @@ export const patients_routes: Routes = [
   { path: '', component: PatientsComponent, children: [
     { path: '', component: PatientsListComponent },
     { path: ':patientKey/edit', component: PatientsEditComponent },
-    { path: ':userKey/new', component: PatientsNewComponent }
+    { path: 'new', component: PatientsNewComponent }
   ]}
 ];
 

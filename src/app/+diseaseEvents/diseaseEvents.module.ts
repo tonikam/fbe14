@@ -6,6 +6,8 @@ import {DiseaseEventsRoutingModule, routedDiseaseEventsComponents} from "./disea
 
 import { DiseaseEventsListComponent } from "./diseaseEvents-list.component";
 import { DiseaseEventsItemComponent } from "./diseaseEvents-item.component";
+import { DiseaseEventsEditComponent } from "./diseaseEvents-edit.component";
+import { DiseaseEventsNewComponent } from "./diseaseEvents-new.component";
 
 @NgModule({
     imports: [
@@ -17,6 +19,8 @@ import { DiseaseEventsItemComponent } from "./diseaseEvents-item.component";
     declarations: [
       DiseaseEventsListComponent,
       DiseaseEventsItemComponent,
+      DiseaseEventsEditComponent,
+      DiseaseEventsNewComponent,
       routedDiseaseEventsComponents
     ],
     providers: [

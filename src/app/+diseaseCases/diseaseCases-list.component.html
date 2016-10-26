@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li><a routerLink="''">Home</a></li>
+  <li><a routerLink="/patients/{{loggedInUserData.key}}">Patients</a></li>
+  <li class="active">Cases</li>
+</ol>
 
 <div class="row cust-container-header">
   <p>{{diseaseCasesCount}} Cases of Patient: {{currentPatientData.name}}</p>
@@ -19,7 +24,7 @@
         </div>
 
         <div class="card-block cust-flex-btn cust-block-card-padding">
-          <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child">New</button>
+          <button type="button" class="btn btn-secondary cust-btn-new  cust-flex-btn-child" [routerLink]="['new']">New</button>
         </div>
       </div>
     </div>

@@ -26,16 +26,13 @@ export class PatientsListComponent {
               private loggedInUser: LoggedInUser
   ){
 
+    // get key from routing parameters
     this.route.params.subscribe(
       (params:any) => {
-
-        // get key from routing parameters
         this.loggedInUserKey = params['userKey'];
 
         this.loggedInUser.userData.subscribe(loggedInData => {
           this.loggedInUserData = loggedInData;
-          console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
-          console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
 
           // get name from observable subject for page title
           this.loggedInUserName = this.loggedInUserData.name;
@@ -47,7 +44,6 @@ export class PatientsListComponent {
               this.patientsCount = queriedItems.length;
             });
           };
-
         });
       });
   };

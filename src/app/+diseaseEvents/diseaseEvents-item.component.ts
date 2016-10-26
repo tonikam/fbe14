@@ -1,7 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
-
-import {DataService} from "../shared/data.service";
 
 @Component({
   selector: '[diseaseEvents-item]',
@@ -12,9 +9,7 @@ export class DiseaseEventsItemComponent implements OnInit {
 
   diseaseEventKey: String;
 
-  constructor(private router: Router,
-              private dataService: DataService){
-  };
+  constructor(){};
 
   ngOnInit() {
     this.diseaseEventKey = this.diseaseEvent.$key;

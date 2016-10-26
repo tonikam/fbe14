@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { DataService } from "../shared/data.service";
 
+import { LoggedInUser } from "../shared/logged-in-user.service";
 import { CurrentPatient } from "../shared/current-patient.service";
 
 @Component({
@@ -12,9 +13,9 @@ import { CurrentPatient } from "../shared/current-patient.service";
 })
 export class DiseaseCasesListComponent implements OnInit{
 
-  currentPatientName: String;
-  currentPatientKey: String;
+  patientKey: String;
 
+  loggedInUserData: any;
   currentPatientData: any;
 
   allDiseaseCases: Observable<any[]>;
@@ -22,34 +23,38 @@ export class DiseaseCasesListComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,
               private dataService: DataService,
+              private loggedInUser: LoggedInUser,
               private currentPatient: CurrentPatient
   ){
 
     this.route.params.subscribe(
       (params:any) => {
-        this.currentPatientKey = params['patientKey'];
+        this.patientKey = params['patientKey'];
+        console.log("diseaseCases-list - patientKey: " + this.patientKey);
 
-        this.currentPatient.patientData.subscribe(patientData => {
-          this.currentPatientData = patientData;
-          console.log("[diseaseCases - list] currentPatientData - key: " + this.currentPatientData.key);
-          console.log("[diseaseCases - list] currentPatientData - name: " + this.currentPatientData.name);
+        this.loggedInUser.userData.subscribe(loggedInData => {
+          this.loggedInUserData = loggedInData;
 
-          // get name from observable subject for page title
-          this.currentPatientName = this.currentPatientData.name;
+          this.currentPatient.patientData.subscribe(patientData => {
+            this.currentPatientData = patientData;
 
-          // get key from routing parameters
-          this.allDiseaseCases = this.dataService.getDiseaseCases(this.currentPatientData.key);
-          if (this.allDiseaseCases) {
-            this.allDiseaseCases.subscribe((queriedItems) => {
-              this.diseaseCasesCount = queriedItems.length;
-            });
-          }
+            // get key from routing parameters
+            this.allDiseaseCases = this.dataService.getDiseaseCases(this.patientKey);
+            if (this.allDiseaseCases) {
+              this.allDiseaseCases.subscribe((queriedItems) => {
+                this.diseaseCasesCount = queriedItems.length;
+              });
+            }
+          });
         });
       });
   };
 
   ngOnInit() {
-
+    this.route.params.subscribe(
+      (params:any) => {
+        this.patientKey = params['patientKey'];
+      });
   };
 
 }

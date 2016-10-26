@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router} from "@angular/router";
+import { Router, ActivatedRoute} from "@angular/router";
+
+import { Subscription } from "rxjs/Rx";
 
 import {DataService} from "../shared/data.service";
-
-import { CurrentDiseaseCase } from "../shared/current-disease-case.service";
 
 @Component({
   selector: '[diseaseCases-item]',
@@ -12,11 +12,17 @@ import { CurrentDiseaseCase } from "../shared/current-disease-case.service";
 export class DiseaseCasesItemComponent implements OnInit {
   @Input() diseaseCase: any;
 
+  patientKey: String;
+
   diseaseCaseKey: String;
 
-  constructor(private router: Router,
-              private dataService: DataService,
-              private currentDiseaseCase: CurrentDiseaseCase){
+  subscription:Subscription;
+
+  constructor(private route: ActivatedRoute,
+              private dataService: DataService) {
+
+        this.patientKey = this.route.parent.snapshot.params['patientKey'];
+        console.log("diseaseCase - item  - patientKey: " + this.patientKey);
   };
 
   ngOnInit() {
@@ -26,17 +32,5 @@ export class DiseaseCasesItemComponent implements OnInit {
   createDiseaseEvent(key_value) {
     this.dataService.createDiseaseEvent(this.diseaseCase.$key,key_value);
   };
-
-  openDiseaseEvents(diseaseCaseKey) {
-    console.log("[diseaseCase-item] diseaseCaseKey: " + diseaseCaseKey);
-
-    //this.dataService.setLastDiseaseCaseKey(diseaseCaseKey);
-    //this.dataService.setLastDiseaseEventKey("");
-
-    // set Subject Observable
-    this.currentDiseaseCase.setDiseaseCaseData({name: this.diseaseCase.name, key: diseaseCaseKey});
-
-    this.router.navigate(['/diseaseEvents/' + diseaseCaseKey])
-  }
 }
 
