@@ -37,6 +37,12 @@ export class DataService {
     return this.af.database.object(`/_db2/users/` + userKey);
   };
 
+  setCurrentUser(userKey) {
+    this.getUser(userKey).subscribe((user) => {
+      this.loggedInUser.setUserData({name: user.name, role: user.role});
+    });
+  };
+
   getAllUsersAndPatients() {
     let queryDefinition = {};
     queryDefinition = {query: {orderByKey: true}};

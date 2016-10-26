@@ -35,6 +35,8 @@ export const app_routes: Routes = [
   {path: 'diseaseCases/:patientKey', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
   {path: 'diseaseEvents/:patientKey/:diseaseCaseKey', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
 
+
+
   {path: '**', component: NotFoundComponent}
 ];
 

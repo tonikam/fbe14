@@ -31,6 +31,9 @@ export class PatientsListComponent {
       (params:any) => {
         this.loggedInUserKey = params['userKey'];
 
+        // read user and set observable subject
+        //this.dataService.setCurrentUser(this.loggedInUserKey);
+
         this.loggedInUser.userData.subscribe(loggedInData => {
           this.loggedInUserData = loggedInData;
 
