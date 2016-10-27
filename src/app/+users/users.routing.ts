@@ -3,6 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 
 import {UsersComponent} from "./users.component";
 import {UsersListComponent} from "./users-list.component";
+import { UsersPatientComponent } from './users-patient.component';
+import { UsersItemComponent } from './users-item.component';
 //import {UserEditComponent} from "./user-edit/user-edit.component";
 //import {UserNewComponent} from "./user-new/user-new.component";
 
@@ -21,8 +23,11 @@ export const users_routes: Routes = [
 
 export class UsersRoutingModule{}
 
-export const routedUsersComponents = [
-  UsersComponent  //,
+export const routingComponents = [
+  UsersComponent,
+  UsersListComponent,
+  UsersPatientComponent,
+  UsersItemComponent  //,
   //UserEditComponent,
   //UserNewComponent
 ];

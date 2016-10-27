@@ -1,12 +1,12 @@
 <ol class="breadcrumb">
   <li><a routerLink="">Home</a></li>
-  <li><a routerLink="/patients/{{loggedInUserData.key}}">Patients</a></li>
-  <li><a routerLink="/diseaseCases/{{patientKey}}">Cases</a></li>
+  <li><a routerLink="/patients">Patients</a></li>
+  <li><a routerLink="/patients/{{patientKey}}/diseaseCases">Cases</a></li>
   <li class="active">Events</li>
 </ol>
 
 <div class="row cust-container-header">
-  <p>{{diseaseEventsCount}} Events of Case: {{currentDiseaseCaseName}}</p>
+  <p>{{diseaseEventsCount}} Events of Case: {{diseaseCaseName}}</p>
 </div>
 
 <div class="row col-sm-6 col-md-4 col-lg-3">
@@ -17,7 +17,7 @@
     <div class="cust-wrap-cards">
       <div class="card cust-head-card-buttons cust-card-events">
 
-        <div class="card-header cust-head-card-header">events of {{currentDiseaseCaseName}}</div>
+        <div class="card-header cust-head-card-header">events of {{diseaseCaseName}}</div>
 
         <div class="card-block text-center">
           <!-- Inhalt -->

@@ -7,9 +7,7 @@ import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
 import {DataService} from "../shared/data.service";
-
-import { CurrentPatient } from "../shared/current-patient.service";
-import { CurrentDiseaseCase } from "../shared/current-disease-case.service";
+import {LogService} from "../shared/log.service";
 
 @Component({
   templateUrl: './diseaseEvents-edit.component.html'
@@ -23,35 +21,24 @@ export class DiseaseEventsEditComponent {
   diseaseEventName: String;
   diseaseEventValue: String;
 
-  currentPatientData: any;
-  currentDiseaseCaseData: any;
-
   constructor(private route:ActivatedRoute,
               private dataService: DataService,
-              private location: Location,
-              private currentPatient: CurrentPatient,
-              private currentDiseaseCase: CurrentDiseaseCase) {
+              private logService: LogService,
+              private location: Location
+  ) {
 
     this.subscription = this.route.params.subscribe(
       (params:any) => {
         this.diseaseEventKey = params['diseaseEventKey'];
 
         this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
-        console.log("events edit - diseaseCaseKey: " + this.diseaseCaseKey);
+        this.logService.logConsole("diseaseEvents-edit", "constructor - diseaseCaseKey", this.diseaseCaseKey);
 
-        this.currentPatient.patientData.subscribe(patientData => {
-          this.currentPatientData = patientData;
-
-          this.currentDiseaseCase.diseaseCaseData.subscribe(diseaseCaseData => {
-            this.currentDiseaseCaseData = diseaseCaseData;
-
-            this.dataService.getDiseaseEvent(this.diseaseCaseKey, this.diseaseEventKey).subscribe((diseaseCase) => {
-              this.diseaseEventName = diseaseCase.name;
-              this.diseaseEventValue = diseaseCase.value;
-            });
-          });
+        this.dataService.getDiseaseEvent(this.diseaseCaseKey, this.diseaseEventKey).subscribe((diseaseCase) => {
+          this.diseaseEventName = diseaseCase.name;
+          this.diseaseEventValue = diseaseCase.value;
         });
-      });
+    });
   };
 
   updateDiseaseEvent(key_value) {

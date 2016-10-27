@@ -1,57 +1,56 @@
-import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
-import { DataService } from "../shared/data.service";
+import { AngularFire } from 'angularfire2';
 
-import { LoggedInUser } from "../shared/logged-in-user.service";
+import { DataService } from "../shared/data.service";
+import { LogService } from "../shared/log.service";
 
 @Component({
   templateUrl: './patients-list.component.html'
 })
-export class PatientsListComponent {
+export class PatientsListComponent implements OnInit{
+
+  loggedInUserName: String;
+
+  getUser: Observable<any>;
 
   allPatients: Observable<any[]>;
   patientsCount: Number;
 
-  loggedInUserKey: String;
-
-  loggedInUserData: any;
-  loggedInUserName: String;
-
   constructor(private router: Router,
-              private route: ActivatedRoute,
+              private af: AngularFire,
               private dataService: DataService,
-              private loggedInUser: LoggedInUser
+              private logService: LogService
   ){
-
-    // get key from routing parameters
-    this.route.params.subscribe(
-      (params:any) => {
-        this.loggedInUserKey = params['userKey'];
-
-        // read user and set observable subject
-        //this.dataService.setCurrentUser(this.loggedInUserKey);
-
-        this.loggedInUser.userData.subscribe(loggedInData => {
-          this.loggedInUserData = loggedInData;
-
-          // get name from observable subject for page title
-          this.loggedInUserName = this.loggedInUserData.name;
-
-          // get data from database
-          this.allPatients = this.dataService.getPatients(this.loggedInUserKey);
-          if (this.allPatients) {
-            this.allPatients.subscribe((queriedItems) => {
-              this.patientsCount = queriedItems.length;
-            });
-          };
-        });
-      });
+    this.logService.logConsole("patients-list","constructor","start");
   };
 
-  onNew(loggedInUserKey) {
-    this.router.navigate(['patients/' + this.loggedInUserData.key + '/new']);
+  ngOnInit() {
+    this.logService.logConsole("patients-list","ngOnInit","start");
+
+    this.af.auth.subscribe(auth => {
+      if (auth) {
+        this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
+            this.loggedInUserName = user.name;
+            this.logService.logConsole("patients-list", "ngOnInit - user", user.name);
+
+            this.allPatients = this.dataService.getPatients(user.$key);
+            if (this.allPatients) {
+              this.allPatients.subscribe((queriedItems) => {
+                this.patientsCount = queriedItems.length;
+              });
+            }
+        });
+      } else {
+        this.logService.logConsole("patients-list", "ngOnInit - user", "no logged in user");
+      }
+    });
+  };
+
+  onNew() {
+    this.router.navigate(['patients/new']);
   };
 }

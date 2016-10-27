@@ -3,19 +3,22 @@ import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 
 import { AngularFire } from 'angularfire2';
+import { FirebaseAuthState } from "angularfire2/index";
 
 import { UserLogin } from "./user-login.interface";
 
-import { LoggedInUser } from "./logged-in-user.service";
-
 import { ErrorHandlerService } from "./error-handler.service";
+import { LogService } from "./log.service";
 
 @Injectable()
 export class AuthService {
 
+  userData: any;
+
   constructor(public af:AngularFire,
               private errorHandler:ErrorHandlerService,
-              public loggedInUser: LoggedInUser) {
+              private logService: LogService
+  ) {
 
   }
 
@@ -38,10 +41,6 @@ export class AuthService {
       .then((auth) => {
         console.log("[authService] - loginUser - uid: " + auth.uid);
         console.log("[authService] - loginUser - providerData[].uid: " + auth.auth.providerData[0].uid);
-
-        // set Subject Observable
-        this.loggedInUser.setUserData({name: auth.auth.providerData[0].uid, key: auth.uid});
-
       })
       .catch((error) => {
         console.log("[authService] - login error: " + error.message);
@@ -51,7 +50,6 @@ export class AuthService {
 
   logout() {
     this.af.auth.logout();
-    this.loggedInUser.setUserData({name: "", key: ""});
   };
 
 }

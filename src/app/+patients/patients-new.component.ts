@@ -1,49 +1,46 @@
 
 import { Component} from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
+import { AngularFire } from 'angularfire2';
+
 import { DataService } from "../shared/data.service";
+import { LogService } from "../shared/log.service";
 
 @Component({
   templateUrl: './patients-new.component.html'
 })
 export class PatientsNewComponent {
 
-  private subscription: Subscription;
+  loggedInUserKey: String;
+  loggedInUserName: String;
 
-  userKey: String;
-  userName: String;
-  user: Observable<any>;
-
-  constructor(private route: ActivatedRoute,
+  constructor(private af: AngularFire,
               private location: Location,
-              private dataService: DataService){
+              private dataService: DataService,
+              private logService: LogService
+  ){
 
-    this.subscription = this.route.params.subscribe(
-      (params:any) => {
-        this.userKey = params['userKey'];
-
-        this.dataService.getUser(this.userKey).subscribe((user) => {
-          this.userName = user.name;
+    this.af.auth.subscribe(auth => {
+      if (auth) {
+        this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
+          this.loggedInUserKey = user.$key;
+          this.loggedInUserName = user.name;
         });
-      });
+      }
+    });
   };
 
   createPatient(key_value) {
-    this.dataService.createPatient(this.userKey,key_value);
+    this.dataService.createPatient(this.loggedInUserKey,key_value);
     this.goBack();
   };
 
   goBack() {
     this.location.back();
-  };
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   };
 }
 

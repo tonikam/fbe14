@@ -6,7 +6,10 @@ import { Location } from "@angular/common";
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
+import { AngularFire } from 'angularfire2';
+
 import {DataService} from "../shared/data.service";
+import {LogService} from "../shared/log.service";
 
 @Component({
   templateUrl: './patients-edit.component.html'
@@ -15,38 +18,42 @@ export class PatientsEditComponent {
 
   subscription:Subscription;
 
-  userKey: String;
-  userName: String;
+  loggedInUserKey: String;
+  loggedInUserName: String;
+
   patientKey: String;
   patientName: String;
   patientAge: String;
 
-  patient: Observable<any>;
-  user: Observable<any>;
-
   constructor(private route:ActivatedRoute,
+              private af: AngularFire,
               private dataService: DataService,
+              private logService: LogService,
               private location: Location) {
 
     this.subscription = this.route.params.subscribe(
       (params:any) => {
         this.patientKey = params['patientKey'];
 
-        this.userKey = this.route.parent.snapshot.params['userKey'];
+        this.af.auth.subscribe(auth => {
+          if (auth) {
+            this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
+              this.loggedInUserKey = user.$key;
+              this.loggedInUserName = user.name;
+              this.logService.logConsole("patients-edit", "constructor - user", user.name);
 
-        this.dataService.getUser(this.userKey).subscribe((user) => {
-          this.userName = user.name;
-
-          this.dataService.getPatient(this.userKey, this.patientKey).subscribe((patient) => {
-            this.patientName = patient.name;
-            this.patientAge = patient.age;
-          });
+              this.dataService.getPatient(this.loggedInUserKey, this.patientKey).subscribe((patient) => {
+                this.patientName = patient.name;
+                this.patientAge = patient.age;
+              });
+            });
+          }
         });
       });
   };
 
   updatePatient(key_value) {
-    this.dataService.updatePatient(this.userKey, this.patientKey, key_value)
+    this.dataService.updatePatient(this.loggedInUserKey, this.patientKey, key_value)
     this.goBack();
   };
 

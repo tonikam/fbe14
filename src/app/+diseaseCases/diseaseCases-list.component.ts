@@ -1,63 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
-import { DataService } from "../shared/data.service";
+import { AngularFire } from 'angularfire2';
 
-import { LoggedInUser } from "../shared/logged-in-user.service";
-import { CurrentPatient } from "../shared/current-patient.service";
+import { DataService } from "../shared/data.service";
+import { LogService } from "../shared/log.service";
 
 @Component({
   templateUrl: './diseaseCases-list.component.html'
 })
-export class DiseaseCasesListComponent implements OnInit{
+export class DiseaseCasesListComponent {
+
+  loggedInUserKey: String;
+  loggedInUserName: String;
 
   patientKey: String;
-
-  loggedInUserData: any;
-  currentPatientData: any;
+  patientName: String;
 
   allDiseaseCases: Observable<any[]>;
   diseaseCasesCount: Number;
 
   constructor(private route: ActivatedRoute,
+              private af: AngularFire,
               private dataService: DataService,
-              private loggedInUser: LoggedInUser,
-              private currentPatient: CurrentPatient
+              private logService: LogService
   ){
 
     this.route.params.subscribe(
       (params:any) => {
         this.patientKey = params['patientKey'];
-        console.log("diseaseCases-list - patientKey: " + this.patientKey);
+        this.logService.logConsole("diseaseCases-list", "constructor - Router patientKey", this.patientKey);
 
-        this.loggedInUser.userData.subscribe(loggedInData => {
-          this.loggedInUserData = loggedInData;
+        this.af.auth.subscribe(auth => {
+          if (auth) {
+            this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
+              this.loggedInUserKey = user.$key;
+              this.loggedInUserName = user.name;
+              this.logService.logConsole("diseaseCases-list", "constructor - user", this.loggedInUserName + " - " + this.loggedInUserKey);
 
-          // set data of patient in data service
-          this.dataService.setCurrentPatient(this.loggedInUserData.key, this.patientKey);
+              this.dataService.getPatient(this.loggedInUserKey,this.patientKey).subscribe((patient) => {
+                this.patientName = patient.name;
+                this.logService.logConsole("diseaseCases-list", "constructor - patient", patient.name);
 
-          this.currentPatient.patientData.subscribe(patientData => {
-            this.currentPatientData = patientData;
-
-            // get key from routing parameters
-            this.allDiseaseCases = this.dataService.getDiseaseCases(this.patientKey);
-            if (this.allDiseaseCases) {
-              this.allDiseaseCases.subscribe((queriedItems) => {
-                this.diseaseCasesCount = queriedItems.length;
+                this.allDiseaseCases = this.dataService.getDiseaseCases(this.patientKey);
+                if (this.allDiseaseCases) {
+                  this.allDiseaseCases.subscribe((queriedItems) => {
+                    this.diseaseCasesCount = queriedItems.length;
+                  });
+                }
               });
-            }
-          });
+            });
+          }
         });
       });
   };
-
-  ngOnInit() {
-    this.route.params.subscribe(
-      (params:any) => {
-        this.patientKey = params['patientKey'];
-      });
-  };
-
 }

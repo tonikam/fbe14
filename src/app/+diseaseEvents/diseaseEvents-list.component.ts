@@ -1,79 +1,79 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
 
 import { Observable } from 'rxjs';
 
-import { DataService } from "../shared/data.service";
+import { AngularFire } from 'angularfire2';
 
-import { LoggedInUser } from "../shared/logged-in-user.service";
-import { CurrentPatient } from "../shared/current-patient.service";
-import { CurrentDiseaseCase} from "../shared/current-disease-case.service";
+import { DataService } from "../shared/data.service";
+import { LogService } from "../shared/log.service";
 
 @Component({
   templateUrl: './diseaseEvents-list.component.html'
 })
-export class DiseaseEventsListComponent implements OnInit {
+export class DiseaseEventsListComponent {
+
+  loggedInUserKey: String;
+  loggedInUserName: String;
 
   patientKey: String;
-  currentDiseaseCaseName: String;
-  currentDiseaseCaseKey: String;
+  patientName: String;
 
-  loggedInUserData: any;
-  currentPatientData: any;
-  currentDiseaseCaseData: any;
+  diseaseCaseKey: String;
+  diseaseCaseName: String;
 
   allDiseaseEvents: Observable<any[]>;
   diseaseEventsCount: Number;
 
+  x: String;
+
   constructor(private route: ActivatedRoute,
+              private router: Router,
+              private af: AngularFire,
               private dataService: DataService,
-              private loggedInUser: LoggedInUser,
-              private currentPatient: CurrentPatient,
-              private currentDiseaseCase: CurrentDiseaseCase){
+              private logService: LogService
+){
 
     this.route.params.subscribe(
       (params:any) => {
-        this.currentDiseaseCaseKey = params['diseaseCaseKey'];
+        this.diseaseCaseKey = params['diseaseCaseKey'];
+        this.logService.logConsole("diseaseEvents-list", "constructor - Router diseaseCaseKey", this.diseaseCaseKey);
 
+        // Gilt nur beim Sub-Routing:
+        //    parent routing parameter wird nicht gefunden:
+        //    der parent parameter heisst auch komischerweise diseaseCaseKey !?!?
+        // Beim Eintrag in die Basis-Route funktioniert es
         this.patientKey = this.route.parent.snapshot.params['patientKey'];
-        console.log("events list c - patientKey: " + this.patientKey);
+        this.logService.logConsole("diseaseEvents-list", "constructor - Router patientKey", this.patientKey);
 
-        this.loggedInUser.userData.subscribe(loggedInData => {
-          this.loggedInUserData = loggedInData;
+        this.logService.logConsole("diseaseEvents-list", "constructor - Router parent params: ", this.route.parent.snapshot.params);
 
-          // set data of diseaseCase in data service
-          this.dataService.setCurrentDiseaseCase(this.patientKey, this.currentDiseaseCaseKey);
+        this.af.auth.subscribe(auth => {
+          if (auth) {
+            this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
+              this.loggedInUserKey = user.$key;
+              this.loggedInUserName = user.name;
+              this.logService.logConsole("diseaseEvents-list", "constructor - user", this.loggedInUserName + " - " + this.loggedInUserKey);
 
-          this.currentPatient.patientData.subscribe(patientData => {
-            this.currentPatientData = patientData;
+              this.dataService.getPatient(this.loggedInUserKey, this.patientKey).subscribe((patient) => {
+                this.patientName = patient.name;
+                this.logService.logConsole("diseaseEvents-list", "constructor - patient", patient.name);
 
-            this.currentDiseaseCase.diseaseCaseData.subscribe(diseaseCaseData => {
-              this.currentDiseaseCaseData = diseaseCaseData;
+                this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
+                  this.diseaseCaseName = diseaseCase.name;
+                  this.logService.logConsole("diseaseEvents-list", "constructor - diseaseCase", diseaseCase.name);
 
-              // get name from observable subject for page title
-              this.currentDiseaseCaseName = this.currentDiseaseCaseData.name;
-
-              // get key from routing parameters
-              this.allDiseaseEvents = this.dataService.getDiseaseEvents(this.currentDiseaseCaseKey);
-              if (this.allDiseaseEvents) {
-                this.allDiseaseEvents.subscribe((queriedItems) => {
-                  this.diseaseEventsCount = queriedItems.length;
+                  this.allDiseaseEvents = this.dataService.getDiseaseEvents(this.diseaseCaseKey);
+                  if (this.allDiseaseEvents) {
+                    this.allDiseaseEvents.subscribe((queriedItems) => {
+                      this.diseaseEventsCount = queriedItems.length;
+                    });
+                  }
                 });
-              }
+              });
             });
-          });
+          }
         });
-      });
+    });
   };
-
-  ngOnInit() {
-    this.route.params.subscribe(
-      (params:any) => {
-        this.currentDiseaseCaseKey = params['diseaseCaseKey'];
-
-        this.patientKey = this.route.parent.snapshot.params['patientKey'];
-        console.log("events list i - patientKey: " + this.patientKey);
-
-      });
-  }
 }

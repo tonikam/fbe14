@@ -5,43 +5,30 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
+import { LogService } from "./log.service";
 
-// import { UserLoggedIn } from "./user-logged-in.interface";
-
-import { LoggedInUser } from "./logged-in-user.service";
 import { CurrentPatient } from "./current-patient.service";
 import { CurrentDiseaseCase} from "../shared/current-disease-case.service";
 
 @Injectable()
 export class DataService {
 
-  // private userLoggedIn: UserLoggedIn;
-
   constructor(private af: AngularFire,
-              private loggedInUser: LoggedInUser,
-              private currentPatient: CurrentPatient,
+              private logService: LogService,
               private currentDiseaseCase: CurrentDiseaseCase
   ) {};
 
   // Users + + + + + + + + + + + + + + +
 
-  /*
-  getUserRole (userKey) {
-    this.af.database.object(`/_db2/users/` + userKey).subscribe(user => {
-      this.userLoggedIn.role = user.role;
+  // not used function -> check it!
+  getUser() {
+    this.af.auth.subscribe((auth) => {
+      if (auth) {
+        return this.af.database.object(`/_db2/users/` + auth.uid);
+      }
     });
   };
-  */
 
-  getUser (userKey) {
-    return this.af.database.object(`/_db2/users/` + userKey);
-  };
-
-  setCurrentUser(userKey) {
-    this.getUser(userKey).subscribe((user) => {
-      this.loggedInUser.setUserData({name: user.name, role: user.role});
-    });
-  };
 
   getAllUsersAndPatients() {
     let queryDefinition = {};
@@ -64,11 +51,13 @@ export class DataService {
     return this.af.database.object(`/_db2/patients/` + userKey + `/` + patientKey);
   };
 
+  /*
   setCurrentPatient(userKey, patientKey) {
     this.getPatient(userKey, patientKey).subscribe((patient) => {
       this.currentPatient.setPatientData({name: patient.name, age: patient.age});
     });
   };
+  */
 
   updatePatient(userKey,patientKey,key_value) {
     let patient = this.getPatient(userKey, patientKey);

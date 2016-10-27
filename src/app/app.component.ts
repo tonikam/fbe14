@@ -1,10 +1,12 @@
 import { Component, OnInit} from "@angular/core";
 
 import { AngularFire } from 'angularfire2';
+import {LoggedInDataComponent} from "./pages/logged-in-data.component";
 
-import { DataService } from "./shared/data.service";
+import { LogService } from "./shared/log.service";
 
-import { LoggedInUser } from "./shared/logged-in-user.service";
+//import { DataService } from "./shared/data.service";
+//import { LoggedInUser } from "./shared/logged-in-user.service";
 
 @Component({
   selector: 'app-disease',
@@ -13,15 +15,17 @@ import { LoggedInUser } from "./shared/logged-in-user.service";
 export class AppComponent implements OnInit{
 
   constructor(private af: AngularFire,
-              private dataService: DataService,
-              private loggedInUser: LoggedInUser){
-
+              private logService: LogService //,
+              //private dataService: DataService,
+              //private loggedInUser: LoggedInUser
+  ){
+    this.logService.setLogActive(true);
   };
 
   ngOnInit(){
 
     // check auth if user is still logged in !!
-
+    /*
     this.af.auth.subscribe(auth => {
       if (auth) {
         console.log(" subscribe auth: still logged in -> " + auth);
@@ -34,6 +38,7 @@ export class AppComponent implements OnInit{
       }
 
     });
+    */
 
   };
 }

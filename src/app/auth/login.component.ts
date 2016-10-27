@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit {
 
     this.loggedInUser.userData.subscribe(loggedInData => {
       this.loggedInUserData = loggedInData;
-      console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
-      console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
+      console.log("[login] loggedInUserData - key: " + this.loggedInUserData.key);
+      console.log("[login] loggedInUserData - name: " + this.loggedInUserData.name);
 
-      this.router.navigate(['/patients/' + this.loggedInUserData.key]);
+      this.router.navigate(['/patients']);
 
      });
   };

@@ -31,8 +31,8 @@ export class LoggedInDataComponent {
      this.loggedInUser.userData.subscribe(loggedInData => {
       this.loggedInUserData = loggedInData;
 
-      console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
-      console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
+      console.log("[logged-in-data] loggedInUserData - key: " + this.loggedInUserData.key);
+      console.log("[logged-in-data] loggedInUserData - name: " + this.loggedInUserData.name);
 
       this.currentPatient.patientData.subscribe(patientData => {
         this.currentPatientData = patientData;

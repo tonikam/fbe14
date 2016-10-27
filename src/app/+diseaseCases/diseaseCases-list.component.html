@@ -1,11 +1,11 @@
 <ol class="breadcrumb">
   <li><a routerLink="''">Home</a></li>
-  <li><a routerLink="/patients/{{loggedInUserData.key}}">Patients</a></li>
+  <li><a routerLink="/patients">Patients</a></li>
   <li class="active">Cases</li>
 </ol>
 
 <div class="row cust-container-header">
-  <p>{{diseaseCasesCount}} Cases of Patient: {{currentPatientData.name}} {{patientKey}}</p>
+  <p>{{diseaseCasesCount}} Cases of Patient: {{patientName}}</p>
 </div>
 
 
@@ -17,7 +17,7 @@
     <div class="cust-wrap-cards">
       <div class="card cust-head-card-buttons cust-card-cases">
 
-        <div class="card-header cust-head-card-header">cases of {{currentPatientData.name}}</div>
+        <div class="card-header cust-head-card-header">cases of {{patientName}}</div>
 
         <div class="card-block text-center">
           <!-- Inhalt -->
@@ -32,7 +32,7 @@
     <!-- List all existing items as card -->
 
     <div *ngFor="let diseaseCase of allDiseaseCases | async" class="card-deck-wrapper">
-          <div diseaseCases-item [diseaseCase]="diseaseCase"></div>
+          <div diseaseCases-item [diseaseCase]="diseaseCase" [patientKey]="patientKey"></div>
     </div>
 
   </div>

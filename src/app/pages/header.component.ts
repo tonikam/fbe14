@@ -4,9 +4,9 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 
 import { AngularFire } from 'angularfire2';
-import { AuthService } from "../shared/auth.service";
 
-import { LoggedInUser } from "../shared/logged-in-user.service";
+import { AuthService } from "../shared/auth.service";
+import { DataService } from "../shared/data.service";
 
 @Component({
     selector: 'disease-diary-header',
@@ -14,29 +14,30 @@ import { LoggedInUser } from "../shared/logged-in-user.service";
 })
 export class HeaderComponent implements OnInit{
 
-  loggedInUserData: any;
+  loggedInUserName: String;
 
-  currentUserRole: String;
+  //loggedInUserRole -> für Anzeige "Admin" Tab
 
   constructor(private authService: AuthService,
+              private dataService: DataService,
               private af: AngularFire,
-              private router: Router,
-              private loggedInUser: LoggedInUser) {
+              private router: Router
+  ) {
+
   };
 
   ngOnInit() {
-    try {
-        this.loggedInUser.userData.subscribe(loggedInData => {
-          this.loggedInUserData = loggedInData;
-          console.log("[patient - list] loggedInUserData - key: " + this.loggedInUserData.key);
-          console.log("[patient - list] loggedInUserData - name: " + this.loggedInUserData.name);
-      });
 
-      this.currentUserRole = "99";
-
-    } catch(e) {
-      console.log("[header - OnInit] error: " + e);
+    /*
+    if (this.dataService.getUser()) {
+      this.dataService.getUser().subscribe(
+        (user) => {
+          this.loggedInUserName = user.name;
+        });
+    } else {
+      this.loggedInUserName = "no logged in user";
     }
+    */
   };
 
   onLogout() {
