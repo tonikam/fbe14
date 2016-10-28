@@ -39,7 +39,7 @@ export class UsersPatientComponent implements OnInit {
   */
 
   updatePatient(key_value) {
-    this.dataService.updatePatient(this.user.$key, this.patient.$key, key_value)
+    this.dataService.updatePatientx(this.patient.$key, key_value)
   };
 
   checkPatientStatus() {

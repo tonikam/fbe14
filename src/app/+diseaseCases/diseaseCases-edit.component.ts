@@ -8,8 +8,9 @@ import { Subscription } from "rxjs/Rx";
 
 import { AngularFire } from 'angularfire2';
 
-import {DataService} from "../shared/data.service";
-import {LogService} from "../shared/log.service";
+import { ConfigService } from "../shared/config.service";
+import { DataService } from "../shared/data.service";
+import { LogService } from "../shared/log.service";
 
 @Component({
   templateUrl: './diseaseCases-edit.component.html'
@@ -28,9 +29,6 @@ export class DiseaseCasesEditComponent {
   diseaseCaseName: String;
   diseaseCaseType: String;
 
-  loggedInUserData: any;
-  currentPatientData: any;
-
   constructor(private route:ActivatedRoute,
               private af: AngularFire,
               private dataService: DataService,
@@ -46,16 +44,18 @@ export class DiseaseCasesEditComponent {
 
         this.af.auth.subscribe(auth => {
            if (auth) {
-             this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
+             this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
                this.loggedInUserKey = user.$key;
                this.loggedInUserName = user.name;
                this.logService.logConsole("diseaseCases-list", "constructor - user", this.loggedInUserName + " - " + this.loggedInUserKey);
 
-               this.dataService.getPatient(this.loggedInUserKey,this.patientKey).subscribe((patient) => {
+               //this.dataService.getPatient(this.loggedInUserKey,this.patientKey).subscribe((patient) => {
+               this.dataService.getPatientx(this.patientKey).subscribe((patient) => {
                  this.patientName = patient.name;
                  this.logService.logConsole("diseaseCases-list", "constructor - patient", patient.name);
 
-                 this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
+                 //this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
+                 this.dataService.getDiseaseCasex(this.diseaseCaseKey).subscribe((diseaseCase) => {
                    this.diseaseCaseName = diseaseCase.name;
                    this.diseaseCaseType = diseaseCase.type;
                  });
@@ -67,7 +67,8 @@ export class DiseaseCasesEditComponent {
   };
 
   updateDiseaseCase(key_value) {
-    this.dataService.updateDiseaseCase(this.patientKey, this.diseaseCaseKey, key_value)
+    //this.dataService.updateDiseaseCase(this.patientKey, this.diseaseCaseKey, key_value)
+    this.dataService.updateDiseaseCasex(this.diseaseCaseKey, key_value)
     this.goBack();
   };
 

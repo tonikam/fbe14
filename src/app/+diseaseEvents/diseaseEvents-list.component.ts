@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { AngularFire } from 'angularfire2';
 
+import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { LogService } from "../shared/log.service";
 
@@ -24,8 +25,6 @@ export class DiseaseEventsListComponent {
 
   allDiseaseEvents: Observable<any[]>;
   diseaseEventsCount: Number;
-
-  x: String;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -50,16 +49,18 @@ export class DiseaseEventsListComponent {
 
         this.af.auth.subscribe(auth => {
           if (auth) {
-            this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
-              this.loggedInUserKey = user.$key;
+            this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+              //this.loggedInUserKey = user.$key;
               this.loggedInUserName = user.name;
-              this.logService.logConsole("diseaseEvents-list", "constructor - user", this.loggedInUserName + " - " + this.loggedInUserKey);
+              this.logService.logConsole("diseaseEvents-list", "constructor - user", this.loggedInUserName); // + " - " + this.loggedInUserKey);
 
-              this.dataService.getPatient(this.loggedInUserKey, this.patientKey).subscribe((patient) => {
+              //this.dataService.getPatient(this.loggedInUserKey, this.patientKey).subscribe((patient) => {
+              this.dataService.getPatientx(this.patientKey).subscribe((patient) => {
                 this.patientName = patient.name;
                 this.logService.logConsole("diseaseEvents-list", "constructor - patient", patient.name);
 
-                this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
+                //this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
+                this.dataService.getDiseaseCasex(this.diseaseCaseKey).subscribe((diseaseCase) => {
                   this.diseaseCaseName = diseaseCase.name;
                   this.logService.logConsole("diseaseEvents-list", "constructor - diseaseCase", diseaseCase.name);
 

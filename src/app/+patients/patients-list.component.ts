@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { AngularFire } from 'angularfire2';
 
+import { ConfigService } from "../shared/config.service";
 import { DataService } from "../shared/data.service";
 import { LogService } from "../shared/log.service";
 
@@ -14,8 +15,6 @@ import { LogService } from "../shared/log.service";
 export class PatientsListComponent implements OnInit{
 
   loggedInUserName: String;
-
-  getUser: Observable<any>;
 
   allPatients: Observable<any[]>;
   patientsCount: Number;
@@ -33,7 +32,7 @@ export class PatientsListComponent implements OnInit{
 
     this.af.auth.subscribe(auth => {
       if (auth) {
-        this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
+        this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
             this.loggedInUserName = user.name;
             this.logService.logConsole("patients-list", "ngOnInit - user", user.name);
 
@@ -50,7 +49,9 @@ export class PatientsListComponent implements OnInit{
     });
   };
 
+  /*
   onNew() {
     this.router.navigate(['patients/new']);
   };
+  */
 }

@@ -11,8 +11,10 @@ export class PatientsItemComponent {
   constructor(private router: Router){
   };
 
+  /*
   editPatient(patientKey) {
     this.router.navigate(['patients/' + patientKey + '/edit']);
   };
+  */
 }
 

@@ -6,6 +6,7 @@ import { Location } from "@angular/common";
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs/Rx";
 
+import {ConfigService} from "../shared/config.service";
 import {DataService} from "../shared/data.service";
 import {LogService} from "../shared/log.service";
 
@@ -17,6 +18,7 @@ export class DiseaseEventsEditComponent {
   subscription:Subscription;
 
   diseaseCaseKey: String;
+  diseaseCaseName: String;
   diseaseEventKey: String;
   diseaseEventName: String;
   diseaseEventValue: String;
@@ -34,15 +36,21 @@ export class DiseaseEventsEditComponent {
         this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
         this.logService.logConsole("diseaseEvents-edit", "constructor - diseaseCaseKey", this.diseaseCaseKey);
 
-        this.dataService.getDiseaseEvent(this.diseaseCaseKey, this.diseaseEventKey).subscribe((diseaseCase) => {
-          this.diseaseEventName = diseaseCase.name;
-          this.diseaseEventValue = diseaseCase.value;
+        this.dataService.getDiseaseCasex(this.diseaseCaseKey).subscribe((diseaseCase) => {
+          this.diseaseCaseName = diseaseCase.name;
+
+          //this.dataService.getDiseaseEvent(this.diseaseCaseKey, this.diseaseEventKey).subscribe((diseaseCase) => {
+          this.dataService.getDiseaseEventx(this.diseaseEventKey).subscribe((diseaseCase) => {
+            this.diseaseEventName = diseaseCase.name;
+            this.diseaseEventValue = diseaseCase.value;
+          });
         });
     });
   };
 
   updateDiseaseEvent(key_value) {
-    this.dataService.updateDiseaseEvent(this.diseaseCaseKey, this.diseaseEventKey, key_value)
+    //this.dataService.updateDiseaseEvent(this.diseaseCaseKey, this.diseaseEventKey, key_value)
+    this.dataService.updateDiseaseEventx(this.diseaseEventKey, key_value)
     this.goBack();
   };
 

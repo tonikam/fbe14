@@ -8,6 +8,7 @@ import { Subscription } from "rxjs/Rx";
 
 import { AngularFire } from 'angularfire2';
 
+import {ConfigService} from "../shared/config.service";
 import {DataService} from "../shared/data.service";
 import {LogService} from "../shared/log.service";
 
@@ -18,7 +19,7 @@ export class PatientsEditComponent {
 
   subscription:Subscription;
 
-  loggedInUserKey: String;
+  //loggedInUserKey: String;
   loggedInUserName: String;
 
   patientKey: String;
@@ -37,12 +38,13 @@ export class PatientsEditComponent {
 
         this.af.auth.subscribe(auth => {
           if (auth) {
-            this.af.database.object(`/_db2/users/` + auth.uid).subscribe((user) => {
-              this.loggedInUserKey = user.$key;
+            this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
+              //this.loggedInUserKey = user.$key;
               this.loggedInUserName = user.name;
               this.logService.logConsole("patients-edit", "constructor - user", user.name);
 
-              this.dataService.getPatient(this.loggedInUserKey, this.patientKey).subscribe((patient) => {
+              //this.dataService.getPatient(this.loggedInUserKey, this.patientKey).subscribe((patient) => {
+              this.dataService.getPatientx(this.patientKey).subscribe((patient) => {
                 this.patientName = patient.name;
                 this.patientAge = patient.age;
               });
@@ -53,7 +55,8 @@ export class PatientsEditComponent {
   };
 
   updatePatient(key_value) {
-    this.dataService.updatePatient(this.loggedInUserKey, this.patientKey, key_value)
+    //this.dataService.updatePatient(this.loggedInUserKey, this.patientKey, key_value)
+    this.dataService.updatePatientx(this.patientKey, key_value)
     this.goBack();
   };
 

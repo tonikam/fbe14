@@ -10,7 +10,7 @@ import { DiseaseEventsNewComponent } from "./diseaseEvents-new.component";
 export const diseaseEvents_routes: Routes = [
   { path: '', component: DiseaseEventsComponent, children: [
     { path: '', component: DiseaseEventsListComponent },
-    { path: ':diseaseEventKey/edit', component: DiseaseEventsEditComponent },
+    { path: 'diseaseEvents/:diseaseEventKey/edit', component: DiseaseEventsEditComponent },
     { path: 'new', component: DiseaseEventsNewComponent }
   ]}
 ];

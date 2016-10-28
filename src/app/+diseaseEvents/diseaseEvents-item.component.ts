@@ -12,7 +12,7 @@ export class DiseaseEventsItemComponent implements OnInit {
   constructor(){};
 
   ngOnInit() {
-    this.diseaseEventKey = this.diseaseEvent.$key;
+    //this.diseaseEventKey = this.diseaseEvent.$key;
   }
 
 }

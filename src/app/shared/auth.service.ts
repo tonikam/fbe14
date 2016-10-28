@@ -7,6 +7,7 @@ import { FirebaseAuthState } from "angularfire2/index";
 
 import { UserLogin } from "./user-login.interface";
 
+import { ConfigService } from "./config.service";
 import { ErrorHandlerService } from "./error-handler.service";
 import { LogService } from "./log.service";
 
@@ -16,6 +17,7 @@ export class AuthService {
   userData: any;
 
   constructor(public af:AngularFire,
+              private configService: ConfigService,
               private errorHandler:ErrorHandlerService,
               private logService: LogService
   ) {
@@ -27,7 +29,7 @@ export class AuthService {
       .then((auth) => {
 
         // create entry in users - table with auth uid
-        this.af.database.object('/_db2/users/' + auth.uid).set({name: user.email, age: 0, role: 10});
+        this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).set({name: user.email, age: 0, role: 10});
         console.log("Registered uid: " + auth.uid);
       })
       .catch((error) => {

@@ -42,10 +42,12 @@ export class DiseaseEventsNewComponent {
         this.diseaseCaseKey = this.route.parent.snapshot.params['diseaseCaseKey'];
         this.logService.logConsole("diseaseEvents-new", "constructor - diseaseCaseKey: ", this.diseaseCaseKey);
 
-        this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
+        //this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
+        this.dataService.getDiseaseCasex(this.diseaseCaseKey).subscribe((diseaseCase) => {
           this.diseaseCaseName = diseaseCase.name;
 
-          this.dataService.getDiseaseEvent( this.diseaseCaseKey, this.diseaseEventKey).subscribe((diseaseEvemt) => {
+          //this.dataService.getDiseaseEvent( this.diseaseCaseKey, this.diseaseEventKey).subscribe((diseaseEvemt) => {
+          this.dataService.getDiseaseEventx(this.diseaseEventKey).subscribe((diseaseEvemt) => {
             this.diseaseEventName = diseaseEvemt.name;
 
           });
@@ -54,7 +56,8 @@ export class DiseaseEventsNewComponent {
   };
 
   createDiseaseEvent(key_value) {
-    this.dataService.createDiseaseEvent(this.diseaseCaseKey,key_value);
+    //this.dataService.createDiseaseEvent(this.diseaseCaseKey,key_value);
+    this.dataService.createDiseaseEventx(key_value);
     this.goBack();
   };
 

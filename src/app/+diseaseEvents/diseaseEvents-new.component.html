@@ -11,7 +11,7 @@
       <td>value</td>
       <td><input type="text" #newValue [value]="" /></td>
     </tr>
-    <tr><button class="btn btn-success" (click)="createDiseaseEvent({value: newValue.value,name: newName.value})">create event</button></tr>
+    <tr><button class="btn btn-success" (click)="createDiseaseEvent({value: newValue.value,name: newName.value, case: diseaseCaseKey})">create event</button></tr>
     <tr>&nbsp;</tr>
     <tr><button class="btn btn-success" (click)="goBack()">back</button></tr>
   </table>

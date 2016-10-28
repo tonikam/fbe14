@@ -12,6 +12,7 @@ export const patients_routes: Routes = [
     { path: '', component: PatientsListComponent },
     { path: ':patientKey/edit', component: PatientsEditComponent },
     { path: 'new', component: PatientsNewComponent },
+
     //{ path: ':patientKey/diseaseCases', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
     { path: ':patientKey', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
   ]}

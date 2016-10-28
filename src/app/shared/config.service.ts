@@ -20,6 +20,14 @@ export class ConfigService {
     method: AuthMethods.Password
   };
 
+  public static firebaseDbConfig = {
+    db: "/_db4",
+    users: "/users",
+    patients: "/patients",
+    diseaseCases: "/cases",
+    diseaseEvents: "/events"
+  };
+
   public static getEmailRegex() {
     return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|bla|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
   };
