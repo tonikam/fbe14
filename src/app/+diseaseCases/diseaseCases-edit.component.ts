@@ -49,13 +49,11 @@ export class DiseaseCasesEditComponent {
                this.loggedInUserName = user.name;
                this.logService.logConsole("diseaseCases-list", "constructor - user", this.loggedInUserName + " - " + this.loggedInUserKey);
 
-               //this.dataService.getPatient(this.loggedInUserKey,this.patientKey).subscribe((patient) => {
-               this.dataService.getPatientx(this.patientKey).subscribe((patient) => {
+               this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                  this.patientName = patient.name;
                  this.logService.logConsole("diseaseCases-list", "constructor - patient", patient.name);
 
-                 //this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
-                 this.dataService.getDiseaseCasex(this.diseaseCaseKey).subscribe((diseaseCase) => {
+                 this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                    this.diseaseCaseName = diseaseCase.name;
                    this.diseaseCaseType = diseaseCase.type;
                  });
@@ -67,9 +65,11 @@ export class DiseaseCasesEditComponent {
   };
 
   updateDiseaseCase(key_value) {
-    //this.dataService.updateDiseaseCase(this.patientKey, this.diseaseCaseKey, key_value)
-    this.dataService.updateDiseaseCasex(this.diseaseCaseKey, key_value)
+     this.dataService.updateDiseaseCase(this.diseaseCaseKey, key_value)
     this.goBack();
+  };
+  deleteDiseaseCase() {
+
   };
 
   goBack() {

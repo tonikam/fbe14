@@ -15,10 +15,6 @@ import { ErrorHandlerService } from "./shared/error-handler.service";
 import { ErrorLoggerService } from "./shared/error-logger.service";
 import { LogService } from "./shared/log.service";
 
-import { LoggedInUser } from "./shared/logged-in-user.service";
-import { CurrentPatient } from "./shared/current-patient.service";
-import { CurrentDiseaseCase } from "./shared/current-disease-case.service";
-
 import { AppRoutingModule, routingComponents } from "./app.routing";
 
 import { AngularFireModule } from 'angularfire2';
@@ -47,10 +43,7 @@ import { AuthMethods } from "angularfire2/index";
     DataService,
     ErrorHandlerService,
     ErrorLoggerService,
-    LogService,
-    LoggedInUser,
-    CurrentPatient,
-    CurrentDiseaseCase
+    LogService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

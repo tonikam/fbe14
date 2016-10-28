@@ -44,7 +44,7 @@ export class PatientsEditComponent {
               this.logService.logConsole("patients-edit", "constructor - user", user.name);
 
               //this.dataService.getPatient(this.loggedInUserKey, this.patientKey).subscribe((patient) => {
-              this.dataService.getPatientx(this.patientKey).subscribe((patient) => {
+              this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                 this.patientName = patient.name;
                 this.patientAge = patient.age;
               });
@@ -55,9 +55,11 @@ export class PatientsEditComponent {
   };
 
   updatePatient(key_value) {
-    //this.dataService.updatePatient(this.loggedInUserKey, this.patientKey, key_value)
-    this.dataService.updatePatientx(this.patientKey, key_value)
+    this.dataService.updatePatient(this.patientKey, key_value)
     this.goBack();
+  };
+  deletePatient() {
+
   };
 
   goBack() {

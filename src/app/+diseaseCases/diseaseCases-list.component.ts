@@ -42,7 +42,7 @@ export class DiseaseCasesListComponent {
               this.logService.logConsole("diseaseCases-list", "constructor - user", this.loggedInUserName ); // + " - " + this.loggedInUserKey);
 
               //this.dataService.getPatient(this.loggedInUserKey,this.patientKey).subscribe((patient) => {
-              this.dataService.getPatientx(this.patientKey).subscribe((patient) => {
+              this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                 this.patientName = patient.name;
                 this.logService.logConsole("diseaseCases-list", "constructor - patient", patient.name);
 

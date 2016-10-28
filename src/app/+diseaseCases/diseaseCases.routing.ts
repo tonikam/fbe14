@@ -5,13 +5,13 @@ import { DiseaseCasesComponent } from "./diseaseCases.component";
 import { DiseaseCasesListComponent } from "./diseaseCases-list.component";
 import { DiseaseCasesItemComponent } from "./diseaseCases-item.component";
 import { DiseaseCasesEditComponent } from "./diseaseCases-edit.component";
-import { DiseaseCasesNewComponent } from "./diseaseCases-new.component";
+import { DiseaseCasesCreateComponent } from "./diseaseCases-create.component";
 
 export const diseaseCases_routes: Routes = [
   { path: '', component: DiseaseCasesComponent, children: [
     { path: '', component: DiseaseCasesListComponent },
     { path: 'diseaseCases/:diseaseCaseKey/edit', component: DiseaseCasesEditComponent },
-    { path: 'new', component: DiseaseCasesNewComponent },
+    { path: 'create', component: DiseaseCasesCreateComponent },
 
     // parent.params werden nicht gefunden
     // # 1 { path: 'diseaseCases/:diseaseCaseKey', loadChildren: 'app/+diseaseEvents/diseaseEvents.module#DiseaseEventsModule'},
@@ -33,6 +33,6 @@ export const routingComponents = [
   DiseaseCasesListComponent,
   DiseaseCasesItemComponent,
   DiseaseCasesEditComponent,
-  DiseaseCasesNewComponent
+  DiseaseCasesCreateComponent
 ];
 

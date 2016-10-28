@@ -31,15 +31,12 @@ export class UsersPatientComponent implements OnInit {
     this.patientKey = this.patient.$key;
   }
 
-  /*
-  onEdit() {
-    this.dataService.setCachedUserID(this.user.$key);
-    this.router.navigate(['/allUsers',this.patient.$key,'edit'])
-  };
-  */
-
   updatePatient(key_value) {
-    this.dataService.updatePatientx(this.patient.$key, key_value)
+    this.dataService.updatePatient(this.patient.$key, key_value);
+  };
+
+  deletePatient() {
+    this.dataService.deletePatient(this.patient.$key);
   };
 
   checkPatientStatus() {

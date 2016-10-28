@@ -5,13 +5,13 @@ import { PatientsComponent } from "./patients.component";
 import { PatientsListComponent } from "./patients-list.component";
 import { PatientsItemComponent } from "./patients-item.component";
 import { PatientsEditComponent } from "./patients-edit.component";
-import { PatientsNewComponent } from "./patients-new.component";
+import { PatientsCreateComponent } from "./patients-create.component";
 
 export const patients_routes: Routes = [
   { path: '', component: PatientsComponent, children: [
     { path: '', component: PatientsListComponent },
     { path: ':patientKey/edit', component: PatientsEditComponent },
-    { path: 'new', component: PatientsNewComponent },
+    { path: 'create', component: PatientsCreateComponent },
 
     //{ path: ':patientKey/diseaseCases', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
     { path: ':patientKey', loadChildren: 'app/+diseaseCases/diseaseCases.module#DiseaseCasesModule'},
@@ -30,6 +30,6 @@ export const routingComponents = [
   PatientsListComponent,
   PatientsItemComponent,
   PatientsEditComponent,
-  PatientsNewComponent
+  PatientsCreateComponent
 ];
 

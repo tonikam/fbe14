@@ -5,13 +5,13 @@ import { DiseaseEventsComponent } from "./diseaseEvents.component";
 import { DiseaseEventsListComponent } from "./diseaseEvents-list.component";
 import { DiseaseEventsItemComponent } from "./diseaseEvents-item.component";
 import { DiseaseEventsEditComponent } from "./diseaseEvents-edit.component";
-import { DiseaseEventsNewComponent } from "./diseaseEvents-new.component";
+import { DiseaseEventsCreateComponent } from "./diseaseEvents-create.component";
 
 export const diseaseEvents_routes: Routes = [
   { path: '', component: DiseaseEventsComponent, children: [
     { path: '', component: DiseaseEventsListComponent },
     { path: 'diseaseEvents/:diseaseEventKey/edit', component: DiseaseEventsEditComponent },
-    { path: 'new', component: DiseaseEventsNewComponent }
+    { path: 'create', component: DiseaseEventsCreateComponent }
   ]}
 ];
 
@@ -27,6 +27,6 @@ export const routingComponents = [
   DiseaseEventsListComponent,
   DiseaseEventsItemComponent,
   DiseaseEventsEditComponent,
-  DiseaseEventsNewComponent
+  DiseaseEventsCreateComponent
 ];
 

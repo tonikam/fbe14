@@ -28,7 +28,7 @@ export class UsersItemComponent implements OnInit { // implements AfterViewInit 
   */
 
   createPatient(key_value) {
-    this.dataService.createPatientx(key_value)
+    this.dataService.createPatient(key_value)
   };
 
 }

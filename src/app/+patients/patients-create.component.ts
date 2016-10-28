@@ -12,11 +12,10 @@ import { DataService } from "../shared/data.service";
 import { LogService } from "../shared/log.service";
 
 @Component({
-  templateUrl: './patients-new.component.html'
+  templateUrl: './patients-create.component.html'
 })
-export class PatientsNewComponent {
+export class PatientsCreateComponent {
 
-  //loggedInUserKey: String;
   loggedInUserName: String;
 
   constructor(private af: AngularFire,
@@ -28,7 +27,6 @@ export class PatientsNewComponent {
     this.af.auth.subscribe(auth => {
       if (auth) {
         this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-          //this.loggedInUserKey = user.$key;
           this.loggedInUserName = user.name;
         });
       }
@@ -36,12 +34,8 @@ export class PatientsNewComponent {
   };
 
   createPatient(key_value) {
-    //key_value.push("user", this.loggedInUserKey);
-
-    this.logService.logConsole("patients-new","createPatient",key_value);
-
-    //this.dataService.createPatient(this.loggedInUserKey,key_value);
-    this.dataService.createPatientx(key_value);
+    this.logService.logConsole("patients-create","createPatient",key_value);
+    this.dataService.createPatient(key_value);
     this.goBack();
   };
 
