@@ -10,8 +10,6 @@ import { PatientsRoutingModule, routingComponents } from "./patients.routing";
     ],
     declarations: [
       routingComponents
-    ],
-    providers: [
-  ]
+    ]
 })
 export class PatientsModule {}

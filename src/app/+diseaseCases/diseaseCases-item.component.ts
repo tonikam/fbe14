@@ -14,11 +14,5 @@ export class DiseaseCasesItemComponent {
 
   constructor(private dataService: DataService) {
   };
-
-  /*
-  createDiseaseEvent(key_value) {
-    //this.dataService.createDiseaseEvent(this.diseaseCase.$key,key_value);
-  };
-  */
 }
 

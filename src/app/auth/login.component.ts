@@ -14,11 +14,13 @@ export class LoginComponent implements OnInit {
   constructor(private fb:FormBuilder,
               private authService:AuthService,
               private router:Router
-  ) {
-  }
+  ) {}
 
   onLogin() {
     this.authService.loginUser(this.myForm.value);
+
+    /* todo: Login error abfangen */
+    // hier wird auch nach einem fehlerhaften Login weitergeroutet ..
     this.router.navigate(['/patients']);
   };
 

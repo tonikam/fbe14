@@ -36,7 +36,7 @@ export class UsersPatientComponent implements OnInit {
   };
 
   deletePatient() {
-    this.dataService.deletePatient(this.patient.$key);
+    //this.dataService.deletePatient(this.patient.$key);
   };
 
   checkPatientStatus() {

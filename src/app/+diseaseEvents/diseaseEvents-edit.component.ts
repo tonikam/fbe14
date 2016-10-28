@@ -54,7 +54,7 @@ export class DiseaseEventsEditComponent {
     this.goBack();
   };
   deleteDiseaseEvent() {
-
+    //this.dataService.deleteDiseaseEvent(this.diseaseEventKey);
   };
 
   goBack() {

@@ -12,22 +12,25 @@ import { LogService } from '../shared/log.service';
 export class UserAdminComponent {
 
   users: FirebaseListObservable<any>;
+  userMainAdmin: String;
 
   constructor(private af: AngularFire,
               private dataService: DataService,
               private logService: LogService
   ) {
-    this.users = af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users);
+    this.userMainAdmin = ConfigService.mainAdmin;
+    this.users = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users);
   };
 
-  updateUser(key: string, role: boolean) {
-    let newRole = "10";
-    if (role ==  true){
-      newRole = "99";
+  updateUser(userKey: string, role: boolean) {
+    let newRole = role;
+    if (newRole ==  true){
+      this.dataService.setUserAdminRole(userKey);
+    } else {
+      this.dataService.removeUserAdminRole(userKey);
     }
-
-    this.logService.logConsole("user-admin","updateUser","key: " + key + " role: " + newRole);
-    this.dataService.updateUser(key, { role: newRole });
+    this.dataService.updateUser(userKey, { admin: newRole });
+    this.logService.logConsole("user-admin","updateUser","key: " + userKey + " admin: " + newRole);
   }
 
   deleteUser(userKey: string) {

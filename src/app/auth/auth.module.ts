@@ -27,10 +27,3 @@ import { RegisterComponent } from "./register.component";
     ]
 })
 export class AuthModule {}
-
-/*
-export const authComponents = [
-  LoginComponent,
-  RegisterComponent,
-];
-*/

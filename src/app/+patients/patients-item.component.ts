@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from "@angular/router";
 
 @Component({
   selector: '[patients-item]',
@@ -7,14 +6,5 @@ import { Router } from "@angular/router";
 })
 export class PatientsItemComponent {
   @Input() patient: any;
-
-  constructor(private router: Router){
-  };
-
-  /*
-  editPatient(patientKey) {
-    this.router.navigate(['patients/' + patientKey + '/edit']);
-  };
-  */
 }
 

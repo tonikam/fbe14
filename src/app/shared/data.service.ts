@@ -11,6 +11,7 @@ import { LogService } from "./log.service";
 @Injectable()
 export class DataService {
 
+  DbAdmins: String;
   DbUsers: String;
   DbPatients: String;
   DbCases: String;
@@ -19,6 +20,7 @@ export class DataService {
   constructor(private af: AngularFire,
               private logService: LogService
   ) {
+    this.DbAdmins = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.admins;
     this.DbUsers = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users;
     this.DbPatients = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.patients;
     this.DbCases = ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.diseaseCases;
@@ -26,6 +28,18 @@ export class DataService {
   };
 
   // Users + + + + + + + + + + + + + + +
+
+  setUserAdminRole(userKey) {
+    this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.admins + '/' + userKey).set({adminRole: true});
+  };
+  removeUserAdminRole(userKey) {
+    try {
+      let admins = this.af.database.list(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.admins);
+      admins.remove(userKey);
+    } catch(e) {
+      // user not found
+    }
+  };
 
   getUser(userKey) {
     return this.af.database.object(String(this.DbUsers) + '/' + userKey);

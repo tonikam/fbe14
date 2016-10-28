@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'; //, AfterViewInit, ViewChild
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 
 import {DataService} from "../shared/data.service";
 
@@ -7,7 +7,7 @@ import {DataService} from "../shared/data.service";
   selector: '[users-item]',
   templateUrl: 'users-item.component.html'
 })
-export class UsersItemComponent implements OnInit { // implements AfterViewInit {
+export class UsersItemComponent implements OnInit {
   @Input() user: any;
 
   userKey: String;
@@ -20,16 +20,8 @@ export class UsersItemComponent implements OnInit { // implements AfterViewInit 
     this.userKey = this.user.$key;
   }
 
-  /*
-  onNew() {
-    this.router.navigate(['/allUsers',this.user.$key,'new'])
-    //this.newPatientModal.showNewModalDialog(this.user);
-  };
-  */
-
   createPatient(key_value) {
     this.dataService.createPatient(key_value)
   };
-
 }
 

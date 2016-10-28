@@ -48,10 +48,4 @@ export class PatientsListComponent implements OnInit{
       }
     });
   };
-
-  /*
-  onNew() {
-    this.router.navigate(['patients/new']);
-  };
-  */
 }

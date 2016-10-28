@@ -10,8 +10,6 @@ import {DiseaseCasesRoutingModule, routingComponents} from "./diseaseCases.routi
     ],
     declarations: [
       routingComponents
-     ],
-    providers: [
-  ]
+    ]
 })
 export class DiseaseCasesModule {}

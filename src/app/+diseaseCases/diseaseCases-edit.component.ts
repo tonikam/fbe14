@@ -69,7 +69,7 @@ export class DiseaseCasesEditComponent {
     this.goBack();
   };
   deleteDiseaseCase() {
-
+    this.dataService.deleteDiseaseCase(this.diseaseCaseKey);
   };
 
   goBack() {

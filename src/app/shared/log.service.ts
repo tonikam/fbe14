@@ -9,8 +9,8 @@ export class LogService {
     this.logActive = false;
   }
 
-  setLogActive(activate) {
-    this.logActive = activate;
+  setLogActive(activated) {
+    this.logActive = activated;
   };
 
   logConsole(module, info, value) {

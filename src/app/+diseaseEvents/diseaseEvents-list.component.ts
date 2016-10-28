@@ -50,16 +50,13 @@ export class DiseaseEventsListComponent {
         this.af.auth.subscribe(auth => {
           if (auth) {
             this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).subscribe((user) => {
-              //this.loggedInUserKey = user.$key;
               this.loggedInUserName = user.name;
               this.logService.logConsole("diseaseEvents-list", "constructor - user", this.loggedInUserName); // + " - " + this.loggedInUserKey);
 
-              //this.dataService.getPatient(this.loggedInUserKey, this.patientKey).subscribe((patient) => {
               this.dataService.getPatient(this.patientKey).subscribe((patient) => {
                 this.patientName = patient.name;
                 this.logService.logConsole("diseaseEvents-list", "constructor - patient", patient.name);
 
-                //this.dataService.getDiseaseCase(this.patientKey, this.diseaseCaseKey).subscribe((diseaseCase) => {
                 this.dataService.getDiseaseCase(this.diseaseCaseKey).subscribe((diseaseCase) => {
                   this.diseaseCaseName = diseaseCase.name;
                   this.logService.logConsole("diseaseEvents-list", "constructor - diseaseCase", diseaseCase.name);

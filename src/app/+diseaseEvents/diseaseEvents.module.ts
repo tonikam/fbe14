@@ -10,8 +10,6 @@ import {DiseaseEventsRoutingModule, routingComponents} from "./diseaseEvents.rou
     ],
     declarations: [
       routingComponents
-     ],
-    providers: [
-  ]
+    ]
 })
 export class DiseaseEventsModule {}

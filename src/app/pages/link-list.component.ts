@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   templateUrl: './link-list.component.html'
 })
 
-export class LinkListComponent{
-}
+export class LinkListComponent{}

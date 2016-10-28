@@ -45,8 +45,7 @@
 
             <!-- Admin -->
 
-            <!--div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((currentUser | async)?.role == '99')" routerLinkActive="active" id="navpadding"-->
-            <div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((currentUserRole == '99'))" routerLinkActive="active" id="navpadding">
+            <div class="nav navbar-nav pull-right" *ngIf="(af.auth | async) && ((loggedInUserAdmin == true))" routerLinkActive="active" id="navpadding">
               <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Admin
@@ -66,14 +65,3 @@
 
     </div>
   </div>
-
-
-
-<!--
-<nav class="breadcrumb">
-  <a class="breadcrumb-item" href="#!">Home</a>
-  <a class="breadcrumb-item" href="#!">User</a>
-  <a class="breadcrumb-item active" href="#!">Patient</a>
-</nav>
--->
-

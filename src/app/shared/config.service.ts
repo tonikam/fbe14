@@ -6,6 +6,10 @@ export class ConfigService {
   constructor() {
   }
 
+  public static logFlag = true;
+
+  public static mainAdmin = "admin@p2.ch";
+
   public static firebaseConfig = {
     // fbe5
     apiKey: "AIzaSyAMQA61KfzbKBSxVRYJtch1LPzcC-VFblk",
@@ -22,6 +26,7 @@ export class ConfigService {
 
   public static firebaseDbConfig = {
     db: "/_db4",
+    admins: "/admins",
     users: "/users",
     patients: "/patients",
     diseaseCases: "/cases",

@@ -14,26 +14,21 @@ import { LogService } from "./log.service";
 @Injectable()
 export class AuthService {
 
-  userData: any;
-
   constructor(public af:AngularFire,
-              private configService: ConfigService,
               private errorHandler:ErrorHandlerService,
               private logService: LogService
-  ) {
-
-  }
+  ) {}
 
   registerUser(user:UserLogin) {
     this.af.auth.createUser({email: user.email, password: user.password})
       .then((auth) => {
 
         // create entry in users - table with auth uid
-        this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).set({name: user.email, age: 0, role: 10});
-        console.log("Registered uid: " + auth.uid);
+        this.af.database.object(ConfigService.firebaseDbConfig.db + ConfigService.firebaseDbConfig.users + '/' + auth.uid).set({name: user.email, admin: false});
+        this.logService.logConsole("auth service","registered uid",auth.uid);
       })
       .catch((error) => {
-        console.log("Register Error: " + error.message);
+        this.logService.logConsole("auth service","register error",error.message);
         this.errorHandler.handleError(error);
       });
   };
@@ -41,11 +36,10 @@ export class AuthService {
   loginUser(user:UserLogin) {
     this.af.auth.login({email: user.email, password: user.password})
       .then((auth) => {
-        console.log("[authService] - loginUser - uid: " + auth.uid);
-        console.log("[authService] - loginUser - providerData[].uid: " + auth.auth.providerData[0].uid);
+        this.logService.logConsole("auth service","logged in user ",auth.auth.providerData[0].uid + " - " + auth.uid);
       })
       .catch((error) => {
-        console.log("[authService] - login error: " + error.message);
+        this.logService.logConsole("auth service","login error",error.message);
         this.errorHandler.handleError(error);
       });
    };
@@ -53,5 +47,4 @@ export class AuthService {
   logout() {
     this.af.auth.logout();
   };
-
 }

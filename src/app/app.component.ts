@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 
 import { AngularFire } from 'angularfire2';
-import {LoggedInDataComponent} from "./pages/logged-in-data.component";
 
+import { ConfigService } from './shared/config.service';
 import { LogService } from "./shared/log.service";
 
 @Component({
@@ -14,6 +14,6 @@ export class AppComponent{
   constructor(private af: AngularFire,
               private logService: LogService
   ){
-    this.logService.setLogActive(true);
+    this.logService.setLogActive(ConfigService.logFlag);
   };
 }
