@@ -63,8 +63,8 @@ export class DataService {
       .map((allUsers) => {
         return allUsers.map((user) => {
           let queryDefinitionPatients = {};
-          queryDefinitionPatients = {query: {orderByChild: 'user',equalTo: user.key}};
-          user.patients = this.af.database.list(String(this.DbPatients), {query: {orderByKey: true}})
+          queryDefinitionPatients = {query: {orderByChild: 'user',equalTo: user.$key}};
+          user.patients = this.af.database.list(String(this.DbPatients), queryDefinitionPatients)
           return user;
         });
       });
